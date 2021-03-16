@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet , Image} from 'react-native';
+import { StyleSheet, Image, TouchableOpacity} from 'react-native';
 import { Dimensions } from 'react-native';
 import { View } from './Themed';
 
@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
         padding: 40,
     },
 
-    tinyLogo: {
-        width: windowWidth / 10,
+    Logo: {
+        width: windowWidth / 9,
         height: windowHeight / 8,
     },
 });
@@ -20,7 +20,9 @@ const styles = StyleSheet.create({
 const Icon = () => {
     return (
         <View style = {styles.container}>
-            <Image style={styles.tinyLogo} source={{uri: 'https://reactnative.dev/img/tiny_logo.png', }}/>
+            <TouchableOpacity>
+                <Image style={styles.Logo} source={{ uri: 'https://static.displate.com/857x1200/displate/2019-11-26/806a8c67ffc9e55fd34c583d1771f4ce_dda30ce246a33d174fe1e11572468028.jpg', }}/>
+            </TouchableOpacity>
         </View>
     );
 }
