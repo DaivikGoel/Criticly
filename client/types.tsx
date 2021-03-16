@@ -15,3 +15,7 @@ export type HomeParamList = {
 export type SearchParamList = {
   SearchScreen: undefined;
 };
+
+export type ProfileParamList = {
+  ProfileScreen: undefined;
+};

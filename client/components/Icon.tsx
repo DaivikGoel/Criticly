@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { StyleSheet , Image} from 'react-native';
-
+import { Dimensions } from 'react-native';
 import { View } from './Themed';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
     container: {
         padding: 40,
     },
-    title: {
-        fontSize: 49,
-        fontWeight: 'bold',
-    },
+
     tinyLogo: {
-        width: 100,
-        height: 200,
+        width: windowWidth / 10,
+        height: windowHeight / 8,
     },
 });
 

@@ -4,10 +4,9 @@ import { StyleSheet } from 'react-native';
 import List from '../components/List';
 import { Text, View } from '../components/Themed';
 
-export default function SearchScreen() {
+export default function ProfileScreen() {
   return (
     <View style={styles.container}>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <List/>
     </View>
   );

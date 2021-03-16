@@ -16,6 +16,11 @@ export default {
               SearchScreen: 'two',
             },
           },
+          Profile: {
+            screens: {
+              ProfileScreen: 'three',
+            },
+          },
         },
       },
       NotFound: '*',
