@@ -5,8 +5,8 @@ import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
 import Icon from './Icon';
-const ApiKey = require('../apikeys.json');
-let url = 'https://api.themoviedb.org/3/trending/tv/day?api_key=' + ApiKey.TMDBApiKey + '&page=1';
+
+
 //let url = 'http://localhost:3000/trending';
 
 
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
 });
 
-export default class List extends Component<{}, { data: Array<any>, isLoading: boolean }> {
+export default class List extends Component<{name: string, url: string}, { data: Array<any>, isLoading: boolean }> {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,8 +28,7 @@ export default class List extends Component<{}, { data: Array<any>, isLoading: b
   }
 
   componentDidMount() {
-    console.log("LOGGING")
-    fetch(url)
+    fetch(this.props.url)
       .then((response) => response.json())
       .then((response) => { this.setState({ data: response.results }); })
       .catch((error) => console.error(error))
@@ -48,7 +47,7 @@ export default class List extends Component<{}, { data: Array<any>, isLoading: b
 
   return (
     <View style = {styles.container}>
-      <Text> Trending </Text>
+      <Text> {this.props.name} </Text>
       <ScrollView 
       horizontal={true}
       //contentContainerStyle={{ width: `${100 * intervals}%` }}
