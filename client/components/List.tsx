@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator} from 'react-native';
-
-import Colors from '../constants/Colors';
-import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
 import Icon from './Icon';
 
@@ -45,14 +42,13 @@ export default class List extends Component<{name: string, url: string}, { data:
   render() {
     const Icons = this.state.data.map((item) => {
       return (
-        <Icon name = {item.name} posterpath = {item.poster_path}/>
+        <Icon name = {item.name} posterpath = {item.poster_path} id ={item.id} />
       )
     })
 
   return (
     <View style = {styles.container}>
       <Text style ={styles.title}> {this.props.name} </Text>
-        {this.state.isLoading == true ? (<ActivityIndicator size="small" />) : 
         <ScrollView
           horizontal={true}
           showsHorizontalScrollIndicator={false}
@@ -60,7 +56,7 @@ export default class List extends Component<{name: string, url: string}, { data:
           decelerationRate="fast"
         >
           {Icons}      
-          </ScrollView>}
+          </ScrollView>
 
 
     </View>
