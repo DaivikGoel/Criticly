@@ -6,6 +6,8 @@ import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
 import Icon from './Icon';
 const ApiKey = require('../apikeys.json');
+let url = 'https://api.themoviedb.org/3/trending/tv/day?api_key=' + ApiKey.TMDBApiKey + '&page=1';
+//let url = 'http://localhost:3000/trending';
 
 
 const styles = StyleSheet.create({
@@ -16,7 +18,7 @@ const styles = StyleSheet.create({
 
 });
 
-export default class List extends Component {
+export default class List extends Component<{}, { data: Array<any>, isLoading: boolean }> {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,10 +28,10 @@ export default class List extends Component {
   }
 
   componentDidMount() {
-    fetch('https://api.themoviedb.org/3/trending/tv/day?api_key=' + ApiKey.TMDBApiKey +  '&page=1')
+    console.log("LOGGING")
+    fetch(url)
       .then((response) => response.json())
-      .then(response => console.log(response))
-      .then((response) => {this.setState({ data: response });})
+      .then((response) => { this.setState({ data: response.results }); })
       .catch((error) => console.error(error))
       .then(() => {
         this.setState({ isLoading: false });
@@ -38,10 +40,15 @@ export default class List extends Component {
   }
 
   render() {
+    const Icons = this.state.data.map((item) => {
+      return (
+        <Icon name = {item.name} posterpath = {item.poster_path}/>
+      )
+    })
 
   return (
     <View style = {styles.container}>
-      <Text> List Title </Text>
+      <Text> Trending </Text>
       <ScrollView 
       horizontal={true}
       //contentContainerStyle={{ width: `${100 * intervals}%` }}
@@ -50,10 +57,7 @@ export default class List extends Component {
       decelerationRate="fast"
       pagingEnabled
       >
-        <Icon/>
-        <Icon/>
-        <Icon/>
-        <Icon/>
+        {Icons}
       </ScrollView>
     </View>
   );

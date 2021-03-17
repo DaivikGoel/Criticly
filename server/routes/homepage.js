@@ -7,6 +7,7 @@ var trending;
 router.get('/', function(req, res, next) {
   fetch('https://api.themoviedb.org/3/trending/tv/day?api_key=' + TMDBApiKey.TMDBApiKey)
     .then(res => res.json())
+    .then(res => console.log(res))
 
 });
 

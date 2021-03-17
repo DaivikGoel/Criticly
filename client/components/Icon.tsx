@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Image, TouchableOpacity} from 'react-native';
 import { Dimensions } from 'react-native';
-import { View } from './Themed';
+import { View, Text } from './Themed';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -12,16 +12,17 @@ const styles = StyleSheet.create({
     },
 
     Logo: {
-        width: windowWidth / 9,
-        height: windowHeight / 8,
+        width: windowWidth / 5,
+        height: windowHeight / 6,
     },
 });
 
-const Icon = () => {
+const Icon = (props) => {
     return (
         <View style = {styles.container}>
             <TouchableOpacity>
-                <Image style={styles.Logo} source={{ uri: 'https://static.displate.com/857x1200/displate/2019-11-26/806a8c67ffc9e55fd34c583d1771f4ce_dda30ce246a33d174fe1e11572468028.jpg', }}/>
+                <Text>{props.name}</Text>
+                <Image style={styles.Logo} source={{ uri: 'https://image.tmdb.org/t/p/original' + props.posterpath, }}/>
             </TouchableOpacity>
         </View>
     );

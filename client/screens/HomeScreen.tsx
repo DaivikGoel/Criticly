@@ -10,11 +10,6 @@ export default function HomeScreen() {
     <View style={styles.container}>
     <ScrollView style = {styles.scrollstyle}>
       <List/>
-      <List />
-      <List />
-      <List />
-      <List />
-      <List />
       </ScrollView>
     </View>
   );
