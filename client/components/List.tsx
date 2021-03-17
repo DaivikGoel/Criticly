@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator} from 'react-native';
 
 import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
@@ -15,6 +15,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  title:
+  {
+    fontSize: 30
+  }
 
 });
 
@@ -47,17 +51,18 @@ export default class List extends Component<{name: string, url: string}, { data:
 
   return (
     <View style = {styles.container}>
-      <Text> {this.props.name} </Text>
-      <ScrollView 
-      horizontal={true}
-      //contentContainerStyle={{ width: `${100 * intervals}%` }}
-      //showsHorizontalScrollIndicator={false}
-      scrollEventThrottle={200}
-      decelerationRate="fast"
-      pagingEnabled
-      >
-        {Icons}
-      </ScrollView>
+      <Text style ={styles.title}> {this.props.name} </Text>
+        {this.state.isLoading == true ? (<ActivityIndicator size="small" />) : 
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          scrollEventThrottle={200}
+          decelerationRate="fast"
+        >
+          {Icons}      
+          </ScrollView>}
+
+
     </View>
   );
 }

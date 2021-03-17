@@ -7,7 +7,7 @@ import { Text, View } from '../components/Themed';
 export default function ProfileScreen() {
   return (
     <View style={styles.container}>
-      <List/>
+      <Text>Profile Screen </Text>
     </View>
   );
 }

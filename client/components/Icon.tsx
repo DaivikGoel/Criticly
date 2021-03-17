@@ -9,7 +9,7 @@ const windowHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
     container: {
-        padding: 40,
+        padding: 15,
     },
 
     Logo: {
