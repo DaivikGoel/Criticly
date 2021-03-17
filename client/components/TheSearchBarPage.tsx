@@ -19,22 +19,29 @@ export default class TheSearchBarPage extends React.Component<{}, { data: Array<
     }
     handleOnChangeText = (text) => {
         // ? Visible the spinner
+        if (text != ''){
+            this.setState({
+                searchText: text,
+                isLoading: true
+
+            });
+            fetch(url + text)
+                .then((response) => response.json())
+                .then((response) => { this.setState({ data: response.results }); })
+                .catch((error) => console.error(error))
+                .then(() => {
+                    this.setState({ isLoading: false });
+                })
+                .then(response => console.log(this.state))
+        }
+    };
+    onClear = () => {
+        // ? Visible the spinner
         this.setState({
-            searchText: text,
-            isLoading: true
-
+            searchText: '',
+            isLoading: false
         });
-        fetch(url + text)
-            .then((response) => response.json())
-            .then((response) => { this.setState({ data: response.results }); })
-            .catch((error) => console.error(error))
-            .then(() => {
-                this.setState({ isLoading: false });
-            })
-            .then(response => console.log(this.state))
 
-        // ? After you've done to implement your use-case
-        // ? Do not forget to set false to spinner's visibility
     };
 
 
@@ -50,6 +57,7 @@ export default class TheSearchBarPage extends React.Component<{}, { data: Array<
             <SearchBar
                 placeholder="Search TV Shows"
                 onChangeText={this.handleOnChangeText}
+                onClearPress={this.onClear}
             />
             <ScrollView>{Icons}</ScrollView>
             </View>
