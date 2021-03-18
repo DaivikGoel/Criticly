@@ -3,9 +3,12 @@ import { StyleSheet, ScrollView} from 'react-native';
 
 import List from '../components/List';
 import { Text, View } from '../components/Themed';
+import {trending_url, topRated_url, popular_url} from '../constants/urls'
 const ApiKey = require('../apikeys.json');
 
-let lists = [["Trending", 'https://api.themoviedb.org/3/trending/tv/day?api_key=' + ApiKey.TMDBApiKey + '&page=1'], ["Top Rated", 'https://api.themoviedb.org/3/tv/top_rated?api_key=' + ApiKey.TMDBApiKey + '&page=1'], ["Popular", 'https://api.themoviedb.org/3/tv/popular?api_key=' + ApiKey.TMDBApiKey + '&page=1'] ];
+let lists = [["Trending", trending_url + ApiKey.TMDBApiKey + '&page=1'], 
+["Top Rated", topRated_url + ApiKey.TMDBApiKey + '&page=1'], 
+["Popular", popular_url + ApiKey.TMDBApiKey + '&page=1'] ];
 
 
 export default function HomeScreen() {

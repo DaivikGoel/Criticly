@@ -2,9 +2,10 @@ import SearchBar from "react-native-dynamic-search-bar";
 import React, { Component } from 'react';
 import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View} from 'react-native';
 import Icon from './Icon';
+import { search_url } from '../constants/urls';
 const ApiKey = require('../apikeys.json');
 
-let url = 'https://api.themoviedb.org/3/search/tv?api_key=' + ApiKey.TMDBApiKey + '&page=1&query=' ; 
+let url = search_url + ApiKey.TMDBApiKey + '&page=1&query=' ; 
 
 
 export default class TheSearchBarPage extends React.Component<{}, { data: Array<any>, searchText: string, isLoading: boolean}> {

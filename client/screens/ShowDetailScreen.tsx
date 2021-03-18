@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View } from '../components/Themed';
 import { ImageBackground} from 'react-native';
 import {Image} from 'react-native-elements'
-import { original } from '../constants/urls';
+import { original_url } from '../constants/urls';
 import { StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
 
 
@@ -10,19 +10,13 @@ export default function ShowDetailScreen({ route }) {
     const { payload } = route.params;
     console.log(payload)
     return (
-    <ImageBackground style={styles.imgContainer} source={{ uri: original + payload.backdrop_path  }}>
+    <ImageBackground style={styles.imgContainer} source={{ uri: original_url + payload.backdrop_path  }}>
         <View style={styles.child}>
             <Text style={styles.ShowTitle}>{payload.name}</Text>
             <Text style={styles.Text}>{payload.overview}</Text>
         </View>
     </ImageBackground>
-
-
-
-      
-
     );
-    
   }
 
   const styles = StyleSheet.create({

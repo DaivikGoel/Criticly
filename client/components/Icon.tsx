@@ -6,7 +6,7 @@ import {Image} from 'react-native-elements'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import { useNavigation } from '@react-navigation/native';
-import { original } from '../constants/urls';
+import { original_url } from '../constants/urls';
 
 const styles = StyleSheet.create({
     container: {
@@ -35,7 +35,7 @@ const Icon = (props) => {
                 {
                     payload: props.payload
                 })
-      } style={styles.Logo} source={{ uri: original + props.posterpath }} PlaceholderContent= {<ActivityIndicator />}/>
+      } style={styles.Logo} source={{ uri: original_url + props.posterpath }} PlaceholderContent= {<ActivityIndicator />}/>
             </TouchableOpacity>
         </View>
     );
