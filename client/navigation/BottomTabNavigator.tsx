@@ -9,7 +9,7 @@ import HomeScreen from '../screens/HomeScreen';
 import ShowDetailScreen from '../screens/ShowDetailScreen';
 import SearchScreen from '../screens/SearchScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import { BottomTabParamList, HomeParamList, SearchParamList } from '../types';
+import { BottomTabParamList, HomeParamList, SearchParamList, ProfileParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
