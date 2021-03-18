@@ -7,24 +7,26 @@ import { Text, View } from '../components/Themed';
 export default function ProfileScreen() {
   return (
     <View style={styles.container}>
-      <Text>Profile Screen </Text>
+      <Text style={styles.header}>Username </Text>
+      <Text style={styles.bio}> This will be the bio text, put some limit of like 300 characters or something</Text>
+      <Text style={styles.header}>My favourites</Text>
+      <Text style={styles.header}>Activity</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  header:{
+    paddingTop:'15%',
+    fontSize:30
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  bio:{
+    paddingTop:'15%',
+    fontSize:30
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+  container:{
+    backgroundColor:'purple',
+    width:'100%',
+    height:'100%'
+  }
 });
