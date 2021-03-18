@@ -1,12 +1,13 @@
 import SearchBar from "react-native-dynamic-search-bar";
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View, Text } from 'react-native';
-import Icon from './Icon';
+import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View, Text, Dimensions } from 'react-native';
+import TVShowInfo from './TVShowInfo';
 import { search_url_tv, search_url_people } from '../constants/urls';
+import { original_url } from '../constants/urls';
+import { Image } from 'react-native-elements'
 const ApiKey = require('../apikeys.json');
-
-
-
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default class EpisodeDetailPage extends React.Component<{ payload: Array<any> }, { data: Array<any>, isLoading: boolean }> {
 
@@ -26,18 +27,21 @@ export default class EpisodeDetailPage extends React.Component<{ payload: Array<
             .then(() => {
                 this.setState({ isLoading: false });
             })
-            .then(() => console.log(this.state))
 
     }
 
 
 
     render() {
+        console.log('HERE', this.state.data.networks)
         return (
             <View>
                     <ScrollView>
-                    <Text style={styles.ShowTitle}>{this.props.payload.name}</Text>
-                    <Text style={styles.Text}>{this.state.data.tagline}</Text>
+                    {this.state.isLoading == false ? (
+                    <TVShowInfo payload ={this.state.data}/>
+                    ) :(
+                            <ActivityIndicator size="large" /> 
+                    )}
                     </ScrollView>
             </View>
         );
@@ -47,10 +51,16 @@ const styles = StyleSheet.create({
     ShowTitle: {
         color: '#FFFFFF',
         fontSize: 30,
-        paddingTop: '25%',
-        textAlign: 'center'
     },
     Text: {
-        color: '#FFFFFF'
+        color: '#FFFFFF',
+    },
+    TitleView:{
+        flexDirection: 'row',
+        paddingTop: '10%'
+    },
+    NetworkIcons: {
+        width: windowWidth / 10,
+        height: windowHeight / 10,
     }
 });
