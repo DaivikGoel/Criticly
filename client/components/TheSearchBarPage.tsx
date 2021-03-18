@@ -32,6 +32,14 @@ export default class TheSearchBarPage extends React.Component<{}, { peopledata: 
             this.fetchdata(search_url_people + ApiKey.TMDBApiKey + '&page=1&query=' + text,'peopledata');
             console.log(this.state.peopledata)
         }
+        else
+            this.setState({
+                searchText: '',
+                isLoading: false,
+                tvdata: [],
+                peopledata: []
+            });
+
     };
     fetchdata = (url, statetype) => {
         fetch(url)
@@ -47,7 +55,9 @@ export default class TheSearchBarPage extends React.Component<{}, { peopledata: 
         // ? Visible the spinner
         this.setState({
             searchText: '',
-            isLoading: false
+            isLoading: false,
+            tvdata: [],
+            peopledata:[]
         });
 
     };
