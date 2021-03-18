@@ -83,6 +83,10 @@ function SearchNavigator() {
         component={SearchScreen}
         options={{ headerTitle: 'Tab Two Title' }}
       />
+      <SearchStack.Screen 
+        name="ShowDetailScreen" 
+        component={ShowDetailScreen} 
+      />
     </SearchStack.Navigator>
   );
 }
