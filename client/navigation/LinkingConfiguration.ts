@@ -9,6 +9,7 @@ export default {
           Home: {
             screens: {
               HomeScreen: 'one',
+              ShowDetailScreen: 'sdc'
             },
           },
           Search: {

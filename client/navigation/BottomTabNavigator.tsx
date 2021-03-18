@@ -6,6 +6,7 @@ import * as React from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import HomeScreen from '../screens/HomeScreen';
+import ShowDetailScreen from '../screens/ShowDetailScreen';
 import SearchScreen from '../screens/SearchScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import { BottomTabParamList, HomeParamList, SearchParamList } from '../types';
@@ -63,6 +64,10 @@ function HomeNavigator() {
         name="HomeScreen"
         component={HomeScreen}
         options={{ headerTitle: 'Crticly' }}
+      />
+      <HomeStack.Screen 
+        name="ShowDetailScreen" 
+        component={ShowDetailScreen} 
       />
     </HomeStack.Navigator>
   );
