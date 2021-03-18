@@ -39,7 +39,7 @@ export default class List extends Component<{name: string, url: string}, { data:
   }
 
   render() {
-    const Icons = this.state.data.map((item) => {;
+    const Icons = this.state.data.map((item) => {
       return (
         <Icon name = {item.name} posterpath = {item.poster_path} id ={item.id} payload = {item} />
       )
