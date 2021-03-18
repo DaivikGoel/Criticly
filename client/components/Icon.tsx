@@ -7,7 +7,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import { useNavigation } from '@react-navigation/native';
 import { original_url } from '../constants/urls';
-
+import Poster from './Poster'
 const styles = StyleSheet.create({
     container: {
         padding: 15,
@@ -30,12 +30,12 @@ const Icon = (props) => {
     const navigation = useNavigation();
     return (
         <View style = {styles.container}>
-            <TouchableOpacity>
-                <Image onPress={() =>navigation.navigate('ShowDetailScreen', 
+            <TouchableOpacity onPress={() =>navigation.navigate('ShowDetailScreen', 
                 {
                     payload: props.payload
                 })
-      } style={styles.Logo} source={{ uri: original_url + props.posterpath }} PlaceholderContent= {<ActivityIndicator />}/>
+      }>
+                <Poster url={original_url + props.posterpath}/>
             </TouchableOpacity>
         </View>
     );

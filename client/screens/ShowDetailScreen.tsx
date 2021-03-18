@@ -2,18 +2,21 @@ import * as React from 'react';
 import { Text, View } from '../components/Themed';
 import { ImageBackground} from 'react-native';
 import {Image} from 'react-native-elements'
+import EpisodeDetailPage from '../components/EpisodeDetailPage'
 import { original_url } from '../constants/urls';
 import { StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
 
 
 export default function ShowDetailScreen({ route }) {
+
+  
     const { payload } = route.params;
     console.log(payload)
+
     return (
     <ImageBackground style={styles.imgContainer} source={{ uri: original_url + payload.backdrop_path  }}>
         <View style={styles.child}>
-            <Text style={styles.ShowTitle}>{payload.name}</Text>
-            <Text style={styles.Text}>{payload.overview}</Text>
+          <EpisodeDetailPage payload ={payload}/>
         </View>
     </ImageBackground>
     );
@@ -28,14 +31,6 @@ export default function ShowDetailScreen({ route }) {
         flex: 1,
         backgroundColor: 'rgba(0,0,0,0.5)',
       },
-    ShowTitle :{
-      color:'#FFFFFF',
-      fontSize: 30,
-      paddingTop: '25%',
-      textAlign: 'center'
-    },
-    Text :{
-        color:'#FFFFFF'  
-      }
+
 });
 

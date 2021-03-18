@@ -30,7 +30,6 @@ export default class TheSearchBarPage extends React.Component<{}, { peopledata: 
             });
             this.fetchdata(search_url_tv + ApiKey.TMDBApiKey + '&page=1&query=' + text, 'tvdata');
             this.fetchdata(search_url_people + ApiKey.TMDBApiKey + '&page=1&query=' + text,'peopledata');
-            console.log(this.state.peopledata)
         }
         else
             this.setState({
