@@ -32,7 +32,6 @@ export default class TheSearchBarPage extends React.Component<{}, { data: Array<
                 .then(() => {
                     this.setState({ isLoading: false });
                 })
-                .then(response => console.log(this.state))
         }
     };
     onClear = () => {

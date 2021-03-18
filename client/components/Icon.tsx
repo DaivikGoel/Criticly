@@ -30,7 +30,10 @@ const Icon = (props) => {
     return (
         <View style = {styles.container}>
             <TouchableOpacity>
-                <Image onPress={() =>navigation.navigate('ShowDetailScreen')
+                <Image onPress={() =>navigation.navigate('ShowDetailScreen', 
+                {
+                    payload: props.payload
+                })
       } style={styles.Logo} source={{ uri: 'https://image.tmdb.org/t/p/original' + props.posterpath, }} PlaceholderContent= {<ActivityIndicator />}/>
             </TouchableOpacity>
         </View>

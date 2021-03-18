@@ -36,13 +36,12 @@ export default class List extends Component<{name: string, url: string}, { data:
       .then(() => {
         this.setState({ isLoading: false });
       })
-      .then(response => console.log(this.state))
   }
 
   render() {
-    const Icons = this.state.data.map((item) => {
+    const Icons = this.state.data.map((item) => {;
       return (
-        <Icon name = {item.name} posterpath = {item.poster_path} id ={item.id} />
+        <Icon name = {item.name} posterpath = {item.poster_path} id ={item.id} payload = {item} />
       )
     })
 
