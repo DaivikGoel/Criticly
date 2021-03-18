@@ -2,19 +2,21 @@ import SearchBar from "react-native-dynamic-search-bar";
 import React, { Component } from 'react';
 import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View, Text} from 'react-native';
 import Icon from './Icon';
-import { search_url } from '../constants/urls';
+import { search_url_tv, search_url_people } from '../constants/urls';
 const ApiKey = require('../apikeys.json');
 
-let url = search_url + ApiKey.TMDBApiKey + '&page=1&query=' ; 
+
+let types = [["TV Shows", search_url_tv], ["Actors", search_url_people]];
 
 
-export default class TheSearchBarPage extends React.Component<{}, { data: Array<any>, searchText: string, isLoading: boolean}> {
+export default class TheSearchBarPage extends React.Component<{}, { peopledata: Array<any>, tvdata: Array<any>, searchText: string, isLoading: boolean}> {
 
     constructor(props) {
         super(props);
         this.state = {
             searchText: '',
-            data : [],
+            tvdata : [],
+            peopledata: [],
             isLoading: false
         };
     }
@@ -26,15 +28,21 @@ export default class TheSearchBarPage extends React.Component<{}, { data: Array<
                 isLoading: true
 
             });
-            fetch(url + text)
-                .then((response) => response.json())
-                .then((response) => { this.setState({ data: response.results }); })
-                .catch((error) => console.error(error))
-                .then(() => {
-                    this.setState({ isLoading: false });
-                })
+            this.fetchdata(search_url_tv + ApiKey.TMDBApiKey + '&page=1&query=' + text, 'tvdata');
+            this.fetchdata(search_url_people + ApiKey.TMDBApiKey + '&page=1&query=' + text,'peopledata');
+            console.log(this.state.peopledata)
         }
     };
+    fetchdata = (url, statetype) => {
+        fetch(url)
+            .then((response) => response.json())
+            .then((response) => { this.setState({ [statetype] : response.results }); })
+            .catch((error) => console.error(error))
+            .then(() => {
+                this.setState({ isLoading: false });
+            })
+
+    }
     onClear = () => {
         // ? Visible the spinner
         this.setState({
@@ -46,43 +54,69 @@ export default class TheSearchBarPage extends React.Component<{}, { data: Array<
 
 
     render() {
-        const SearchResults = this.state.data.map((item) => {
+        const TVSearchResults = this.state.tvdata.map((item) => {
             return (
                 <View style ={{flexDirection: 'column'}}>
                     <View style ={styles.SearchResult}>
-                        <Icon name={item.name} posterpath={item.poster_path} id={item.id} id={item.id} payload={item}/>
-                        <View>
+                        <Icon name={item.name} posterpath={item.poster_path} id={item.id} payload={item}/>
+                        <View style = {styles.TextView}>
                             <Text>{item.name}</Text> 
                             <Text>{item.overview}</Text> 
                         </View>
                     </View>
-                    <View style={styles.bar}/>
+                    <View style={styles.Bar}/>
                 </View>
                 
+            )
+        })
+        const PeopleSearchResults = this.state.peopledata.map((item) => {
+            return (
+                <View style={{ flexDirection: 'column' }}>
+                    <View style={styles.SearchResult}>
+                        <Icon name={item.name} posterpath={item.profile_path} id={item.id} payload={item} />
+                        <View style={styles.TextView}>
+                            <Text>{item.name}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.Bar} />
+                </View>
+
             )
         })
 
         return (
             <View>
                 <SearchBar
-                    placeholder="Search TV Shows"
+                    placeholder="Search"
                     onChangeText={this.handleOnChangeText}
                     onClearPress={this.onClear}
                 />
-                <ScrollView>{SearchResults}</ScrollView>
+                <View>
+
+                <ScrollView>
+                <Text> TV Shows</Text>
+                    {TVSearchResults}
+                <Text> People</Text>
+                {PeopleSearchResults}
+                </ScrollView>
+
+                </View>
             </View>
         );
     }
 }
 const styles = StyleSheet.create({
     SearchResult: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     InnerText:{
         flexDirection: 'column'
     },
-    bar: {
+    Bar: {
         borderBottomColor: 'black',
         borderBottomWidth: 1,
+    },
+    TextView: {
+        flex: 1,
     }
 });
