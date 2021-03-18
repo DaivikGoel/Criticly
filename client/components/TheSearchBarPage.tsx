@@ -1,6 +1,6 @@
 import SearchBar from "react-native-dynamic-search-bar";
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View} from 'react-native';
+import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View, Text} from 'react-native';
 import Icon from './Icon';
 import { search_url } from '../constants/urls';
 const ApiKey = require('../apikeys.json');
@@ -46,21 +46,43 @@ export default class TheSearchBarPage extends React.Component<{}, { data: Array<
 
 
     render() {
-        const Icons = this.state.data.map((item) => {
+        const SearchResults = this.state.data.map((item) => {
             return (
-                <Icon name={item.name} posterpath={item.poster_path} id={item.id} />
+                <View style ={{flexDirection: 'column'}}>
+                    <View style ={styles.SearchResult}>
+                        <Icon name={item.name} posterpath={item.poster_path} id={item.id} id={item.id} payload={item}/>
+                        <View>
+                            <Text>{item.name}</Text> 
+                            <Text>{item.overview}</Text> 
+                        </View>
+                    </View>
+                    <View style={styles.bar}/>
+                </View>
+                
             )
         })
 
         return (
             <View>
-            <SearchBar
-                placeholder="Search TV Shows"
-                onChangeText={this.handleOnChangeText}
-                onClearPress={this.onClear}
-            />
-            <ScrollView>{Icons}</ScrollView>
+                <SearchBar
+                    placeholder="Search TV Shows"
+                    onChangeText={this.handleOnChangeText}
+                    onClearPress={this.onClear}
+                />
+                <ScrollView>{SearchResults}</ScrollView>
             </View>
         );
     }
 }
+const styles = StyleSheet.create({
+    SearchResult: {
+        flexDirection: 'row'
+    },
+    InnerText:{
+        flexDirection: 'column'
+    },
+    bar: {
+        borderBottomColor: 'black',
+        borderBottomWidth: 1,
+    }
+});
