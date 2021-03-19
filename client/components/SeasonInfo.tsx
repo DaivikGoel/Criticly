@@ -23,7 +23,7 @@ const SeasonInfo = (props) => {
     const Episodes = props.payload.episodes.map((episode) => {
         return (
             <View style={styles.collapsibleItem}>
-                <Text>{episode.name}</Text>
+                <Text>{episode.episode_number} {episode.name}</Text>
             </View>
 
         )

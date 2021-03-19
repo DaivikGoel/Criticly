@@ -46,7 +46,7 @@ export default class EpisodeDetailPage extends React.Component<{ payload: Array<
 
     render() {
 
-        const SeasonLists = this.state.seasondata.map((season) => {
+        const SeasonLists = this.state.seasondata.sort(function (a, b) { return a.season_number - b.season_number; }).map((season) => {
             return (
                 <SeasonInfo payload ={season}/>
             )
