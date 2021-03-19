@@ -15,7 +15,7 @@ class SearchTabs extends Component {
     }
     render() {
         return (
-            <View style={styles.container}>
+            <View style={styles.Tabcontainer}>
                 <Tabs selected={this.state.page} style={{ backgroundColor: 'white' }}
                     selectedStyle={{ color: 'red' }} onSelect={el => this.setState({ page: el.props.name })} selectedIconStyle={{ borderTopWidth: 2, borderTopColor: 'red' }}>
                     <Text name="TV Shows">TV Shows</Text>
@@ -31,19 +31,9 @@ class SearchTabs extends Component {
 export default SearchTabs;
 
 const styles = StyleSheet.create({
-    container: {
+    Tabcontainer: {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
     },
 });
