@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
-import TheSearchBarPage from '../components/TheSearchBarPage'
+import TheSearchBarContainer from '../components/TheSearchBarContainer'
 
 export default function SearchScreen() {
   return (
     <View >
-      <TheSearchBarPage/>
+      <TheSearchBarContainer/>
     </View>
   );
 }

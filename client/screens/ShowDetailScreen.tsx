@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View } from '../components/Themed';
 import { ImageBackground} from 'react-native';
 import {Image} from 'react-native-elements'
-import EpisodeDetailPage from '../components/EpisodeDetailPage'
+import EpisodeDetailPage from '../components/EpisodeDetailContainer'
 import { original_url } from '../constants/urls';
 import { StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
 

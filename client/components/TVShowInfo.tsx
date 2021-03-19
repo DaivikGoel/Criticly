@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
 });
 
 const TVShowInfo = (props) => {
-    console.log("HERE", props)
     return (
         <View style={styles.TitleView}>
             <Poster url={original_url + props.payload.poster_path} />
@@ -38,7 +37,6 @@ const TVShowInfo = (props) => {
                 <Text style={styles.Text}>{props.payload.number_of_seasons} Seasons </Text>
                 <Text style={styles.Text}>{props.payload.number_of_episodes} Episodes </Text>
                 <Text style={styles.Text}> Last Air Date {props.payload.last_air_date} </Text>
-                <Text style={styles.Text}> Networks: </Text>
                 <Image style={styles.NetworkIcons} source={{ uri: original_url + props.payload.networks[0].logo_path }} PlaceholderContent={<ActivityIndicator />} />
             </View>
         </View>

@@ -9,7 +9,7 @@ const ApiKey = require('../apikeys.json');
 let types = [["TV Shows", search_url_tv], ["Actors", search_url_people]];
 
 
-export default class TheSearchBarPage extends React.Component<{}, { peopledata: Array<any>, tvdata: Array<any>, searchText: string, isLoading: boolean}> {
+export default class TheSearchBarContainer extends React.Component<{}, { peopledata: Array<any>, tvdata: Array<any>, searchText: string, isLoading: boolean}> {
 
     constructor(props) {
         super(props);
@@ -67,7 +67,7 @@ export default class TheSearchBarPage extends React.Component<{}, { peopledata: 
             return (
                 <View style ={{flexDirection: 'column'}}>
                     <View style ={styles.SearchResult}>
-                        <Icon name={item.name} posterpath={item.poster_path} id={item.id} payload={item}/>
+                        <Icon name={item.name} posterpath={item.poster_path} key={item.id} payload={item} />
                         <View style = {styles.TextView}>
                             <Text>{item.name}</Text> 
                             <Text>{item.overview}</Text> 
@@ -82,7 +82,7 @@ export default class TheSearchBarPage extends React.Component<{}, { peopledata: 
             return (
                 <View style={{ flexDirection: 'column' }}>
                     <View style={styles.SearchResult}>
-                        <Icon name={item.name} posterpath={item.profile_path} id={item.id} payload={item} />
+                        <Icon key ={item.id} name={item.name} posterpath={item.profile_path} id={item.id} payload={item} />
                         <View style={styles.TextView}>
                             <Text>{item.name}</Text>
                         </View>
