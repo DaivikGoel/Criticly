@@ -1,23 +1,24 @@
 import SearchBar from "react-native-dynamic-search-bar";
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View, Text} from 'react-native';
+import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View, Text, useWindowDimensions} from 'react-native';
 import Icon from './Icon';
 import { search_url_tv, search_url_people } from '../constants/urls';
+import Tabs from 'react-native-tabs';
 const ApiKey = require('../apikeys.json');
 
 
 let types = [["TV Shows", search_url_tv], ["Actors", search_url_people]];
 
 
-export default class TheSearchBarContainer extends React.Component<{}, { peopledata: Array<any>, tvdata: Array<any>, searchText: string, isLoading: boolean}> {
+export default class TheSearchBarContainer extends React.Component<{}, { data: Array<any>, searchText: string, isLoading: boolean, selectedpage: string}> {
 
     constructor(props) {
         super(props);
         this.state = {
             searchText: '',
-            tvdata : [],
-            peopledata: [],
-            isLoading: false
+            data : [],
+            isLoading: false,
+            selectedpage: 'TV Shows'
         };
     }
     handleOnChangeText = (text) => {
@@ -27,23 +28,47 @@ export default class TheSearchBarContainer extends React.Component<{}, { peopled
                 searchText: text,
                 isLoading: true
 
+            }, () => {
+                    this.fetchdata();
             });
-            this.fetchdata(search_url_tv + ApiKey.TMDBApiKey + '&page=1&query=' + text, 'tvdata');
-            this.fetchdata(search_url_people + ApiKey.TMDBApiKey + '&page=1&query=' + text,'peopledata');
+            
+
+
         }
         else
             this.setState({
                 searchText: '',
                 isLoading: false,
-                tvdata: [],
-                peopledata: []
+                data: []
             });
 
     };
-    fetchdata = (url, statetype) => {
+
+    
+    fetchdata = () => {
+        let search_url = ''
+        switch(this.state.selectedpage){
+            case 'TV Shows':
+                search_url = search_url_tv
+                break;
+            case 'People':
+                search_url = search_url_people
+                break;
+            case 'List':
+                search_url = search_url_tv
+                break;
+            case 'Users':
+                search_url = search_url_people
+                break;
+            default:
+                search_url = search_url_tv
+                break;
+
+        }
+        let url = search_url + ApiKey.TMDBApiKey + '&page=1&query=' + this.state.searchText
         fetch(url)
             .then((response) => response.json())
-            .then((response) => { this.setState({ [statetype] : response.results }); })
+            .then((response) => { this.setState({ data : response.results }); })
             .catch((error) => console.error(error))
             .then(() => {
                 this.setState({ isLoading: false });
@@ -55,15 +80,24 @@ export default class TheSearchBarContainer extends React.Component<{}, { peopled
         this.setState({
             searchText: '',
             isLoading: false,
-            tvdata: [],
-            peopledata:[]
+            data: [],
         });
 
     };
+    
+    onSelect = (selected) => {
+        
+        this.setState({ selectedpage: selected.props.name }, 
+            () =>{
+            if(this.state.searchText != '')
+                this.fetchdata()
+            });
+
+    }
 
 
     render() {
-        const TVSearchResults = this.state.tvdata.map((item) => {
+        const SearchResults = this.state.data.map((item) => {
             return (
                 <View style ={{flexDirection: 'column'}}>
                     <View style ={styles.SearchResult}>
@@ -78,39 +112,33 @@ export default class TheSearchBarContainer extends React.Component<{}, { peopled
                 
             )
         })
-        const PeopleSearchResults = this.state.peopledata.map((item) => {
-            return (
-                <View style={{ flexDirection: 'column' }}>
-                    <View style={styles.SearchResult}>
-                        <Icon key ={item.id} name={item.name} posterpath={item.profile_path} id={item.id} payload={item} />
-                        <View style={styles.TextView}>
-                            <Text>{item.name}</Text>
-                        </View>
-                    </View>
-                    <View style={styles.Bar} />
-                </View>
 
-            )
-        })
 
         return (
-            <View>
-                <SearchBar
-                    placeholder="Search"
-                    onChangeText={this.handleOnChangeText}
-                    onClearPress={this.onClear}
-                />
+            <View style={{ flexDirection: 'column' }} >
                 <View>
-
-                <ScrollView>
-                <Text> TV Shows</Text>
-                    {TVSearchResults}
-                <Text> People</Text>
-                {PeopleSearchResults}
+                    <SearchBar
+                        placeholder="Search"
+                        onChangeText={this.handleOnChangeText}
+                        onClearPress={this.onClear}
+                    />
+                </View>
+                <View style ={{paddingTop:'15%'}}>
+                    <View style={styles.Tabcontainer}>
+                        <Tabs selected={this.state.selectedpage} style={{ backgroundColor: 'white' }}
+                            selectedStyle={{ color: 'red' }} onSelect={this.onSelect} selectedIconStyle={{ borderTopWidth: 2, borderTopColor: 'red' }}>
+                            <Text name="TV Shows">TV Shows</Text>
+                            <Text name="People" >People</Text>
+                            <Text name="Lists">Lists</Text>
+                            <Text name="Users" >Users</Text>
+                        </Tabs>
+                    </View>
+                </View>
+                <ScrollView style = {{paddingTop: '5%'}}>
+                        {SearchResults}
                 </ScrollView>
 
                 </View>
-            </View>
         );
     }
 }
@@ -127,5 +155,10 @@ const styles = StyleSheet.create({
     },
     TextView: {
         flex: 1,
-    }
+    },
+    Tabcontainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
 });
