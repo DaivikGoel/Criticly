@@ -2,9 +2,7 @@ import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import React from 'react';
 import CollapsibleList from "react-native-collapsible-list";
 import { TouchableOpacity } from 'react-native-gesture-handler';
-const ApiKey = require('../apikeys.json');
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
     wrapperCollapsibleList: {
@@ -21,10 +19,16 @@ const styles = StyleSheet.create({
     }
 });
 const SeasonInfo = (props) => {
+    const navigation = useNavigation();
     const Episodes = props.payload.episodes.map((episode) => {
         return (
             <View style={styles.collapsibleItem}>
-            <TouchableOpacity>
+            <TouchableOpacity 
+                onPress={() =>navigation.navigate('ShowSingleEpisodeDetailScreen', 
+                    {
+                        payload: props.payload
+                    })
+            }>
                 <Text>{episode.episode_number} {episode.name}</Text>
             </TouchableOpacity>
             </View>

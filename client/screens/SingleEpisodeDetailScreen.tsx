@@ -7,18 +7,16 @@ import { original_url } from '../constants/urls';
 import { StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
 
 
-export default function ShowDetailScreen({ route }) {
+export default function SingleEpisodeDetailScreen({ route }) {
 
   
     const { payload } = route.params;
     console.log(payload)
 
     return (
-    <ImageBackground style={styles.imgContainer} source={{ uri: original_url + payload.backdrop_path  }}>
-        <View style={styles.child}>
-          <EpisodeDetailContainer payload ={payload}/>
+        <View>
+            <Text>text for the particular episode</Text>
         </View>
-    </ImageBackground>
     );
   }
 

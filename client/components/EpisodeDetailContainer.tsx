@@ -6,7 +6,7 @@ const ApiKey = require('../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default class EpisodeDetailPage extends React.Component<{ payload: Array<any> }, { showdata: Array<any>, seasondata: Array<any>, isLoading: boolean }> {
+export default class EpisodeDetailContainer extends React.Component<{ payload: Array<any> }, { showdata: Array<any>, seasondata: Array<any>, isLoading: boolean }> {
 
     constructor(props) {
         super(props);

@@ -12,11 +12,13 @@ export type BottomTabParamList = {
 export type HomeParamList = {
   HomeScreen: undefined;
   ShowDetailScreen: undefined;
+  ShowSingleEpisodeDetailScreen: undefined;
 };
 
 export type SearchParamList = {
   SearchScreen: undefined;
   ShowDetailScreen: undefined;
+  ShowSingleEpisodeDetailScreen: undefined;
 };
 
 export type ProfileParamList = {

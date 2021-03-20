@@ -7,6 +7,7 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import HomeScreen from '../screens/HomeScreen';
 import ShowDetailScreen from '../screens/ShowDetailScreen';
+import ShowSingleEpisodeDetailScreen from '../screens/SingleEpisodeDetailScreen';
 import SearchScreen from '../screens/SearchScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import { BottomTabParamList, HomeParamList, SearchParamList, ProfileParamList } from '../types';
@@ -69,6 +70,10 @@ function HomeNavigator() {
         name="ShowDetailScreen" 
         component={ShowDetailScreen} 
       />
+      <HomeStack.Screen
+      name="ShowSingleEpisodeDetailScreen"
+      component={ShowSingleEpisodeDetailScreen}
+    />
     </HomeStack.Navigator>
   );
 }
@@ -87,6 +92,10 @@ function SearchNavigator() {
         name="ShowDetailScreen" 
         component={ShowDetailScreen} 
       />
+      <SearchStack.Screen
+      name="ShowSingleEpisodeDetailScreen"
+      component={ShowSingleEpisodeDetailScreen}
+      />
     </SearchStack.Navigator>
   );
 }
@@ -104,4 +113,5 @@ function ProfileNavigator() {
     </ProfileStack.Navigator>
   );
 }
+
 
