@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View } from '../components/Themed';
 import { ImageBackground} from 'react-native';
 import {Image} from 'react-native-elements'
-import EpisodeDetailContainer from '../components/EpisodeDetailContainer'
+import ShowDetailContainer from '../components/ShowDetailContainer'
 import { original_url } from '../constants/urls';
 import { StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
 
@@ -16,7 +16,7 @@ export default function ShowDetailScreen({ route }) {
     return (
     <ImageBackground style={styles.imgContainer} source={{ uri: original_url + payload.backdrop_path  }}>
         <View style={styles.child}>
-          <EpisodeDetailContainer payload ={payload}/>
+          <ShowDetailContainer payload ={payload}/>
         </View>
     </ImageBackground>
     );

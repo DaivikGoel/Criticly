@@ -26,7 +26,8 @@ const SeasonInfo = (props) => {
             <TouchableOpacity 
                 onPress={() =>navigation.navigate('ShowSingleEpisodeDetailScreen', 
                     {
-                        payload: props.payload
+                        episodeinfo: episode,
+                        seasoninfo: props.payload
                     })
             }>
                 <Text>{episode.episode_number} {episode.name}</Text>

@@ -1,22 +1,26 @@
 import * as React from 'react';
 import { Text, View } from '../components/Themed';
-import { ImageBackground} from 'react-native';
 import {Image} from 'react-native-elements'
-import EpisodeDetailContainer from '../components/EpisodeDetailContainer'
+import ShowDetailContainer from '../components/ShowDetailContainer'
 import { original_url } from '../constants/urls';
-import { StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
-
+import { StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView, ImageBackground} from 'react-native';
+import EpisodeInfo from '../components/EpisodeInfo'
 
 export default function SingleEpisodeDetailScreen({ route }) {
 
   
-    const { payload } = route.params;
-    console.log(payload)
+    const { episodeinfo,seasoninfo } = route.params;
+    console.log("EINFO", episodeinfo)
+    console.log("SINFO", seasoninfo)
 
     return (
-        <View>
-            <Text>text for the particular episode</Text>
+    <ImageBackground style={styles.imgContainer} source={{ uri: original_url + seasoninfo.poster_path }}>
+        <View style={styles.child}>
+            <ScrollView > 
+            <EpisodeInfo payload ={episodeinfo}/>
+            </ScrollView>
         </View>
+    </ImageBackground>
     );
   }
 
