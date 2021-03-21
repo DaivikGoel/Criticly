@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
     },
     TitleView: {
         flexDirection: 'row',
-        paddingTop: '10%'
+        paddingTop: '10%',
+        paddingLeft: '3%'
     },
     NetworkIcons: {
         width: windowWidth / 5,

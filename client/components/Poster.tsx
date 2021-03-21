@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     Logo: {
         width: windowWidth / 5,
         height: windowHeight / 6,
+        resizeMode:'cover'
     },
     IconText: {
         color: 'white',
