@@ -5,7 +5,8 @@ import ShowDetailContainer from '../components/ShowDetailContainer'
 import { original_url } from '../constants/urls';
 import { StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView, ImageBackground} from 'react-native';
 import EpisodeInfo from '../components/EpisodeInfo'
-
+import Ratings from '../components/Ratings'
+import ReviewButton from '../components/ReviewButton';
 export default function SingleEpisodeDetailScreen({ route }) {
 
   
@@ -17,6 +18,7 @@ export default function SingleEpisodeDetailScreen({ route }) {
         <View style={styles.child}>
             <ScrollView > 
                     <EpisodeInfo episodeinfo={episodeinfo} seasonposterurl={original_url + seasoninfo.poster_path } />
+                    <Ratings/>
             </ScrollView>
         </View>
     );
@@ -29,7 +31,7 @@ export default function SingleEpisodeDetailScreen({ route }) {
       },
     child: {
         flex: 1,
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        backgroundColor: 'rgb(0,0,0)',
       },
 
 });
