@@ -38,21 +38,22 @@ const styles = StyleSheet.create({
 const EpisodeInfo = (props) => {
     return (
     <View style ={{flex: 1}}>
-    <ImageBackground style={styles.imgContainer} source={{ uri: original_url + props.episodeinfo.still_path}}>
-        <View style = {styles.ImageOpacity}>
-            <View style={styles.TitleView}>
-                <Poster url ={props.seasonposterurl}/>
-                <View style={{ flexDirection: 'column', paddingLeft: '5%' }}>
-                    <Text style={styles.ShowTitle}>{props.episodeinfo.name}</Text>
-                    <Text style={styles.Text}>Season {props.episodeinfo.season_number}</Text>
-                    <Text style={styles.Text}>Episode {props.episodeinfo.episode_number}</Text>
-                    <Text style={styles.Text}>Air Date {props.episodeinfo.air_date} </Text>
+        <ImageBackground style={styles.imgContainer} source={{ uri: original_url + props.episodeinfo.still_path}}>
+            <View style = {styles.ImageOpacity}>
+                <View style={styles.TitleView}>
+                    <Poster url ={props.seasonposterurl}/>
+                    <View style={{ flexDirection: 'column', paddingLeft: '5%' }}>
+                        <Text style={styles.ShowTitle}>{props.episodeinfo.name}</Text>
+                        <Text style={styles.Text}>Season {props.episodeinfo.season_number}</Text>
+                        <Text style={styles.Text}>Episode {props.episodeinfo.episode_number}</Text>
+                        <Text style={styles.Text}>Air Date {props.episodeinfo.air_date} </Text>
+                        <Text style={styles.Text}>Directed by: {props.episodeinfo.crew.find( el => el.job =='Director')['name']}</Text>
+                    </View>
                 </View>
+                <ReviewButton/>
             </View>
-            <ReviewButton/>
-        </View>
         </ImageBackground>
-        </View>
+    </View>
     );
 }
 export default EpisodeInfo;

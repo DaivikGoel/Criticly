@@ -6,7 +6,8 @@ import { original_url } from '../constants/urls';
 import { StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView, ImageBackground} from 'react-native';
 import EpisodeInfo from '../components/EpisodeInfo'
 import Ratings from '../components/Ratings'
-import ReviewButton from '../components/ReviewButton';
+import TopReviews from '../components/TopReviews';
+
 export default function SingleEpisodeDetailScreen({ route }) {
 
   
@@ -19,6 +20,7 @@ export default function SingleEpisodeDetailScreen({ route }) {
             <ScrollView > 
                     <EpisodeInfo episodeinfo={episodeinfo} seasonposterurl={original_url + seasoninfo.poster_path } />
                     <Ratings/>
+                    <TopReviews/>
             </ScrollView>
         </View>
     );
