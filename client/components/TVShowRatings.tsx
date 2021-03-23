@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 });
 
 
-const Ratings = (props) => {
+const TVShowRatings = (props) => {
     return (
         <View style={styles.Container}>
             <View style={styles.RatingMetaData}>
@@ -41,13 +41,13 @@ const Ratings = (props) => {
             </View>
             <View style={styles.RatingMetaData}>
                 <Text style={styles.Text}>3.8/5</Text>
-                <Text style={styles.Text}>Average Rating </Text>
+                <Text style={styles.Text}>Average Episode Rating </Text>
             </View>
             <View style={styles.RatingMetaData}>
-                <Text style={styles.Text}>4/5</Text>
-                <Text style={styles.Text}> Your Rating </Text>
+                <Text style={styles.Text}>3.5/5</Text>
+                <Text style={styles.Text}> Your Average Rating </Text>
             </View>
         </View>
     );
 }
-export default Ratings;
+export default TVShowRatings;

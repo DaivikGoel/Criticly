@@ -5,7 +5,7 @@ import ShowDetailContainer from '../components/ShowDetailContainer'
 import { original_url } from '../constants/urls';
 import { StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView, ImageBackground} from 'react-native';
 import EpisodeInfo from '../components/EpisodeInfo'
-import Ratings from '../components/Ratings'
+import EpisodeRatings from '../components/EpisodeRatings'
 import TopReviews from '../components/TopReviews';
 import CastAndCrew from '../components/CastAndCrew';
 
@@ -23,7 +23,7 @@ export default function SingleEpisodeDetailScreen({ route }) {
         <View style={styles.child}>
             <ScrollView > 
                     <EpisodeInfo episodeinfo={episodeinfo} seasonposterurl={original_url + seasoninfo.poster_path } />
-                    <Ratings/>
+                    <EpisodeRatings/>
                     <TopReviews/>
                     <CastAndCrew url ={episodedetailsurl}/> 
             </ScrollView>

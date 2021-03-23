@@ -3,6 +3,7 @@ import { StyleSheet, ScrollView, ActivityIndicator, View, Dimensions, Text } fro
 import TVShowInfo from './TVShowInfo';
 import SeasonInfo from './SeasonInfo'
 import CastAndCrew from './CastAndCrew';
+import TVShowRatings from './TVShowRatings';
 const ApiKey = require('../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -78,6 +79,7 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
                         <View>
                             <View>
                                 <TVShowInfo payload ={this.state.showdata}/>
+                                <TVShowRatings/>
                                 <Text style={styles.ShowTitle}>Seasons</Text>
                                 {SeasonLists}
                             </View>
