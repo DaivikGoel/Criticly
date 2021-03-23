@@ -113,7 +113,7 @@ export default class TheSearchBarContainer extends React.Component<{}, { data: A
                 
             )
             }
-            else if (this.state.selectedpage == 'People')
+            else if (this.state.selectedpage == 'People') {
                 return (
                 <View style ={{flexDirection: 'column'}}>
                     <View style ={styles.SearchResult}>
