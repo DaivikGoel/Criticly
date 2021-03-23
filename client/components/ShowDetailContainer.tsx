@@ -1,11 +1,30 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, ActivityIndicator, View, Dimensions } from 'react-native';
+import { StyleSheet, ScrollView, ActivityIndicator, View, Dimensions, Text } from 'react-native';
 import TVShowInfo from './TVShowInfo';
 import SeasonInfo from './SeasonInfo'
+import CastAndCrew from './CastAndCrew';
 const ApiKey = require('../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+
+const styles = StyleSheet.create({
+    ShowTitle: {
+        color: '#FFFFFF',
+        fontSize: 30,
+    },
+    Text: {
+        color: '#FFFFFF',
+    },
+    TitleView: {
+        flexDirection: 'row',
+        paddingTop: '10%'
+    },
+    NetworkIcons: {
+        width: windowWidth / 10,
+        height: windowHeight / 10,
+    }
+});
 export default class ShowDetailContainer extends React.Component<{ payload: Array<any> }, { showdata: Array<any>, seasondata: Array<any>, isLoading: boolean }> {
 
     constructor(props) {
@@ -18,7 +37,7 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
     }
     componentDidMount() {
         let showurl = "https://api.themoviedb.org/3/tv/" + this.props.payload.id + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
-        let seasonurl = "https://api.themoviedb.org/3/tv/" + this.props.payload.id +"/season/" //https://api.themoviedb.org/3/tv/{tv_id}/season/{season_number}?api_key=<<api_key>>&language=en-US
+        let seasonurl = "https://api.themoviedb.org/3/tv/" + this.props.payload.id +"/season/" 
             fetch(showurl)
             .then((response) => response.json())
             .then((data) => { 
@@ -45,6 +64,7 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
 
 
     render() {
+        let crediturl = "https://api.themoviedb.org/3/tv/" + this.props.payload.id + "/credits" + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
 
         const SeasonLists = this.state.seasondata.sort(function (a, b) { return a.season_number - b.season_number; }).map((season) => {
             return (
@@ -56,8 +76,15 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
                 <ScrollView>
                     {this.state.isLoading == false ? (
                         <View>
-                            <TVShowInfo payload ={this.state.showdata}/>
-                            {SeasonLists}
+                            <View>
+                                <TVShowInfo payload ={this.state.showdata}/>
+                                <Text style={styles.ShowTitle}>Seasons</Text>
+                                {SeasonLists}
+                            </View>
+                            <View style ={{paddingTop:'5%'}}>
+                            <Text style={styles.ShowTitle}>Cast and Crew</Text>
+                            <CastAndCrew url ={crediturl}/>
+                            </View>
                         </View>
                     ) :(
                         <ActivityIndicator size="large" /> 
@@ -68,20 +95,3 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
         );
     }
 }
-const styles = StyleSheet.create({
-    ShowTitle: {
-        color: '#FFFFFF',
-        fontSize: 30,
-    },
-    Text: {
-        color: '#FFFFFF',
-    },
-    TitleView:{
-        flexDirection: 'row',
-        paddingTop: '10%'
-    },
-    NetworkIcons: {
-        width: windowWidth / 10,
-        height: windowHeight / 10,
-    }
-});
