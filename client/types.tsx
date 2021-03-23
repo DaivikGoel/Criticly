@@ -13,12 +13,14 @@ export type HomeParamList = {
   HomeScreen: undefined;
   ShowDetailScreen: undefined;
   ShowSingleEpisodeDetailScreen: undefined;
+  ShowPeopleScreen: undefined;
 };
 
 export type SearchParamList = {
   SearchScreen: undefined;
   ShowDetailScreen: undefined;
   ShowSingleEpisodeDetailScreen: undefined;
+  ShowPeopleScreen: undefined;
 };
 
 export type ProfileParamList = {

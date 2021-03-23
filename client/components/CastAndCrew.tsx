@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import CollapsibleList from "react-native-collapsible-list";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import CrewCastListItem from './CrewCastListItem';
 
 const styles = StyleSheet.create({
     wrapperCollapsibleList: {
@@ -44,25 +45,12 @@ export default class CastAndCrew extends Component<{ url: string }, { cast: Arra
 
     const cast = this.state.cast.map((member) => {
         return (
-            <View style={styles.collapsibleItem}>
-                <TouchableOpacity>
-                        <Text>{member.name}</Text>
-                        <Text style = {{textAlign: 'right'}}>{member.character}</Text>
-                </TouchableOpacity>
-
-            </View>
-
+            <CrewCastListItem name={member.name} role={member.character} payload={member}/>
         )
     })
     const crew = this.state.crew.map((member) => {
         return (
-            <View style={styles.collapsibleItem}>
-                <TouchableOpacity>
-                    <Text>{member.name}</Text>
-                    <Text style={{ textAlign: 'right' }}>{member.job}</Text>
-                </TouchableOpacity>
-            </View>
-
+            <CrewCastListItem name={member.name} role={member.job} payload = {member}/>
         )
     })
 

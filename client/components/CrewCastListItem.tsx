@@ -1,13 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
+import { StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Dimensions } from 'react-native';
 import { View, Text } from './Themed';
-import {Image} from 'react-native-elements'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import { useNavigation } from '@react-navigation/native';
-import { original_url } from '../constants/urls';
-import Poster from './Poster'
 
 const styles = StyleSheet.create({
     container: {
@@ -18,28 +15,33 @@ const styles = StyleSheet.create({
         width: windowWidth / 5,
         height: windowHeight / 6,
     },
-    IconText:{
+    IconText: {
         color: 'white',
-        textAlign: 'center', 
+        textAlign: 'center',
 
 
     },
+    collapsibleItem: {
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderColor: "#CCC",
+        padding: 10
+    }
 
 });
 
-const Icon = (props) => {
+const CrewCastListItem = (props) => {
     const navigation = useNavigation();
     return (
-        <View style = {styles.container}>
-            <TouchableOpacity onPress={() =>navigation.navigate('ShowDetailScreen', 
+        <View style={styles.collapsibleItem}>
+            <TouchableOpacity onPress={() => navigation.navigate('ShowPeopleScreen',
                 {
-                    payload: props.payload
+                    person: props.payload
                 })
-      }>
-                <Poster url={original_url + props.posterpath}/>
+            }>
+                <Text>{props.name}</Text>
+                <Text style={{ textAlign: 'right' }}>{props.role}</Text>
             </TouchableOpacity>
         </View>
     );
 }
-export default Icon;
-
+export default CrewCastListItem;
