@@ -15,7 +15,7 @@ export default function HomeScreen() {
   
   const Lists = lists.map((item) => {
     return (
-      <List name={item[0]} url={item[1]} />
+      <List name={item[0]} url={item[1]} type ='tv'/>
     )
   })
   return (

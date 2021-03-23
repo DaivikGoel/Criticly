@@ -2,20 +2,23 @@ import * as React from 'react';
 import { Text, View } from '../components/Themed';
 import { ImageBackground} from 'react-native';
 import {Image} from 'react-native-elements'
-import ShowDetailContainer from '../components/ShowDetailContainer'
-import { original_url } from '../constants/urls';
-import { StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
-
+import List from '../components/List'
+import { original_url, people_url} from '../constants/urls';
+import { StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView} from 'react-native';
+import PeopleInfo from '../components/PeopleInfo'
+const ApiKey = require('../apikeys.json');
 
 export default function ShowPeopleScreen({ route }) {
 
   
     const { person } = route.params;
-    console.log(person)
     return (
-        <View style={styles.child}>
-          <Text> {person.name}</Text>
-        </View>
+      <View style={styles.child}>
+        <ScrollView >
+          <PeopleInfo profilepic ={original_url + person.profile_path} person ={person} />
+          <List url={'https://api.themoviedb.org/3/person/' + person.id + '/tv_credits' + '?api_key=' + ApiKey.TMDBApiKey +  '&language=en-US'} type ='cast' name='TV Shows Known For' />
+        </ScrollView>
+      </View>
     );
   }
 

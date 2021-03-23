@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { Text, View } from '../components/Themed';
-import {Image} from 'react-native-elements'
-import ShowDetailContainer from '../components/ShowDetailContainer'
 import { original_url } from '../constants/urls';
 import { StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView, ImageBackground} from 'react-native';
 import EpisodeInfo from '../components/EpisodeInfo'

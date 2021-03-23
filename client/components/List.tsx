@@ -19,19 +19,36 @@ const styles = StyleSheet.create({
 
 });
 
-export default class List extends Component<{name: string, url: string}, { data: Array<any>, isLoading: boolean }> {
+export default class List extends Component<{name: string, url: string, type: string}, { data: Array<any>, isLoading: boolean}> {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
-      isLoading: true
+      isLoading: true,
     };
   }
 
   componentDidMount() {
     fetch(this.props.url)
       .then((response) => response.json())
-      .then((response) => { this.setState({ data: response.results }); })
+      .then((response) => {
+        switch(this.props.type){
+        case 'tv':
+          this.setState({ data: response.results }); 
+            break;
+        case 'cast':
+            this.setState({ data: response.cast });
+            break;
+        case 'crew':
+            this.setState({ data: response.crew });
+            break;
+        default:
+          this.setState({ data: response.results });
+          break;
+
+        }
+      }
+        )
       .catch((error) => console.error(error))
       .then(() => {
         this.setState({ isLoading: false });
@@ -39,6 +56,7 @@ export default class List extends Component<{name: string, url: string}, { data:
   }
 
   render() {
+    console.log("HERE", this.state.data)
     const Icons = this.state.data.map((item) => {
       return (
         <Icon name = {item.name} posterpath = {item.poster_path} key ={item.id} payload = {item} />
@@ -54,7 +72,7 @@ export default class List extends Component<{name: string, url: string}, { data:
           scrollEventThrottle={200}
           decelerationRate="fast"
         >
-          {Icons}      
+          {Icons}    
           </ScrollView>
 
 
