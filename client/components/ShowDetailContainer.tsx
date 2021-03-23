@@ -48,7 +48,7 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
 
         const SeasonLists = this.state.seasondata.sort(function (a, b) { return a.season_number - b.season_number; }).map((season) => {
             return (
-                <SeasonInfo payload ={season}/>
+                <SeasonInfo payload={season} showid={this.props.payload.id}/>
             )
         })
         return (

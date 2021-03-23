@@ -27,7 +27,8 @@ const SeasonInfo = (props) => {
                 onPress={() =>navigation.navigate('ShowSingleEpisodeDetailScreen', 
                     {
                         episodeinfo: episode,
-                        seasoninfo: props.payload
+                        seasoninfo: props.payload,
+                        showid: props.showid
                     })
             }>
                 <Text>{episode.episode_number} {episode.name}</Text>
