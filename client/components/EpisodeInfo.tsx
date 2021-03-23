@@ -50,7 +50,7 @@ const EpisodeInfo = (props) => {
                         <Text style={styles.Text}>Directed by: {props.episodeinfo.crew.find( el => el.job =='Director')['name']}</Text>
                     </View>
                 </View>
-                <ReviewButton/>
+                <ReviewButton payload = {props}/>
             </View>
         </ImageBackground>
     </View>

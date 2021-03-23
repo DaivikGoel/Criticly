@@ -15,9 +15,7 @@ export default function SingleEpisodeDetailScreen({ route }) {
 
   
     const { episodeinfo,seasoninfo, showid} = route.params;
-    console.log("EINFO", episodeinfo)
-    console.log("SINFO", seasoninfo)
-    console.log(showid)
+
     let episodedetailsurl = 'https://api.themoviedb.org/3/tv/' + showid + '/season/' + seasoninfo.season_number + '/episode/' + episodeinfo.episode_number + '/credits' + '?api_key=' + ApiKey.TMDBApiKey;
     
 

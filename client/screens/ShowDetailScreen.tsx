@@ -11,7 +11,6 @@ export default function ShowDetailScreen({ route }) {
 
   
     const { payload } = route.params;
-    console.log(payload)
 
     return (
     <ImageBackground style={styles.imgContainer} source={{ uri: original_url + payload.backdrop_path  }}>

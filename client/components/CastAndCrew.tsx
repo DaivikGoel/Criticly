@@ -32,12 +32,11 @@ export default class CastAndCrew extends Component<{ url: string }, { cast: Arra
     componentDidMount() {
         fetch(this.props.url)
             .then((response) => response.json())
-            .then((response) => { this.setState({ cast: response.cast, crew: response.crew }), console.log(this.state) })
+            .then((response) => { this.setState({ cast: response.cast, crew: response.crew }) })
             .catch((error) => console.error(error))
             .then(() => {
                 this.setState({ isLoading: false });
             })
-            .then(() => console.log(this.state))
     }
 
 
