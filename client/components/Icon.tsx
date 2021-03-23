@@ -31,7 +31,7 @@ const Icon = (props) => {
     const navigation = useNavigation();
     return (
         <View style = {styles.container}>
-            <TouchableOpacity onPress={() =>navigation.navigate('ShowDetailScreen', 
+            <TouchableOpacity onPress={() =>navigation.push('ShowDetailScreen', 
                 {
                     payload: props.payload
                 })

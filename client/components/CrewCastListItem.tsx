@@ -33,7 +33,7 @@ const CrewCastListItem = (props) => {
     const navigation = useNavigation();
     return (
         <View style={styles.collapsibleItem}>
-            <TouchableOpacity onPress={() => navigation.navigate('ShowPeopleScreen',
+            <TouchableOpacity onPress={() => navigation.push('ShowPeopleScreen',
                 {
                     person: props.payload
                 })

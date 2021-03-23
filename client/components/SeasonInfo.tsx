@@ -24,7 +24,7 @@ const SeasonInfo = (props) => {
         return (
             <View style={styles.collapsibleItem}>
             <TouchableOpacity 
-                onPress={() =>navigation.navigate('ShowSingleEpisodeDetailScreen', 
+                onPress={() =>navigation.push('ShowSingleEpisodeDetailScreen', 
                     {
                         episodeinfo: episode,
                         seasoninfo: props.payload,
