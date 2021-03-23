@@ -29,17 +29,33 @@ const styles = StyleSheet.create({
 
 const Icon = (props) => {
     const navigation = useNavigation();
-    return (
-        <View style = {styles.container}>
-            <TouchableOpacity onPress={() =>navigation.push('ShowDetailScreen', 
-                {
-                    payload: props.payload
-                })
-      }>
-                <Poster url={original_url + props.posterpath}/>
-            </TouchableOpacity>
-        </View>
-    );
+    switch (props.type){
+        case 'people':
+            return (
+                <View style={styles.container}>
+                    <TouchableOpacity onPress={() => navigation.push('ShowPeopleScreen',
+                        {
+                            person: props.payload
+                        })
+                    }>
+                        <Poster url={original_url + props.posterpath} />
+                    </TouchableOpacity>
+                </View>
+            );
+        default:
+            return (
+                <View style = {styles.container}>
+                    <TouchableOpacity onPress={() =>navigation.push('ShowDetailScreen', 
+                        {
+                            payload: props.payload
+                        })
+            }>
+                        <Poster url={original_url + props.posterpath}/>
+                    </TouchableOpacity>
+                </View>
+            );
+            break;
+}
 }
 export default Icon;
 

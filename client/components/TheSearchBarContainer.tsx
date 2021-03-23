@@ -98,6 +98,7 @@ export default class TheSearchBarContainer extends React.Component<{}, { data: A
 
     render() {
         const SearchResults = this.state.data.map((item) => {
+            if(this.state.selectedpage == 'TV Shows'){
             return (
                 <View style ={{flexDirection: 'column'}}>
                     <View style ={styles.SearchResult}>
@@ -111,6 +112,41 @@ export default class TheSearchBarContainer extends React.Component<{}, { data: A
                 </View>
                 
             )
+            }
+            else if (this.state.selectedpage == 'People')
+                return (
+                <View style ={{flexDirection: 'column'}}>
+                    <View style ={styles.SearchResult}>
+                        <Icon name={item.name} posterpath={item.profile_path} key={item.id} payload={item} type ={'people'} />
+                        <View style = {styles.TextView}>
+                            <Text>{item.name}</Text> 
+                            <Text>{item.known_for_department}</Text>
+                                {item.known_for.map(media => 
+                                    <Text key={media}>{media.title} </Text>
+                                )} 
+                        </View>
+                    </View>
+                    <View style={styles.Bar}/>
+                </View>
+                )
+                                }
+            else {
+                return (
+                    <View style={{ flexDirection: 'column' }}>
+                        <View style={styles.SearchResult}>
+                            <Icon name={item.name} posterpath={item.poster_path} key={item.id} payload={item} />
+                            <View style={styles.TextView}>
+                                <Text>{item.name}</Text>
+                                <Text>{item.overview}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.Bar} />
+                    </View>
+                )
+
+
+            }
+
         })
 
 
