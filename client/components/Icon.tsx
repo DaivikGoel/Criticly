@@ -12,6 +12,7 @@ import Poster from './Poster'
 const styles = StyleSheet.create({
     container: {
         padding: 15,
+        backgroundColor: 'transparent'
     },
 
     Logo: {

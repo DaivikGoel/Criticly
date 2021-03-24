@@ -71,7 +71,7 @@ export default class PeopleInfo extends Component<{}, { persondetails: Array<any
                 <View style = {styles.ImageOpacity}>
                     <View style={styles.TitleView}>
                         <Poster url ={this.props.profilepic}/>
-                        <View style={{ flexDirection: 'column', paddingLeft: '5%' }}>
+                        <View style={{ flexDirection: 'column', paddingLeft: '5%'}}>
                             <Text style={styles.ShowTitle}>{this.props.person.name}</Text>
                             <Text style={styles.Text}>Known for: {this.props.person.known_for_department}</Text>
                             <Text style={styles.Text} numberOfLines={this.state.showMoreText ? undefined : 4 }>{this.state.persondetails.biography}</Text>

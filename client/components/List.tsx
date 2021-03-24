@@ -10,11 +10,12 @@ import Icon from './Icon';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
   },
   title:
   {
-    fontSize: 30
+    fontSize: 30, 
+    color: 'white'
   }
 
 });
@@ -71,6 +72,7 @@ export default class List extends Component<{name: string, url: string, type: st
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={200}
           decelerationRate="fast"
+          style = {{backgroundColor: 'transparent'}}
         >
           {Icons}    
           </ScrollView>

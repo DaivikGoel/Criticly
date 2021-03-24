@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent:'space-evenly'
+    justifyContent:'space-evenly',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)'
   },
   scrollstyle: {
     marginTop: 50
