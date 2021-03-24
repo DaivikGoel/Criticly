@@ -87,7 +87,7 @@ export default class TheSearchBarContainer extends React.Component<{}, { data: A
     
     onSelect = (selected) => {
         
-        this.setState({ selectedpage: selected.props.name }, 
+        this.setState({ selectedpage: selected.props.name, data: [] }, 
             () =>{
             if(this.state.searchText != '')
                 this.fetchdata()
