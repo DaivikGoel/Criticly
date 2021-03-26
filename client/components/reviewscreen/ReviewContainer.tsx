@@ -26,7 +26,9 @@ export default class ReviewContainer extends React.Component<{}, {reviews:Array<
 
     async fb() {
         var info = dbh.collection('Reviews')
-        const info2 = await info.get()
+        const info2 = await info
+        .where('userid', '==', 1)
+        .get()
         info2.forEach((doc) => {
             this.setState({reviews: this.state.reviews.concat(doc.data())}, () => console.log(this.state))
             console.log(doc.id, '=>', doc.data())
