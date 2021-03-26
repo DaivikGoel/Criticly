@@ -10,14 +10,6 @@ import { createStackNavigator } from 'react-navigation';
 import TopReviewCard from './TopReviewCard';
 
 
-import 'firebase/firestore';
-import firebaseApp from '../../environment/firebaseconfig'
-import * as firebase from 'firebase'
-
-
-firebaseApp
-
-const dbh = firebase.firestore();
 
 const styles = StyleSheet.create({
     Text: {
@@ -63,18 +55,10 @@ export default class TopReviews extends Component<{}, { data: Array<any>, isLoad
         };
     }
 
-    async fb() {
-        var info = dbh.collection('Reviews')
-        const info2 = await info.get()
-        info2.forEach((doc) => {
-            console.log(doc.id, '=>', doc.data())
-        })
-    }
+
 
 
     render(){
-        console.log(this.props)
-        this.fb()
         return (
             <View style={styles.Container}>
                 <TopReviewCard/>

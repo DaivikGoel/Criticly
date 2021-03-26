@@ -44,7 +44,7 @@ const TopReviewCard = (props) => {
                     reviews: 'reviews'
                 })
             } />
-            <ReviewCard/>
+            <ReviewCard name='test2' date='yesterday' review ='Worst thing ive ever seen' />
     </View>
     );
 }

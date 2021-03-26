@@ -31,15 +31,22 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
         borderColor: '#FFFFFF'
-    }
+    },
+    Bar: {
+        borderBottomColor: 'black',
+        borderBottomWidth: 1,
+    },
 });
 
 const ReviewCard = (props) => {
     return (
         <View style={{ flex: 1 }}>
-            <Text style={styles.Text}> Reviewer Name </Text>
-            <Text style={styles.Text}> Date Written</Text>
-            <Text style={styles.Text}>Yes! The ultimate Mafia television show. If you are a lover of mobster film then you are the one that counts. This show has a great story line that was  very direct, they did not fluff every aspect of that type of lifestyle. The characters were very vulnerable and honest. I love the expected delivery, the norm of the show where Tony walks out every day to get the paper in his robe. This reoccurring scene showed us exactly how our men are monotonous in their ways!</Text>
+            <View style={{ flexDirection: 'column' }}>
+                    <Text style={styles.Text}> {props.name}</Text>
+                    <Text style={styles.Text}> {props.date}</Text>
+                    <Text style={styles.Text}>{props.review}</Text>
+                <View style={styles.Bar} />
+            </View>
         </View>
     );
 }

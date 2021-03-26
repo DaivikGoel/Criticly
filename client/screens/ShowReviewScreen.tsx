@@ -5,7 +5,7 @@ import {Image} from 'react-native-elements'
 import List from '../components/common/List'
 import { original_url, people_url} from '../constants/urls';
 import { StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView} from 'react-native';
-import TopReviewCard from '../components/showdetail/TopReviewCard';
+import ReviewContainer from '../components/reviewscreen/ReviewContainer';
 
 const ApiKey = require('../apikeys.json');
 
@@ -16,7 +16,7 @@ export default function ShowReviewScreen({ route }) {
     return (
       <View style={styles.child}>
         <ScrollView >
-          <TopReviewCard />
+          <ReviewContainer />
         </ScrollView>
       </View>
     );
