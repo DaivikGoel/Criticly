@@ -42,7 +42,8 @@ export default class RateEpisodeModal extends React.Component<{}, { Rating: numb
                 reviewtext: this.state.ReviewText,
                 seasonid: this.props.payload.seasoninfo.id,
                 showid: this.props.payload.showid,
-                userid: '1'
+                userid: '1', 
+                datecreated: firebase.firestore.FieldValue.serverTimestamp()
             })
             .then(() => {
                 Alert.alert('Review Added')

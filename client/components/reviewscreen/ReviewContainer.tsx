@@ -37,8 +37,9 @@ export default class ReviewContainer extends React.Component<{}, {reviews:Array<
 
     render() {
         const reviews = this.state.reviews.map((item) => {
+            const date = item.datecreated.toDate().toDateString()
             return (
-                <ReviewCard name={item.userid} review = {item.reviewtext} date ='yesterday'/>
+                <ReviewCard name={item.userid} review = {item.reviewtext} date ={date} />
             )
         })
         return (
