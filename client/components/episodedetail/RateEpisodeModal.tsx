@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, TextInput } from 'react-native';
+import { Text, View, StyleSheet, TextInput, Alert } from 'react-native';
 import Modal from 'react-native-modal';
 import { AirbnbRating, Button } from 'react-native-elements';
 import Poster from '../common/Poster'
@@ -34,19 +34,26 @@ export default class RateEpisodeModal extends React.Component<{}, { Rating: numb
     }
 
     submitReview = () => {
-        dbh.collection('Reviews')
-        .add({
-            episodeid: this.props.payload.episodeinfo.id,
-            rating: this.state.Rating,
-            reviewtext: this.state.ReviewText,
-            seasonid: this.props.payload.seasoninfo.id,
-            showid: this.props.payload.showid,
-            userid: '1'
-        })
-        .then(() => {
-            console.log('Review added!');
-        });
-        this.props.hideModal
+        if (this.state.Rating != 0){
+            dbh.collection('Reviews')
+            .add({
+                episodeid: this.props.payload.episodeinfo.id,
+                rating: this.state.Rating,
+                reviewtext: this.state.ReviewText,
+                seasonid: this.props.payload.seasoninfo.id,
+                showid: this.props.payload.showid,
+                userid: '1'
+            })
+            .then(() => {
+                Alert.alert('Review Added')
+            });
+            this.props.hideModal()
+        }
+        else{
+
+            Alert.alert('No Rating has been given')
+        }
+
     }
 
 
