@@ -22,7 +22,7 @@ export default function SingleEpisodeDetailScreen({ route }) {
             <ScrollView > 
                     <EpisodeInfo episodeinfo={episodeinfo} seasonposterurl={original_url + seasoninfo.poster_path } showid = {showid} seasoninfo = {seasoninfo} />
                     <EpisodeRatings/>
-                    <TopReviews/>
+                    <TopReviews episodeid = {episodeinfo.id}/>
                     <CastAndCrew url ={episodedetailsurl}/> 
             </ScrollView>
         </View>

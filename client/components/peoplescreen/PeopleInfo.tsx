@@ -54,7 +54,7 @@ export default class PeopleInfo extends Component<{}, { persondetails: Array<any
             .then((data) => {
                 this.setState({
                     persondetails: data
-                }, () => console.log(this.state.persondetails));
+                });
             })
             .then(() => {
                 this.setState({ isLoading: false });

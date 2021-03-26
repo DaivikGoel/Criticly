@@ -41,7 +41,7 @@ const TopReviewCard = (props) => {
     <View style ={{flex: 1}}>
             <Button title='Reviews' type='outline' containerStyle={styles.containerStyle} titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle} onPress={() => navigation.push('ShowReviewScreen',
                 {
-                    reviews: 'reviews'
+                    episodeid: props.episodeid
                 })
             } />
             <ReviewCard name='test2' date='yesterday' review ='Worst thing ive ever seen' />

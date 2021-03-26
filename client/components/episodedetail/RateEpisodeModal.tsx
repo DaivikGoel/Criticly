@@ -51,46 +51,45 @@ export default class RateEpisodeModal extends React.Component<{}, { Rating: numb
 
 
     render(){
-        console.log(this.props)
-    return (
-            <Modal 
-            isVisible={this.props.isVisible}
-            backdropOpacity = {0.9}
-            >
-                <View style={{ flex: 1, flexDirection: 'column'}}>
-                    <Button title="Hide modal" onPress={this.props.hideModal} />
-                    <View style={styles.TitleView}>
-                        <Poster url={this.props.payload.seasonposterurl} />
-                            <View style={{ flexDirection: 'column', paddingLeft: '5%' }}>
-                                <Text style={styles.ShowTitle}>{this.props.payload.episodeinfo.name}</Text>
-                                <Text style={styles.Text}>Season {this.props.payload.episodeinfo.season_number}</Text>
-                                <Text style={styles.Text}>Episode {this.props.payload.episodeinfo.episode_number}</Text>
-                                <Text style={styles.Text}>Air Date {this.props.payload.episodeinfo.air_date} </Text>
-                                <Text style={styles.Text}>Directed by: {this.props.payload.episodeinfo.crew.find(el => el.job == 'Director')['name']}</Text>
-                            </View>
-                    </View>
-                    <View>
-                        <Text style={styles.ShowTitle}>Rate</Text>
-                        <AirbnbRating
-                        defaultRating = {0}
-                        onFinishRating = {this.SaveRating}
+        return (
+                <Modal 
+                isVisible={this.props.isVisible}
+                backdropOpacity = {0.9}
+                >
+                    <View style={{ flex: 1, flexDirection: 'column'}}>
+                        <Button title="Hide modal" onPress={this.props.hideModal} />
+                        <View style={styles.TitleView}>
+                            <Poster url={this.props.payload.seasonposterurl} />
+                                <View style={{ flexDirection: 'column', paddingLeft: '5%' }}>
+                                    <Text style={styles.ShowTitle}>{this.props.payload.episodeinfo.name}</Text>
+                                    <Text style={styles.Text}>Season {this.props.payload.episodeinfo.season_number}</Text>
+                                    <Text style={styles.Text}>Episode {this.props.payload.episodeinfo.episode_number}</Text>
+                                    <Text style={styles.Text}>Air Date {this.props.payload.episodeinfo.air_date} </Text>
+                                    <Text style={styles.Text}>Directed by: {this.props.payload.episodeinfo.crew.find(el => el.job == 'Director')['name']}</Text>
+                                </View>
+                        </View>
+                        <View>
+                            <Text style={styles.ShowTitle}>Rate</Text>
+                            <AirbnbRating
+                            defaultRating = {0}
+                            onFinishRating = {this.SaveRating}
+                            />
+                        </View>
+                        <View style = {{paddingTop: '5%'}}>
+                            <Text style={styles.ShowTitle}>Add a Review</Text>
+                            <TextInput
+                            style={styles.input}
+                            placeholder='What do you think?'
+                            placeholderTextColor = 'white'
+                            multiline={true}
+                            textAlignVertical = 'top'
+                            onChangeText={this.onChangeText}
                         />
+                        <Button title="Submit" onPress={this.submitReview}/>
+                        </View>
                     </View>
-                    <View style = {{paddingTop: '5%'}}>
-                        <Text style={styles.ShowTitle}>Add a Review</Text>
-                        <TextInput
-                        style={styles.input}
-                        placeholder='What do you think?'
-                        placeholderTextColor = 'white'
-                        multiline={true}
-                        textAlignVertical = 'top'
-                        onChangeText={this.onChangeText}
-                    />
-                    <Button title="Submit" onPress={this.submitReview}/>
-                    </View>
-                </View>
-            </Modal>
-    );
+                </Modal>
+        );
     }
 }
 

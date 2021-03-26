@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
 });
 
 const TVShowInfo = (props) => {
-    console.log(props.payload)
     return (
         <View style={styles.TitleView}>
             <Poster url={original_url + props.payload.poster_path} />

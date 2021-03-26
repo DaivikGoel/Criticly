@@ -61,7 +61,7 @@ export default class TopReviews extends Component<{}, { data: Array<any>, isLoad
     render(){
         return (
             <View style={styles.Container}>
-                <TopReviewCard/>
+                <TopReviewCard episodeid ={this.props.episodeid} />
             </View>
         );
     }
