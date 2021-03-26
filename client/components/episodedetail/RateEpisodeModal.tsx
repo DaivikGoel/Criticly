@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 });
 
 
-export default class ReviewContainer extends React.Component<{}, { Rating: number, ReviewText: string}> {
+export default class RateEpisodeModal extends React.Component<{}, { Rating: number, ReviewText: string}> {
     constructor(props) {
         super(props);
         this.state = {
