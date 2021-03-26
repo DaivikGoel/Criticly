@@ -11,6 +11,8 @@ import ShowSingleEpisodeDetailScreen from '../screens/SingleEpisodeDetailScreen'
 import ShowPeopleScreen from '../screens/ShowPeopleScreen'
 import SearchScreen from '../screens/SearchScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import ShowReviewScreen from '../screens/ShowReviewScreen'
+
 import { BottomTabParamList, HomeParamList, SearchParamList, ProfileParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -79,6 +81,10 @@ function HomeNavigator() {
         name="ShowPeopleScreen"
         component={ShowPeopleScreen}
       />
+      <HomeStack.Screen
+        name="ShowReviewScreen"
+        component={ShowReviewScreen}
+      />
     </HomeStack.Navigator>
   );
 }
@@ -104,6 +110,10 @@ function SearchNavigator() {
       <SearchStack.Screen
         name="ShowPeopleScreen"
         component={ShowPeopleScreen}
+      />
+      <SearchStack.Screen
+        name="ShowReviewScreen"
+        component={ShowReviewScreen}
       />
     </SearchStack.Navigator>
   );

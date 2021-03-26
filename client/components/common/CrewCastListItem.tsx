@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, TouchableOpacity, ActivityIndicator, View, Text  } from 'react-native';
 import { Dimensions } from 'react-native';
-import { View, Text } from './Themed';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import { useNavigation } from '@react-navigation/native';

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, ScrollView, ActivityIndicator, View, Dimensions, Text } from 'react-native';
 import TVShowInfo from './TVShowInfo';
 import SeasonInfo from './SeasonInfo'
-import CastAndCrew from './CastAndCrew';
+import CastAndCrew from '../common/CastAndCrew';
 import TVShowRatings from './TVShowRatings';
-const ApiKey = require('../apikeys.json');
+const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 

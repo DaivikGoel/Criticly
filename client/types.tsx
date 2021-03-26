@@ -14,6 +14,7 @@ export type HomeParamList = {
   ShowDetailScreen: undefined;
   ShowSingleEpisodeDetailScreen: undefined;
   ShowPeopleScreen: undefined;
+  ShowReviewScreen:undefined;
 };
 
 export type SearchParamList = {
@@ -21,6 +22,7 @@ export type SearchParamList = {
   ShowDetailScreen: undefined;
   ShowSingleEpisodeDetailScreen: undefined;
   ShowPeopleScreen: undefined;
+  ShowReviewScreen: undefined;
 };
 
 export type ProfileParamList = {

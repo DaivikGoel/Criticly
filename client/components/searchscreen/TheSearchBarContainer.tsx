@@ -1,10 +1,10 @@
 import SearchBar from "react-native-dynamic-search-bar";
 import React, { Component } from 'react';
 import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View, Text, useWindowDimensions} from 'react-native';
-import Icon from './Icon';
-import { search_url_tv, search_url_people } from '../constants/urls';
+import Icon from '../common/Icon';
+import { search_url_tv, search_url_people } from '../../constants/urls';
 import Tabs from 'react-native-tabs';
-const ApiKey = require('../apikeys.json');
+const ApiKey = require('../../apikeys.json');
 
 
 let types = [["TV Shows", search_url_tv], ["Actors", search_url_people]];

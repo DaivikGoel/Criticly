@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator} from 'react-native';
-import { Text, View } from './Themed';
+import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, Text, View } from 'react-native';
 import Icon from './Icon';
 
 

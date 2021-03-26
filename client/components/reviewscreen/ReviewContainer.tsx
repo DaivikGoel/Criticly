@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, TextInput } from 'react-native';
 import Modal from 'react-native-modal';
 import { AirbnbRating, Button } from 'react-native-elements';
-import Poster from './Poster'
+import Poster from '../common/Poster'
 
 const styles = StyleSheet.create({
     ShowTitle: {

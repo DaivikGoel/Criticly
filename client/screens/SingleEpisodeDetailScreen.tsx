@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Text, View } from '../components/Themed';
 import { original_url } from '../constants/urls';
 import { StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView, ImageBackground} from 'react-native';
-import EpisodeInfo from '../components/EpisodeInfo'
-import EpisodeRatings from '../components/EpisodeRatings'
-import TopReviews from '../components/TopReviews';
-import CastAndCrew from '../components/CastAndCrew';
+import EpisodeInfo from '../components/episodedetail/EpisodeInfo'
+import EpisodeRatings from '../components/episodedetail/EpisodeRatings'
+import TopReviews from '../components/showdetail/TopReviews';
+import CastAndCrew from '../components/common/CastAndCrew';
 
 const ApiKey = require('../apikeys.json');
 

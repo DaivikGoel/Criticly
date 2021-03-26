@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, ScrollView} from 'react-native';
 
-import List from '../components/List';
+import List from '../components/common/List';
 import { Text, View } from '../components/Themed';
 import {trending_url, topRated_url, popular_url} from '../constants/urls'
 const ApiKey = require('../apikeys.json');
