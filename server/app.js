@@ -24,6 +24,11 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/postreview', postReviewsRouter);
 
+const con = require('./config.js')
+con.connect(function(err) {
+if (err) throw err;
+console.log("Connected!");
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

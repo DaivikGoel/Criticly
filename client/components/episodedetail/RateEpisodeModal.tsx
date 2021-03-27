@@ -4,14 +4,6 @@ import Modal from 'react-native-modal';
 import { AirbnbRating, Button } from 'react-native-elements';
 import Poster from '../common/Poster'
 
-import 'firebase/firestore';
-import firebaseApp from '../../environment/firebaseconfig'
-import * as firebase from 'firebase'
-
-firebaseApp
-
-const dbh = firebase.firestore();
-
 export default class RateEpisodeModal extends React.Component<{}, { Rating: number, ReviewText: string}> {
     constructor(props) {
         super(props);
@@ -35,21 +27,21 @@ export default class RateEpisodeModal extends React.Component<{}, { Rating: numb
 
     submitReview = () => {
         if (this.state.Rating != 0){
-            // dbh.collection('Reviews')
-            // .add({
-            //     episodeid: this.props.payload.episodeinfo.id,
-            //     rating: this.state.Rating,
-            //     reviewtext: this.state.ReviewText,
-            //     seasonid: this.props.payload.seasoninfo.id,
-            //     showid: this.props.payload.showid,
-            //     userid: '1', 
-            //     datecreated: firebase.firestore.FieldValue.serverTimestamp()
-            // })
-            // .then(() => {
-            //     Alert.alert('Review Added')
-            // });
-            
-            fetch('http://localhost:3000/postreview')
+            fetch('http://localhost:3000/postreview', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    episodeid: this.props.payload.episodeinfo.id,
+                    rating: this.state.Rating,
+                    reviewtext: this.state.ReviewText,
+                    seasonid: this.props.payload.seasoninfo.id,
+                    showid: this.props.payload.showid,
+                    userid: '2'
+                })
+            })
             .then((response) => console.log(response))
 
             this.props.hideModal()
