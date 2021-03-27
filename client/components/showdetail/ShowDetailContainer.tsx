@@ -39,6 +39,7 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
     componentDidMount() {
         let showurl = "https://api.themoviedb.org/3/tv/" + this.props.payload.id + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
         let seasonurl = "https://api.themoviedb.org/3/tv/" + this.props.payload.id +"/season/" 
+        this.getAggregateReviews();
             fetch(showurl)
             .then((response) => response.json())
             .then((data) => { 
@@ -60,6 +61,12 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
             .then(() => {
                 this.setState({ isLoading: false });
             })
+    }
+
+    getAggregateReviews(){
+        console.log("aggregate reviews client");
+        fetch('http://10.0.2.2:3000/aggregateReviews/')
+        .then((response) => console.log(response))
     }
 
 

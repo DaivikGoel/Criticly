@@ -5,17 +5,16 @@ const start = Date.now();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-
-    res.sendStatus(200);
-  con.connect(function(err) {
-    if (err) throw err;
-    var sql = "Select * from reviews where episodeid = '2431898'";
+    console.log("here at least")
+    var sql = "SELECT * from reviews" 
+    console.log(sql)
     con.query(sql, function (err, result) {
-      if (err) throw err;
-      console.log(result);
-  });
-  });
+        if (err) throw err;
+        console.log(result);
+      });
+      
+      res.send('404');
+      });
 
-});
 
 module.exports = router;

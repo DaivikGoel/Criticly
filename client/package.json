@@ -40,7 +40,8 @@
     "react-native-spinkit": "^1.5.1",
     "react-native-tabs": "^1.0.9",
     "react-native-web": "~0.13.12",
-    "tslib": "^2.1.0"
+    "tslib": "^2.1.0",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",

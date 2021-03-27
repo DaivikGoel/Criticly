@@ -7,12 +7,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var postReviewsRouter = require('./routes/postreview');
-<<<<<<< Updated upstream
 var getReviewsRouter = require('./routes/getreviews');
-=======
-var getAggregateReviewsRouter = require('./routes/aggregateReview');
-
->>>>>>> Stashed changes
+var getAggregateReviewsRouter = require('./routes/aggregateReviews');
 var app = express();
 
 // view engine setup
@@ -28,12 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/postreview', postReviewsRouter);
-<<<<<<< Updated upstream
 app.use('/getreviews', getReviewsRouter);
-
-=======
 app.use('/aggregateReviews', getAggregateReviewsRouter);
->>>>>>> Stashed changes
 
 const con = require('./config.js')
 con.connect(function(err) {
