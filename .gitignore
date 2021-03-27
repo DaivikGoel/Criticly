@@ -1,6 +1,7 @@
 #API Key Files
 **/apikeys*
 **/firebaseconfig*
+**/config*
 
 # Expo
 .expo

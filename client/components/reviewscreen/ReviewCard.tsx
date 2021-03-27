@@ -23,12 +23,13 @@ const styles = StyleSheet.create({
     Bar: {
         borderBottomColor: 'black',
         borderBottomWidth: 1,
+        paddingTop:'2%'
     },
 });
 
 const ReviewCard = (props) => {
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, paddingTop: '5%'}}>
             <View style={{ flexDirection: 'column', paddingLeft: '2%', paddingRight: '2%'}}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.name}>{props.name}</Text>
