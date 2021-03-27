@@ -35,19 +35,23 @@ export default class RateEpisodeModal extends React.Component<{}, { Rating: numb
 
     submitReview = () => {
         if (this.state.Rating != 0){
-            dbh.collection('Reviews')
-            .add({
-                episodeid: this.props.payload.episodeinfo.id,
-                rating: this.state.Rating,
-                reviewtext: this.state.ReviewText,
-                seasonid: this.props.payload.seasoninfo.id,
-                showid: this.props.payload.showid,
-                userid: '1', 
-                datecreated: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                Alert.alert('Review Added')
-            });
+            // dbh.collection('Reviews')
+            // .add({
+            //     episodeid: this.props.payload.episodeinfo.id,
+            //     rating: this.state.Rating,
+            //     reviewtext: this.state.ReviewText,
+            //     seasonid: this.props.payload.seasoninfo.id,
+            //     showid: this.props.payload.showid,
+            //     userid: '1', 
+            //     datecreated: firebase.firestore.FieldValue.serverTimestamp()
+            // })
+            // .then(() => {
+            //     Alert.alert('Review Added')
+            // });
+            
+            fetch('http://localhost:3000/postreview')
+            .then((response) => console.log(response))
+
             this.props.hideModal()
         }
         else{
