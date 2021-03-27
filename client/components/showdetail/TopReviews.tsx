@@ -55,14 +55,26 @@ export default class TopReviews extends Component<{}, { data: Array<any>, isLoad
         };
     }
 
+    componentDidMount() {
+        this.getreviews()
+    }
 
+    getreviews() {
+        fetch('http://localhost:3000/getreviews?episodeid=' + this.props.episodeinfo.id + '&type=latest')
+            .then(async (response) => {
+                const data = await response.json()
+                this.setState({ data: this.state.data.concat(data) })
 
+            }
+
+            )
+    }
 
     render(){
         console.log('TOP REVIEW', this.props)
         return (
             <View style={styles.Container}>
-                <TopReviewCard episodeinfo ={this.props.episodeinfo} />
+                <TopReviewCard episodeinfo ={this.props.episodeinfo} latestreview = {this.state.data} />
             </View>
         );
     }

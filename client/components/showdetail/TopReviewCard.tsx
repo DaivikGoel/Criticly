@@ -39,12 +39,12 @@ const TopReviewCard = (props) => {
     const navigation = useNavigation();
     return (
     <View style ={{flex: 1}}>
-            <Button title='Reviews' type='outline' containerStyle={styles.containerStyle} titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle} onPress={() => navigation.push('ShowReviewScreen',
+            <Button title='Latest Review' type='outline' containerStyle={styles.containerStyle} titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle} onPress={() => navigation.push('ShowReviewScreen',
                 {
                     episodeinfo: props.episodeinfo
                 })
             } />
-            <ReviewCard name='test2' date='yesterday' review ='Worst thing ive ever seen' />
+            <ReviewCard name={props.latestreview[0].username} review={props.latestreview[0].reviewtext} date={props.latestreview[0].modified_instant} rating={props.latestreview[0].rating} />
     </View>
     );
 }
