@@ -63,7 +63,7 @@ export default class TopReviews extends Component<{}, { data: Array<any>, isLoad
         fetch('http://localhost:3000/getreviews?episodeid=' + this.props.episodeinfo.id + '&type=latest')
             .then(async (response) => {
                 const data = await response.json()
-                this.setState({ data: this.state.data.concat(data) })
+                this.setState({ data: this.state.data.concat(data) }, () => console.log(this.state.data))
 
             }
 
@@ -71,7 +71,7 @@ export default class TopReviews extends Component<{}, { data: Array<any>, isLoad
     }
 
     render(){
-        console.log('TOP REVIEW', this.props)
+        console.log('TOP REVIEW', this.state.data)
         return (
             <View style={styles.Container}>
                 <TopReviewCard episodeinfo ={this.props.episodeinfo} latestreview = {this.state.data} />

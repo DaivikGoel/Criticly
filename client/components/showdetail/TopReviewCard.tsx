@@ -44,7 +44,11 @@ const TopReviewCard = (props) => {
                     episodeinfo: props.episodeinfo
                 })
             } />
+            { props.latestreviews == null ? 
+            <Text>UNDEFINED</Text>
+            :
             <ReviewCard name={props.latestreview[0].username} review={props.latestreview[0].reviewtext} date={props.latestreview[0].modified_instant} rating={props.latestreview[0].rating} />
+}
     </View>
     );
 }
