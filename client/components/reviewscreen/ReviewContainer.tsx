@@ -18,28 +18,53 @@ export default class ReviewContainer extends React.Component<{}, {reviews:Array<
         super(props);
         this.state = {
             reviews: [],
+            
         };
     }
     componentDidMount(){
-        this.fb()
+        this.getreviews()
     }
 
-    async fb() {
+    async getreviews() {
         var info = dbh.collection('Reviews')
-        const info2 = await info
-        .where('episodeid', '==', this.props.episodeid)
+        const reviews = await info
+        .where('episodeid', '==', this.props.episodeinfo.id)
         .get()
-        info2.forEach((doc) => {
-            this.setState({reviews: this.state.reviews.concat(doc.data())})
+        reviews.forEach((doc) => {
+            var userdata;
+            (async () => {
+                userdata = await this.getusername(doc.data().userid)
+                var reviewdata = {
+                    reviewdata: doc.data(),
+                    userdata: userdata
+                }
+                this.setState({ reviews: this.state.reviews.concat(reviewdata) }, () => console.log(this.state))
+            })()
+
         })
+    }
+
+    async getusername(userid) {
+        console.log('userid',userid)
+        var info = dbh.collection('users')
+        var user;
+        const reviews = await info
+            .where(firebase.firestore.FieldPath.documentId(), '==', userid)
+            .get()
+        await reviews.forEach((doc) => {
+            user = doc.data()
+        })
+        return user
+
     }
 
 
     render() {
         const reviews = this.state.reviews.map((item) => {
-            const date = item.datecreated.toDate().toDateString()
+            const date = item.reviewdata.datecreated.toDate().toDateString()
+
             return (
-                <ReviewCard name={item.userid} review = {item.reviewtext} date ={date} />
+                <ReviewCard name={item.userdata.name} review = {item.reviewdata.reviewtext} date ={date} rating = {item.reviewdata.rating}/>
             )
         })
         return (
