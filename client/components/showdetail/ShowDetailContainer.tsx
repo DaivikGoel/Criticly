@@ -26,14 +26,16 @@ const styles = StyleSheet.create({
         height: windowHeight / 10,
     }
 });
-export default class ShowDetailContainer extends React.Component<{ payload: Array<any> }, { showdata: Array<any>, seasondata: Array<any>, isLoading: boolean }> {
+export default class ShowDetailContainer extends React.Component<{ payload: Array<any> }, { showdata: Array<any>, seasondata: Array<any>, isLoading: boolean, averageRating: number, ratingsCount:number }> {
 
     constructor(props) {
         super(props);
         this.state = {
             showdata:[],
             seasondata: [],
-            isLoading: true
+            isLoading: true,
+            averageRating: -1,
+            ratingsCount: -1
         };
     }
     componentDidMount() {
@@ -63,10 +65,13 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
             })
     }
 
-    getAggregateReviews(){
-        console.log("aggregate reviews client");
-        fetch('http://10.0.2.2:3000/aggregateReviews/')
-        .then((response) => console.log(response))
+    getAggregateReviews() {
+        fetch('http://10.0.2.2:3000/aggregateReviews?showid=' + this.props.payload.id)
+        .then(async (response) => {
+            const data = await response.json()
+            this.setState({ averageRating: data[0]["AVG(rating)"], ratingsCount: data[0]["COUNT(rating)"] });
+            }
+        )
     }
 
 
@@ -86,7 +91,7 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
                         <View>
                             <View>
                                 <TVShowInfo payload ={this.state.showdata}/>
-                                <TVShowRatings/>
+                                <TVShowRatings averageRating = {this.state.averageRating} ratingsCount = {this.state.ratingsCount}/>
                                 <Text style={styles.ShowTitle}>Seasons</Text>
                                 {SeasonLists}
                             </View>

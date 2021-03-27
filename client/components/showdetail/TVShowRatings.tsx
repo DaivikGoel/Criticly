@@ -36,11 +36,11 @@ const TVShowRatings = (props) => {
     return (
         <View style={styles.Container}>
             <View style={styles.RatingMetaData}>
-                <Text style={styles.Text}>550</Text>
+                <Text style={styles.Text}>{props.ratingsCount}</Text>
                 <Text style={styles.Text}>Total Ratings </Text>
             </View>
             <View style={styles.RatingMetaData}>
-                <Text style={styles.Text}>3.8/5</Text>
+                <Text style={styles.Text}>{props.averageRating}</Text>
                 <Text style={styles.Text}>Average Episode Rating </Text>
             </View>
             <View style={styles.RatingMetaData}>

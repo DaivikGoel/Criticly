@@ -5,15 +5,11 @@ const start = Date.now();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    console.log("here at least")
-    var sql = "SELECT * from reviews" 
-    console.log(sql)
+    var sql = "SELECT AVG(rating), COUNT(rating) from reviews where showid =" + req.query.showid + ""; 
     con.query(sql, function (err, result) {
         if (err) throw err;
-        console.log(result);
+        res.send(result)
       });
-      
-      res.send('404');
       });
 
 
