@@ -25,46 +25,23 @@ export default class ReviewContainer extends React.Component<{}, {reviews:Array<
         this.getreviews()
     }
 
-    async getreviews() {
-        var info = dbh.collection('Reviews')
-        const reviews = await info
-        .where('episodeid', '==', this.props.episodeinfo.id)
-        .get()
-        reviews.forEach((doc) => {
-            var userdata;
-            (async () => {
-                userdata = await this.getusername(doc.data().userid)
-                var reviewdata = {
-                    reviewdata: doc.data(),
-                    userdata: userdata
-                }
-                this.setState({ reviews: this.state.reviews.concat(reviewdata) }, () => console.log(this.state))
-            })()
-
-        })
-    }
-
-    async getusername(userid) {
-        console.log('userid',userid)
-        var info = dbh.collection('users')
-        var user;
-        const reviews = await info
-            .where(firebase.firestore.FieldPath.documentId(), '==', userid)
-            .get()
-        await reviews.forEach((doc) => {
-            user = doc.data()
-        })
-        return user
-
+    getreviews() {
+        fetch('http://localhost:3000/getreviews?episodeid=' + this.props.episodeinfo.id)
+        .then(async (response) => {
+            const data = await response.json()
+            this.setState({ reviews: this.state.reviews.concat(data) })
+        
+        }
+        
+        )
     }
 
 
     render() {
         const reviews = this.state.reviews.map((item) => {
-            const date = item.reviewdata.datecreated.toDate().toDateString()
-
+            console.log(item)
             return (
-                <ReviewCard name={item.userdata.name} review = {item.reviewdata.reviewtext} date ={date} rating = {item.reviewdata.rating}/>
+                <ReviewCard name={item.username} review = {item.reviewtext} date ={item.modified_instant} rating = {item.rating}/>
             )
         })
         return (
