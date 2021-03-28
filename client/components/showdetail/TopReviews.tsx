@@ -71,7 +71,6 @@ export default class TopReviews extends Component<{}, { data: Array<any>, isLoad
     }
 
     render(){
-        console.log('TOP REVIEW', this.state.data)
         return (
             <View style={styles.Container}>
                 <TopReviewCard episodeinfo ={this.props.episodeinfo} latestreview = {this.state.data} />
