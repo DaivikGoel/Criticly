@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const con = require('../config.js')
-const start = Date.now();
 const executeQuery = require('../util/sqlWrapper.js')
 
 /* GET users listing. */

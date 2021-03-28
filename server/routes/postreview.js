@@ -10,13 +10,7 @@ app.use(bodyParser.json());
 router.post('/', function(req, res, next) {
 
     var sql = "INSERT INTO reviews (userid, episodeid, seasonid, showid, rating, reviewtext) VALUES (" + req.body.userid + ',' + req.body.episodeid + ',' + req.body.seasonid + ',' + req.body.showid + ',' + req.body.rating + ',' + "'" +  req.body.reviewtext + "'" + ')' ; 
-    console.log(sql)
-    con.query(sql, function (err, result) {
-      if (err) throw err;
-      console.log("1 record inserted");
-  });
-
-  res.send('404');
+    executeQuery(sql, req ,res)
   });
 
 
