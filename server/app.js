@@ -25,7 +25,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/postreview', postReviewsRouter);
 app.use('/getreviews', getReviewsRouter);
-app.use('/aggregateReviews?:showid', getAggregateReviewsRouter);
+app.use('/aggregateReviews?:id', getAggregateReviewsRouter);
 
 const con = require('./config.js')
 con.connect(function(err) {

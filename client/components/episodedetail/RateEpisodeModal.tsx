@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, TextInput, Alert } from 'react-native';
 import Modal from 'react-native-modal';
 import { AirbnbRating, Button } from 'react-native-elements';
 import Poster from '../common/Poster'
-
+import { apiUrl } from '../../constants/apiurl';
 export default class RateEpisodeModal extends React.Component<{}, { Rating: number, ReviewText: string}> {
     constructor(props) {
         super(props);
@@ -27,7 +27,7 @@ export default class RateEpisodeModal extends React.Component<{}, { Rating: numb
 
     submitReview = () => {
         if (this.state.Rating != 0){
-            fetch('http://localhost:3000/postreview', {
+            fetch(apiUrl + 'postreview', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -42,7 +42,6 @@ export default class RateEpisodeModal extends React.Component<{}, { Rating: numb
                     userid: '10'
                 })
             })
-            .then((response) => console.log(response))
 
             this.props.hideModal()
         }

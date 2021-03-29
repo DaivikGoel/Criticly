@@ -3,8 +3,6 @@ import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, Text, View
 import Icon from './Icon';
 
 
-//let url = 'http://localhost:3000/trending';
-
 
 const styles = StyleSheet.create({
   container: {

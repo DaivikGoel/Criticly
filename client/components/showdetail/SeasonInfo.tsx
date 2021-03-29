@@ -28,7 +28,8 @@ const SeasonInfo = (props) => {
                     {
                         episodeinfo: episode,
                         seasoninfo: props.payload,
-                        showid: props.showid
+                        showid: props.showid,
+                        averageSeasonRating: props.averageSeasonRating
                     })
             }>
                 <Text>{episode.episode_number} {episode.name}</Text>

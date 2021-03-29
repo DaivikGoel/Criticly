@@ -2,6 +2,7 @@
 **/apikeys*
 **/firebaseconfig*
 **/config*
+**/apiurl*
 
 # Expo
 .expo

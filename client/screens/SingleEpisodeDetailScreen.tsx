@@ -12,7 +12,7 @@ const ApiKey = require('../apikeys.json');
 export default function SingleEpisodeDetailScreen({ route }) {
 
   
-    const { episodeinfo,seasoninfo, showid} = route.params;
+    const { episodeinfo,seasoninfo, showid, averageSeasonRating} = route.params;
 
     let episodedetailsurl = 'https://api.themoviedb.org/3/tv/' + showid + '/season/' + seasoninfo.season_number + '/episode/' + episodeinfo.episode_number + '/credits' + '?api_key=' + ApiKey.TMDBApiKey;
     
@@ -21,7 +21,7 @@ export default function SingleEpisodeDetailScreen({ route }) {
         <View style={styles.child}>
             <ScrollView > 
                     <EpisodeInfo episodeinfo={episodeinfo} seasonposterurl={original_url + seasoninfo.poster_path } showid = {showid} seasoninfo = {seasoninfo} />
-                    <EpisodeRatings/>
+                    <EpisodeRatings averageSeasonRating={averageSeasonRating} episodeid = {episodeinfo.id}/>
                     <TopReviews episodeinfo = {episodeinfo} />
                     <CastAndCrew url ={episodedetailsurl}/> 
             </ScrollView>

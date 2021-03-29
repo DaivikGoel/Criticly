@@ -8,6 +8,7 @@ const windowHeight = Dimensions.get('window').height;
 import { original_url } from '../../constants/urls';
 import { createStackNavigator } from 'react-navigation';
 import TopReviewCard from './TopReviewCard';
+import { apiUrl } from '../../constants/apiurl';
 
 
 
@@ -60,10 +61,10 @@ export default class TopReviews extends Component<{}, { data: Array<any>, isLoad
     }
 
     getreviews() {
-        fetch('http://localhost:3000/getreviews?episodeid=' + this.props.episodeinfo.id + '&type=latest')
+        fetch(apiUrl + 'getreviews?episodeid=' + this.props.episodeinfo.id + '&type=latest')
             .then(async (response) => {
                 const data = await response.json()
-                this.setState({ data: this.state.data.concat(data) }, () => console.log(this.state.data))
+                this.setState({ data: this.state.data.concat(data) })
 
             }
 

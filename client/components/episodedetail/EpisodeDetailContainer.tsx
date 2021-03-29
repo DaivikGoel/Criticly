@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, ScrollView, ActivityIndicator, View, Dimensions, Text } from 'react-native';
-import TVShowInfo from './TVShowInfo';
-import SeasonInfo from './SeasonInfo'
-import CastAndCrew from '../common/CastAndCrew';
-import TVShowRatings from './TVShowRatings';
-import { apiUrl } from '../../constants/apiurl';
+import { apiUrl} from '../../constants/apiurl';
+
 const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -27,7 +24,7 @@ const styles = StyleSheet.create({
         height: windowHeight / 10,
     }
 });
-export default class ShowDetailContainer extends React.Component<{ payload: Array<any> }, { showdata: Array<any>, seasondata: Array<any>, isLoading: boolean, averageRating: number, ratingsCount:number }> {
+export default class EpisodeDetailContainer extends React.Component<{ payload: Array<any> }, { showdata: Array<any>, seasondata: Array<any>, isLoading: boolean, averageRating: number, ratingsCount:number }> {
 
     constructor(props) {
         super(props);
@@ -40,30 +37,8 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
         };
     }
     componentDidMount() {
-        let showurl = "https://api.themoviedb.org/3/tv/" + this.props.payload.id + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
-        let seasonurl = "https://api.themoviedb.org/3/tv/" + this.props.payload.id +"/season/" 
-        this.getAggregateReviews();
-            fetch(showurl)
-            .then((response) => response.json())
-            .then((data) => { 
-                this.setState({ 
-                    showdata: data
-                }); 
-                })
-            .then((data) => {
-                this.state.showdata.seasons.map(season => (
-                    fetch(seasonurl + season.season_number + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US")
-                    .then((response) => response.json())
-                    .then((response) => {
-                        this.setState({
-                            seasondata: this.state.seasondata.concat(response)
-                        });
-                    })
-                ))
-            })
-            .then(() => {
-                this.setState({ isLoading: false });
-            })
+        this.getAggregateReviews()
+
     }
 
     getAggregateReviews() {
@@ -82,7 +57,7 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
 
         const SeasonLists = this.state.seasondata.sort(function (a, b) { return a.season_number - b.season_number; }).map((season) => {
             return (
-                <SeasonInfo payload={season} showid={this.props.payload.id} averageSeasonRating = {this.state.averageRating}/>
+                <SeasonInfo payload={season} showid={this.props.payload.id}/>
             )
         })
         return (

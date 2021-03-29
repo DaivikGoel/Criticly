@@ -4,8 +4,7 @@ import { Dimensions } from 'react-native';
 import { Image } from 'react-native-elements'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-import { useNavigation } from '@react-navigation/native';
-import { original_url } from '../../constants/urls';
+import { apiUrl } from '../../constants/apiurl';
 
 const styles = StyleSheet.create({
     Text: {
@@ -31,22 +30,45 @@ const styles = StyleSheet.create({
 });
 
 
-const EpisodeRatings = (props) => {
-    return (
-        <View style={styles.Container}>
-            <View style={styles.RatingMetaData}>
-                <Text style={styles.Text}>2/5</Text>
-                <Text style={styles.Text}>Average Season Rating </Text>
+export default class EpisodeRatings extends React.Component<{}, { isLoading: boolean, averageRating: number, ratingsCount: number  }> {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            averageRating: -1,
+            ratingsCount: -1,
+            isLoading: true
+        };
+    }
+    componentDidMount() {
+        this.getAggregateReviews()
+
+    }
+    getAggregateReviews() {
+        fetch(apiUrl + 'aggregateReviews?id=' + this.props.episodeid + '&type=episode')
+            .then(async (response) => {
+                const data = await response.json()
+                this.setState({ averageRating: data[0]["AVG(rating)"], ratingsCount: data[0]["COUNT(rating)"], isLoading: false });
+            }
+            )
+    }
+    render() {
+        return (
+            <View style={styles.Container}>
+                <View style={styles.RatingMetaData}>
+                    <Text style={styles.Text}>{this.props.averageSeasonRating}/5</Text>
+                    <Text style={styles.Text}>Average Season Rating </Text>
+                </View>
+                <View style={styles.RatingMetaData}>
+                    <Text style={styles.Text}>{this.state.averageRating}/5</Text>
+                    <Text style={styles.Text}>Average Episode Rating </Text>
+                </View>
+                <View style={styles.RatingMetaData}>
+                    <Text style={styles.Text}>4/5</Text>
+                    <Text style={styles.Text}> Your Rating </Text>
+                </View>
             </View>
-            <View style={styles.RatingMetaData}>
-                <Text style={styles.Text}>3.8/5</Text>
-                <Text style={styles.Text}>Average Episode Rating </Text>
-            </View>
-            <View style={styles.RatingMetaData}>
-                <Text style={styles.Text}>4/5</Text>
-                <Text style={styles.Text}> Your Rating </Text>
-            </View>
-        </View>
     );
+    }
 }
-export default EpisodeRatings;
+
