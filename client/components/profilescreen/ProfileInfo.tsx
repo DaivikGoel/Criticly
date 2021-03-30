@@ -8,14 +8,16 @@ const windowHeight = Dimensions.get('window').height;
 
 import { test_image } from '../../constants/urls';
 import { apiUrl } from '../../constants/apiurl';
+import UserMetaData from './UserMetaData';
 
-export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, isLoading: boolean, userStats: Record<string, string> }> {
+export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, isLoading: boolean, recentlyReviewed: Array<any>, userStats: Record<string, string> }> {
 
     constructor(props) {
         super(props);
         this.state = {
             userInfo: [],
             userStats:{},
+            recentlyReviewed: [], 
             isLoading: true
 
         };
@@ -43,6 +45,16 @@ export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, i
             } });
         }
         )
+        
+        fetch(apiUrl + 'getreviews?userid=' + this.props.personid + '&type=user')
+            .then(async (response) => {
+                var data = await response.json()
+                this.setState({
+                        recentlyReviewed: data
+                    }, () => console.log(this.state));
+            }
+            )
+
 
     }
 
@@ -50,33 +62,20 @@ export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, i
         return (
             <View style={styles.container}>
                 <ScrollView>
-                    <View style={styles.metadata}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Image
-                                source={{ uri: this.state.userInfo.profile_pic }}
-                                style={styles.displayPic}
-                            />
-                            <View>
-                                <Text style={styles.header}>{this.state.userInfo.username} </Text>
-                                <View style = {styles.userstatscontainer}>
-                                    <View>
-                                        <Text style = {styles.userstats}>{this.state.userStats.numberofreviews} </Text>
-                                        <Text style = {styles.userstats}>Reviews</Text>
-                                    </View>
-                                    <View>
-                                        <Text style={styles.userstats}>0</Text>
-                                        <Text style={styles.userstats}>Followers</Text>
-                                    </View>
-                                    <View>
-                                        <Text style={styles.userstats}>0</Text>
-                                        <Text style={styles.userstats}>Following</Text>
-                                    </View>
-                                </View>
-                            </View>
-                        </View> 
+                    <UserMetaData payload = {this.state} />
                         <Text style={styles.bio}> {this.state.userInfo.bio}</Text>
-                        <Text style={styles.header}>My favourites</Text>
-                    </View>
+                        <View style={styles.reviewcontainer}>
+                            <Text style={styles.header}>Recently Reviewed</Text>
+                            <ScrollView
+                                horizontal={true}
+                                showsHorizontalScrollIndicator={false}
+                                scrollEventThrottle={200}
+                                decelerationRate="fast"
+                                style={{ backgroundColor: 'transparent' }}
+                            >
+
+                            </ScrollView>
+                        </View>
                 </ScrollView>
             </View>
         )
@@ -99,12 +98,6 @@ const styles = StyleSheet.create({
         fontSize: 20, 
         color: 'white'
     },
-    userstats: {
-        paddingTop: '5%',
-        fontSize: 15,
-        color: 'white',
-        textAlign: 'center'
-    },
     userstatscontainer:{
         flexDirection: 'row',
         alignContent: 'space-between',
@@ -116,10 +109,9 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%'
     },
-    metadata: {
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: '5%'
+    reviewcontainer: {
+        backgroundColor: 'transparent',
+        flex:1
+
     }
 });
