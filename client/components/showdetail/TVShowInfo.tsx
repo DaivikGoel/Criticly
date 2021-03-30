@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
     NetworkIcons: {
         width: windowWidth / 5,
         height: windowHeight / 10,
-        resizeMode: 'contain'
+        resizeMode: 'contain', 
+        tintColor: 'white'
     }
 });
 
