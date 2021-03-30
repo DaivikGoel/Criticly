@@ -47,7 +47,7 @@ const Icon = (props) => {
                 <View style = {styles.container}>
                     <TouchableOpacity onPress={() =>navigation.push('ShowDetailScreen', 
                         {
-                            payload: props.payload
+                            showid: props.showid
                         })
             }>
                         <Poster url={original_url + props.posterpath}/>

@@ -40,7 +40,7 @@ export default class EpisodeRatings extends React.Component<{}, { isLoading: boo
             isLoading: true
         };
     }
-    componentWillMount() {
+    componentDidMount() {
         this.getAggregateReviews()
 
     }

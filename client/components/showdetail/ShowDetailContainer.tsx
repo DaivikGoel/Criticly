@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, ActivityIndicator, View, Dimensions, Text } from 'react-native';
+import { StyleSheet, ScrollView, ActivityIndicator, View, Dimensions, Text, ImageBackground} from 'react-native';
 import TVShowInfo from './TVShowInfo';
 import SeasonInfo from './SeasonInfo'
 import CastAndCrew from '../common/CastAndCrew';
 import TVShowRatings from './TVShowRatings';
 import { apiUrl } from '../../constants/apiurl';
+import { original_url } from '../../constants/urls';
 const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -25,9 +26,14 @@ const styles = StyleSheet.create({
     NetworkIcons: {
         width: windowWidth / 10,
         height: windowHeight / 10,
-    }
+    },
+    imgContainer: {
+        width: '100%', 
+        height: '100%',
+
+    },
 });
-export default class ShowDetailContainer extends React.Component<{ payload: Array<any> }, { showdata: Array<any>, seasondata: Array<any>, isLoading: boolean, averageRating: number, ratingsCount:number }> {
+export default class ShowDetailContainer extends React.Component<{ showid: number }, { showdata: Array<any>, seasondata: Array<any>, isLoading: boolean, averageRating: number, ratingsCount:number }> {
 
     constructor(props) {
         super(props);
@@ -40,8 +46,8 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
         };
     }
     componentDidMount() {
-        let showurl = "https://api.themoviedb.org/3/tv/" + this.props.payload.id + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
-        let seasonurl = "https://api.themoviedb.org/3/tv/" + this.props.payload.id +"/season/" 
+        let showurl = "https://api.themoviedb.org/3/tv/" + this.props.showid + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
+        let seasonurl = "https://api.themoviedb.org/3/tv/" + this.props.showid +"/season/" 
         this.getAggregateReviews();
             fetch(showurl)
             .then((response) => response.json())
@@ -67,7 +73,7 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
     }
 
     getAggregateReviews() {
-        fetch(apiUrl + 'aggregateReviews?showid=' + this.props.payload.id + '&type=season')
+        fetch(apiUrl + 'aggregateReviews?showid=' + this.props.showid + '&type=season')
         .then(async (response) => {
             const data = await response.json()
             this.setState({ averageRating: data[0]["AVG(rating)"], ratingsCount: data[0]["COUNT(rating)"] });
@@ -78,14 +84,15 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
 
 
     render() {
-        let crediturl = "https://api.themoviedb.org/3/tv/" + this.props.payload.id + "/credits" + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
+        let crediturl = "https://api.themoviedb.org/3/tv/" + this.props.showid + "/credits" + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
 
         const SeasonLists = this.state.seasondata.sort(function (a, b) { return a.season_number - b.season_number; }).map((season) => {
             return (
-                <SeasonInfo payload={season} showid={this.props.payload.id} averageSeasonRating = {this.state.averageRating}/>
+                <SeasonInfo payload={season} showid={this.props.showid} averageSeasonRating = {this.state.averageRating}/>
             )
         })
         return (
+            <ImageBackground style={styles.imgContainer} source={{ uri: original_url + this.state.showdata.backdrop_path }}>
             <View>
                 <ScrollView>
                     {this.state.isLoading == false ? (
@@ -107,6 +114,7 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
                     )}
                 </ScrollView>
             </View>
+            </ImageBackground>
         );
     }
 }

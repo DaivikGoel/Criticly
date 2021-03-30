@@ -57,7 +57,7 @@ export default class List extends Component<{name: string, url: string, type: st
 
     const Icons = this.state.data.sort(function (a, b) { return b.popularity - a.popularity; }).map((item) => {
       return (
-        <Icon name = {item.name} posterpath = {item.poster_path} key ={item.id} payload = {item} />
+        <Icon name = {item.name} posterpath = {item.poster_path} key ={item.id} payload = {item} showid ={item.id} />
       )
     })
 

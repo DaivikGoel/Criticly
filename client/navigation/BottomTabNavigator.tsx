@@ -129,6 +129,22 @@ function ProfileNavigator() {
         component={ProfileScreen}
         options={{ headerTitle: 'Profile' }}
       />
+      <ProfileStack.Screen
+        name="ShowDetailScreen"
+        component={ShowDetailScreen}
+      />
+      <ProfileStack.Screen
+        name="ShowSingleEpisodeDetailScreen"
+        component={ShowSingleEpisodeDetailScreen}
+      />
+      <ProfileStack.Screen
+        name="ShowPeopleScreen"
+        component={ShowPeopleScreen}
+      />
+      <ProfileStack.Screen
+        name="ShowReviewScreen"
+        component={ShowReviewScreen}
+      />
     </ProfileStack.Navigator>
   );
 }

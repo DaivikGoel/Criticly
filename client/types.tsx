@@ -27,4 +27,8 @@ export type SearchParamList = {
 
 export type ProfileParamList = {
   ProfileScreen: undefined;
+  ShowDetailScreen: undefined;
+  ShowSingleEpisodeDetailScreen: undefined;
+  ShowPeopleScreen: undefined;
+  ShowReviewScreen: undefined;
 };

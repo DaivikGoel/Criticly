@@ -10,13 +10,13 @@ import { StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
 export default function ShowDetailScreen({ route }) {
 
   
-    const { payload } = route.params;
+    const {showid } = route.params;
     return (
-    <ImageBackground style={styles.imgContainer} source={{ uri: original_url + payload.backdrop_path  }}>
+    <View style={styles.imgContainer}>
         <View style={styles.child}>
-          <ShowDetailContainer payload ={payload}/>
+          <ShowDetailContainer showid ={showid}/>
         </View>
-    </ImageBackground>
+    </View>
     );
   }
 

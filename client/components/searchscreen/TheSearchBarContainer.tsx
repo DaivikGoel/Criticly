@@ -121,8 +121,8 @@ export default class TheSearchBarContainer extends React.Component<{}, { data: A
                         <View style = {styles.TextView}>
                             <Text>{item.name}</Text> 
                             <Text>{item.known_for_department}</Text>
-                                {item.known_for.map(media => 
-                                    <Text key={media}>{media.title} </Text>
+                                {item.known_for.map((media, index)  => 
+                                    <Text key={index}>{media.title} </Text>
                                 )} 
                         </View>
                     </View>

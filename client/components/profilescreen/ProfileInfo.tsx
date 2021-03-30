@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View, Text, Dimensions, ImageBackground } from 'react-native';
-import { Image } from 'react-native-elements'
+import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View, Text, Dimensions, ImageBackground, RefreshControl } from 'react-native';
+import { AirbnbRating, Image } from 'react-native-elements'
 
 const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
@@ -9,6 +9,7 @@ const windowHeight = Dimensions.get('window').height;
 import { test_image } from '../../constants/urls';
 import { apiUrl } from '../../constants/apiurl';
 import UserMetaData from './UserMetaData';
+import Icon from '../common/Icon'
 
 export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, isLoading: boolean, recentlyReviewed: Array<any>, userStats: Record<string, string> }> {
 
@@ -18,12 +19,17 @@ export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, i
             userInfo: [],
             userStats:{},
             recentlyReviewed: [], 
-            isLoading: true
+            isLoading: true,
 
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        this.getUserInfo()
+    }
+
+    _onRefresh = () => {
+        this.setState({ isLoading: true });
         this.getUserInfo()
     }
 
@@ -32,7 +38,7 @@ export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, i
         .then(async (response) => {
             var data = await response.json()
             data = data[0]
-            this.setState({ userInfo: data });
+            this.setState({ userInfo: data});
         }
         )
 
@@ -56,10 +62,12 @@ export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, i
 
                         this.state.recentlyReviewed.forEach(item => 
                             (
-                            fetch("https://api.themoviedb.org/3/tv/" + item.showid + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US")
+                            fetch("https://api.themoviedb.org/3/tv/" + item.showid + "/season/" + item.seasonnumber + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US")
                                 .then(async (response) => {
                                     var data = await response.json()
                                     item.showdata = data
+                                    this.setState({ isLoading: false });
+                                    this.forceUpdate();
                                 }
                                 )
                             )
@@ -76,9 +84,40 @@ export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, i
     }
 
     render() {
+        const Icons = this.state.recentlyReviewed.map((item) => {
+            var poster_path
+            var episodename
+            if(typeof(item.showdata) == 'undefined'){
+                poster_path = null
+                episodename = null 
+            }
+            else {
+                poster_path = item.showdata.poster_path
+                episodename = item.showdata.episodes[item.episodenumber - 1].name
+            }
+            return (
+                <View>
+                <Icon key={item.id} showid={item.showid} posterpath={poster_path}/>
+                <Text style={styles.userreview} numberOfLines ={1}>{episodename}</Text>
+                <AirbnbRating
+                    defaultRating={item.rating}
+                    isDisabled={true}
+                    showRating={false}
+                    size={windowHeight / 70}
+                />
+                </View>
+            )
+        })
         return (
             <View style={styles.container}>
-                <ScrollView>
+                <ScrollView
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.isLoading}
+                            onRefresh={this._onRefresh}
+                        />
+                    }
+                >
                     <UserMetaData payload = {this.state} />
                         <Text style={styles.bio}> {this.state.userInfo.bio}</Text>
                         <View style={styles.reviewcontainer}>
@@ -90,7 +129,7 @@ export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, i
                                 decelerationRate="fast"
                                 style={{ backgroundColor: 'transparent' }}
                             >
-
+                            {Icons}
                             </ScrollView>
                         </View>
                 </ScrollView>
@@ -130,5 +169,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         flex:1
 
-    }
+    },
+    userreview: {
+        fontSize: 15,
+        color: 'white',
+        textAlign: 'center',
+        width: windowWidth / 4
+    },
 });
