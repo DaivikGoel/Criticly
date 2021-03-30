@@ -93,7 +93,7 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
         })
         return (
             <ImageBackground style={styles.imgContainer} source={{ uri: original_url + this.state.showdata.backdrop_path }}>
-            <View>
+                <View style={{ backgroundColor: 'rgba(0,0,0,0.7)',flex: 1}}>
                 <ScrollView>
                     {this.state.isLoading == false ? (
                         <View>
