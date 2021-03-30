@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 var postReviewsRouter = require('./routes/postreview');
 var getReviewsRouter = require('./routes/getreviews');
 var getAggregateReviewsRouter = require('./routes/aggregateReviews');
+var getUserStatsRouter = require('./routes/getuserstats');
 var getUsersRouter = require('./routes/getuserinfo');
 var app = express();
 
@@ -28,6 +29,7 @@ app.use('/postreview', postReviewsRouter);
 app.use('/getreviews', getReviewsRouter);
 app.use('/getuserinfo', getUsersRouter)
 app.use('/aggregateReviews?:id', getAggregateReviewsRouter);
+app.use('/getuserstats', getUserStatsRouter);
 
 const con = require('./config.js')
 con.connect(function(err) {

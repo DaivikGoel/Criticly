@@ -10,6 +10,6 @@ export default function ProfileScreen() {
   const personid = 10 
 
   return (
-    <ProfileInfo personid = {personid}/>
+      <ProfileInfo personid = {personid}/>
   );
 }
