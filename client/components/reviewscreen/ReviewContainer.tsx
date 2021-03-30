@@ -27,7 +27,7 @@ export default class ReviewContainer extends React.Component<{}, {reviews:Array<
     }
 
     getreviews() {
-        fetch(apiUrl + 'getreviews?episodeid=' + this.props.episodeinfo.id)
+        fetch(apiUrl + 'getreviews?episodenumber=' + this.props.episodeinfo.episode_number + '&seasonnumber=' + this.props.episodeinfo.season_number + '&showid=' + this.props.showid )
         .then(async (response) => {
             const data = await response.json()
             this.setState({ reviews: this.state.reviews.concat(data) })

@@ -23,7 +23,7 @@ export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, i
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.getUserInfo()
     }
 
@@ -51,7 +51,24 @@ export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, i
                 var data = await response.json()
                 this.setState({
                         recentlyReviewed: data
-                    }, () => console.log(this.state));
+                    }, 
+                    () => (
+
+                        this.state.recentlyReviewed.forEach(item => 
+                            (
+                            fetch("https://api.themoviedb.org/3/tv/" + item.showid + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US")
+                                .then(async (response) => {
+                                    var data = await response.json()
+                                    item.showdata = data
+                                }
+                                )
+                            )
+
+
+                        )
+                    
+                    )
+                )
             }
             )
 

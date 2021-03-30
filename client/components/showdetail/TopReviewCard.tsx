@@ -41,7 +41,8 @@ const TopReviewCard = (props) => {
     <View style ={{flex: 1}}>
             <Button title='Latest Review' type='outline' containerStyle={styles.containerStyle} titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle} onPress={() => navigation.push('ShowReviewScreen',
                 {
-                    episodeinfo: props.episodeinfo
+                    episodeinfo: props.episodeinfo,
+                    showid: props.showid
                 })
             } />
             { props.latestreview.length == 0 ? 

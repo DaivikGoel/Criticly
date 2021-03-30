@@ -61,7 +61,7 @@ export default class TopReviews extends Component<{}, { data: Array<any>, isLoad
     }
 
     getreviews() {
-        fetch(apiUrl + 'getreviews?episodeid=' + this.props.episodeinfo.id + '&type=latest')
+        fetch(apiUrl + 'getreviews?episodenumber=' + this.props.episodeinfo.episode_number + '&seasonnumber=' + this.props.episodeinfo.season_number + '&showid=' + this.props.showid + '&type=latest')
             .then(async (response) => {
                 const data = await response.json()
                 this.setState({ data: this.state.data.concat(data) })
@@ -74,7 +74,7 @@ export default class TopReviews extends Component<{}, { data: Array<any>, isLoad
     render(){
         return (
             <View style={styles.Container}>
-                <TopReviewCard episodeinfo ={this.props.episodeinfo} latestreview = {this.state.data} />
+                <TopReviewCard episodeinfo={this.props.episodeinfo} latestreview={this.state.data} showid={this.props.showid}/>
             </View>
         );
     }

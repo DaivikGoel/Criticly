@@ -40,12 +40,12 @@ export default class EpisodeRatings extends React.Component<{}, { isLoading: boo
             isLoading: true
         };
     }
-    componentDidMount() {
+    componentWillMount() {
         this.getAggregateReviews()
 
     }
     getAggregateReviews() {
-        fetch(apiUrl + 'aggregateReviews?id=' + this.props.episodeid + '&type=episode')
+        fetch(apiUrl + 'aggregateReviews?showid=' + this.props.showid + '&type=episode' + '&seasonnumber=' + this.props.episodeinfo.season_number + '&episodenumber=' + this.props.episodeinfo.episode_number)
             .then(async (response) => {
                 const data = await response.json()
                 this.setState({ averageRating: data[0]["AVG(rating)"], ratingsCount: data[0]["COUNT(rating)"], isLoading: false });

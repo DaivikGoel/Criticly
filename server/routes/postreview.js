@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 /* GET users listing. */
 router.post('/', function(req, res, next) {
 
-    var sql = "INSERT INTO reviews (userid, episodeid, seasonid, showid, rating, reviewtext) VALUES (" + req.body.userid + ',' + req.body.episodeid + ',' + req.body.seasonid + ',' + req.body.showid + ',' + req.body.rating + ',' + "'" +  req.body.reviewtext + "'" + ')' ; 
+    var sql = "INSERT INTO reviews (userid, episodenumber, seasonnumber, showid, rating, reviewtext) VALUES (" + req.body.userid + ',' + req.body.episodenumber + ',' + req.body.seasonnumber + ',' + req.body.showid + ',' + req.body.rating + ',' + "'" +  req.body.reviewtext + "'" + ')' ; 
     executeQuery(sql, req ,res)
   });
 

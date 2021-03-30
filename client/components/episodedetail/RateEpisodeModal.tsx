@@ -34,10 +34,10 @@ export default class RateEpisodeModal extends React.Component<{}, { Rating: numb
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    episodeid: this.props.payload.episodeinfo.id,
+                    episodenumber: this.props.payload.episodeinfo.episode_number,
                     rating: this.state.Rating,
                     reviewtext: this.state.ReviewText,
-                    seasonid: this.props.payload.seasoninfo.id,
+                    seasonnumber: this.props.payload.seasoninfo.season_number,
                     showid: this.props.payload.showid,
                     userid: '10'
                 })

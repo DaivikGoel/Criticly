@@ -10,7 +10,7 @@ const executeQuery = require('../util/sqlWrapper.js')
 router.get('/', function(req, res, next) {
     switch (req.query.type){
       case ('latest'):
-        var sql = "SELECT reviews.*, users.username FROM reviews INNER JOIN users ON (reviews.userid = users.id) WHERE episodeid = " + req.query.episodeid + " ORDER BY modified_instant LIMIT 1"
+        var sql = "SELECT reviews.*, users.username FROM reviews INNER JOIN users ON (reviews.userid = users.id) where episodenumber = " + req.query.episodenumber + " AND seasonnumber = " + req.query.seasonnumber + " AND showid = " + req.query.showid + " ORDER BY modified_instant LIMIT 1"
         executeQuery(sql, req ,res)
         break; 
       case ('user'):
@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
         break; 
 
       default:
-        var sql = "SELECT reviews.*, users.username FROM reviews INNER JOIN users ON (reviews.userid = users.id) WHERE episodeid = " + req.query.episodeid 
+        var sql = "SELECT reviews.*, users.username FROM reviews INNER JOIN users ON (reviews.userid = users.id) where episodenumber = " + req.query.episodenumber + " AND seasonnumber = " + req.query.seasonnumber + " AND showid = " + req.query.showid
         executeQuery(sql, req ,res)
         break;
 }

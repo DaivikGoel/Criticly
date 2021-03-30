@@ -67,7 +67,7 @@ export default class ShowDetailContainer extends React.Component<{ payload: Arra
     }
 
     getAggregateReviews() {
-        fetch(apiUrl + 'aggregateReviews?id=' + this.props.payload.id + '&type=season')
+        fetch(apiUrl + 'aggregateReviews?showid=' + this.props.payload.id + '&type=season')
         .then(async (response) => {
             const data = await response.json()
             this.setState({ averageRating: data[0]["AVG(rating)"], ratingsCount: data[0]["COUNT(rating)"] });
