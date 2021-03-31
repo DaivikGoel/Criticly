@@ -4,8 +4,9 @@ import TVShowInfo from './TVShowInfo';
 import SeasonInfo from './SeasonInfo'
 import CastAndCrew from '../common/CastAndCrew';
 import TVShowRatings from './TVShowRatings';
-import { apiUrl } from '../../constants/apiurl';
+import { apiUrlIos, apiUrlAndroid } from '../../constants/apiurl';
 import { original_url } from '../../constants/urls';
+import {Button} from 'react-native';
 const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -47,7 +48,7 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
     }
     componentDidMount() {
         let showurl = "https://api.themoviedb.org/3/tv/" + this.props.showid + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
-        let seasonurl = "https://api.themoviedb.org/3/tv/" + this.props.showid +"/season/" 
+        let seasonurl = "https://api.themoviedb.org/3/tv/" + this.props.showid +"/season/"
         this.getAggregateReviews();
             fetch(showurl)
             .then((response) => response.json())
@@ -70,10 +71,12 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
             .then(() => {
                 this.setState({ isLoading: false });
             })
+            console.log(this.props); 
+            console.log(this.state);
     }
 
     getAggregateReviews() {
-        fetch(apiUrl + 'aggregateReviews?showid=' + this.props.showid + '&type=season')
+        fetch(apiUrlAndroid + 'aggregateReviews?showid=' + this.props.showid + '&type=season')
         .then(async (response) => {
             const data = await response.json()
             this.setState({ averageRating: data[0]["AVG(rating)"], ratingsCount: data[0]["COUNT(rating)"] });
@@ -81,11 +84,25 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
         )
     }
 
+    addToWatchList(){
+        fetch(apiUrlAndroid + 'postListItem', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userid: '10',
+                listtype: "watchlist",
+                title: "action movies"
+            })
+        })
+    }
+
 
 
     render() {
         let crediturl = "https://api.themoviedb.org/3/tv/" + this.props.showid + "/credits" + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
-
         const SeasonLists = this.state.seasondata.sort(function (a, b) { return a.season_number - b.season_number; }).map((season) => {
             return (
                 <SeasonInfo payload={season} showid={this.props.showid} averageSeasonRating = {this.state.averageRating}/>
@@ -99,6 +116,7 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
                         <View>
                             <View>
                                 <TVShowInfo payload ={this.state.showdata}/>
+                                <Button onPress={this.addToWatchList} title="Add to watchlist"></Button>
                                 <TVShowRatings averageRating = {this.state.averageRating} ratingsCount = {this.state.ratingsCount}/>
                                 <Text style={styles.ShowTitle}>Seasons</Text>
                                 {SeasonLists}

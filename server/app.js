@@ -11,6 +11,7 @@ var getReviewsRouter = require('./routes/getreviews');
 var getAggregateReviewsRouter = require('./routes/aggregateReviews');
 var getUserStatsRouter = require('./routes/getuserstats');
 var getUsersRouter = require('./routes/getuserinfo');
+var postListItemRouter = require('./routes/postListItem');
 var app = express();
 
 // view engine setup
@@ -30,6 +31,7 @@ app.use('/getreviews', getReviewsRouter);
 app.use('/getuserinfo', getUsersRouter)
 app.use('/aggregateReviews?:id', getAggregateReviewsRouter);
 app.use('/getuserstats', getUserStatsRouter);
+app.use('/postListItem',postListItemRouter);
 
 const con = require('./config.js')
 con.connect(function(err) {
