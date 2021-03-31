@@ -4,7 +4,7 @@ import TVShowInfo from './TVShowInfo';
 import SeasonInfo from './SeasonInfo'
 import CastAndCrew from '../common/CastAndCrew';
 import TVShowRatings from './TVShowRatings';
-import { apiUrlIos, apiUrlAndroid } from '../../constants/apiurl';
+import { apiUrl } from '../../constants/apiurl';
 import { original_url } from '../../constants/urls';
 import {Button} from 'react-native';
 const ApiKey = require('../../apikeys.json');
@@ -76,7 +76,7 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
     }
 
     getAggregateReviews() {
-        fetch(apiUrlAndroid + 'aggregateReviews?showid=' + this.props.showid + '&type=season')
+        fetch(apiUrl + 'aggregateReviews?showid=' + this.props.showid + '&type=season')
         .then(async (response) => {
             const data = await response.json()
             this.setState({ averageRating: data[0]["AVG(rating)"], ratingsCount: data[0]["COUNT(rating)"] });
@@ -85,7 +85,7 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
     }
 
     addToWatchList(){
-        fetch(apiUrlAndroid + 'postListItem', {
+        fetch(apiUrl + 'postListItem', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
