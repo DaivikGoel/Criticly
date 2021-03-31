@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
 
 const TopReviewCard = (props) => {
     const navigation = useNavigation();
+    console.log(props.item)
     return (
     <View style ={{flex: 1}}>
             <Button title='Latest Review' type='outline' containerStyle={styles.containerStyle} titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle} onPress={() => navigation.push('ShowReviewScreen',
@@ -48,7 +49,7 @@ const TopReviewCard = (props) => {
             { props.latestreview.length == 0 ? 
             <Text style = {styles.Text}>No Reviews</Text>
             :
-            <ReviewCard name={props.latestreview[0].username} review={props.latestreview[0].reviewtext} date={props.latestreview[0].modified_instant} rating={props.latestreview[0].rating} />
+                <ReviewCard userid={props.item.userid} reviewid={props.item.reviewid} name={props.item.username} review={props.item.reviewtext} date={props.item.modified_instant} rating={props.item.rating} numberofLikes={props.item.numberofLikes} alreadyLiked={props.item.hasUserLiked == 1 ? true : false} />
 }
     </View>
     );

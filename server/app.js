@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var postReviewsRouter = require('./routes/postreview');
+var postReviewLikeRouter = require('./routes/postreviewlike');
 var getReviewsRouter = require('./routes/getreviews');
 var getAggregateReviewsRouter = require('./routes/aggregateReviews');
 var getUserStatsRouter = require('./routes/getuserstats');
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/postreview', postReviewsRouter);
+app.use('/postreviewlike', postReviewLikeRouter);
 app.use('/getreviews', getReviewsRouter);
 app.use('/getuserinfo', getUsersRouter)
 app.use('/aggregateReviews?:id', getAggregateReviewsRouter);

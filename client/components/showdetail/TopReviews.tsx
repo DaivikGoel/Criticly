@@ -10,6 +10,7 @@ import { createStackNavigator } from 'react-navigation';
 import TopReviewCard from './TopReviewCard';
 import { apiUrl } from '../../constants/apiurl';
 
+const userid = 9
 
 
 const styles = StyleSheet.create({
@@ -61,7 +62,7 @@ export default class TopReviews extends Component<{}, { data: Array<any>, isLoad
     }
 
     getreviews() {
-        fetch(apiUrl + 'getreviews?episodenumber=' + this.props.episodeinfo.episode_number + '&seasonnumber=' + this.props.episodeinfo.season_number + '&showid=' + this.props.showid + '&type=latest')
+        fetch(apiUrl + 'getreviews?episodenumber=' + this.props.episodeinfo.episode_number + '&seasonnumber=' + this.props.episodeinfo.season_number + '&showid=' + this.props.showid + '&userid=' + userid + '&type=latest')
             .then(async (response) => {
                 const data = await response.json()
                 this.setState({ data: this.state.data.concat(data) })
@@ -74,7 +75,7 @@ export default class TopReviews extends Component<{}, { data: Array<any>, isLoad
     render(){
         return (
             <View style={styles.Container}>
-                <TopReviewCard episodeinfo={this.props.episodeinfo} latestreview={this.state.data} showid={this.props.showid}/>
+                <TopReviewCard episodeinfo={this.props.episodeinfo} latestreview={this.state.data} showid={this.props.showid} item ={this.state.data[0]} />
             </View>
         );
     }

@@ -71,8 +71,6 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
             .then(() => {
                 this.setState({ isLoading: false });
             })
-            console.log(this.props); 
-            console.log(this.state);
     }
 
     getAggregateReviews() {
