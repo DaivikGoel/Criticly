@@ -49,7 +49,7 @@ const TopReviewCard = (props) => {
             { props.latestreview.length == 0 ? 
             <Text style = {styles.Text}>No Reviews</Text>
             :
-                <ReviewCard userid={props.item.userid} reviewid={props.item.reviewid} name={props.item.username} review={props.item.reviewtext} date={props.item.modified_instant} rating={props.item.rating} numberofLikes={props.item.numberofLikes} alreadyLiked={props.item.hasUserLiked == 1 ? true : false} />
+                <ReviewCard userid={props.item.userid} reviewid={props.item.reviewid} name={props.item.username} review={props.item.reviewtext} date={props.item.modified_instant} rating={props.item.rating} numberofLikes={props.item.numberofLikes} numberofComments={props.item.numberofComments} alreadyLiked={props.item.hasUserLiked == 1 ? true : false} />
 }
     </View>
     );

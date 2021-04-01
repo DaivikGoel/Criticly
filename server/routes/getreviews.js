@@ -10,7 +10,7 @@ const executeQuery = require('../util/sqlWrapper.js')
 router.get('/', function(req, res, next) {
     switch (req.query.type){
       case ('latest'):
-        var sql = "SELECT r.*, u.username, COUNT(rl.reviewid) AS numberofLikes, count(case when rl.userid = " +req.query.userid +  " then 1 else null end) AS hasUserLiked FROM reviews as r INNER JOIN users as u ON (r.userid = u.id) "  + "LEFT JOIN reviewlikes as rl ON r.reviewid = rl.reviewid " + "where r.episodenumber = " + req.query.episodenumber + " AND r.seasonnumber = " + req.query.seasonnumber + " AND r.showid = " + req.query.showid + " GROUP BY r.reviewid" + " ORDER BY modified_instant LIMIT 1"
+        var sql = "SELECT r.*, u.username, COUNT(distinct rl.reviewid, rl.userid) AS numberofLikes, COUNT(distinct rc.commentid) AS numberofComments, count(case when rl.userid = " +req.query.userid +  " then 1 else null end) AS hasUserLiked FROM reviews as r INNER JOIN users as u ON (r.userid = u.id) "  + "LEFT JOIN reviewlikes as rl ON r.reviewid = rl.reviewid " + "LEFT JOIN reviewcomments as rc ON r.reviewid = rc.reviewid " + "where r.episodenumber = " + req.query.episodenumber + " AND r.seasonnumber = " + req.query.seasonnumber + " AND r.showid = " + req.query.showid + " GROUP BY r.reviewid" + " ORDER BY modified_instant LIMIT 1"
         executeQuery(sql, req ,res)
         break; 
       case ('user'):
@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
         break; 
 
       default:
-        var sql = "SELECT r.*, u.username, COUNT(rl.reviewid) AS numberofLikes, count(case when rl.userid = " +req.query.userid +  " then 1 else null end) AS hasUserLiked FROM reviews as r INNER JOIN users as u ON (r.userid = u.id) "  + "LEFT JOIN reviewlikes as rl ON r.reviewid = rl.reviewid " + "where r.episodenumber = " + req.query.episodenumber + " AND r.seasonnumber = " + req.query.seasonnumber + " AND r.showid = " + req.query.showid + " GROUP BY r.reviewid"
+        var sql = "SELECT r.*, u.username, COUNT(distinct rl.reviewid, rl.userid) AS numberofLikes, COUNT(distinct rc.commentid) AS numberofComments, count(case when rl.userid = " +req.query.userid +  " then 1 else null end) AS hasUserLiked FROM reviews as r INNER JOIN users as u ON (r.userid = u.id) "  + "LEFT JOIN reviewlikes as rl ON r.reviewid = rl.reviewid " + "LEFT JOIN reviewcomments as rc ON r.reviewid = rc.reviewid " + "where r.episodenumber = " + req.query.episodenumber + " AND r.seasonnumber = " + req.query.seasonnumber + " AND r.showid = " + req.query.showid + " GROUP BY r.reviewid"
         executeQuery(sql, req ,res)
         break;
 }

@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, Dimensions, ImageBackground, TouchableOpacity }
 import { Button, AirbnbRating } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 import { apiUrl } from '../../constants/apiurl';
+import { useNavigation } from '@react-navigation/native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class ReviewCard extends React.Component<{}, { liked: boolean, heartcolor: string, numberofLikes: number }> {
+class ReviewCard extends React.Component<{}, { liked: boolean, heartcolor: string, numberofLikes: number }> {
     
     constructor(props) {
         super(props);
@@ -75,8 +76,13 @@ export default class ReviewCard extends React.Component<{}, { liked: boolean, he
     }
 
     render(){
+        const { navigation } = this.props;
         return (
             <View style={{ flex: 1, paddingTop: '5%'}}>
+                <TouchableOpacity onPress={() => navigation.push('ShowFullReviewScreen',
+                    {
+                        commentinfo: 'comments'
+                    })}>
                 <View style={{ flexDirection: 'column', paddingLeft: '2%', paddingRight: '2%'}}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Text style={styles.name}>{this.props.name}</Text>
@@ -94,15 +100,26 @@ export default class ReviewCard extends React.Component<{}, { liked: boolean, he
                     </View>
                         <View style = {{paddingTop: '5%'}}>
                             <Text style={styles.Text}>{this.props.review}</Text>
-                        <View style={{flexDirection: 'row'}}>
+                        <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
                         <TouchableOpacity onPress = {() => this.onLike()}>
                             <Ionicons name="heart" backgroundColor="transparent" size={32} color = {this.state.heartcolor} />
                         </TouchableOpacity>
                         </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Text style={[styles.Text, { justifyContent: 'flex-end', height: "100%" }]}>{this.state.numberofLikes} likes</Text>
+
+                                <Text style={styles.Text}>{this.props.numberofComments} Comments</Text>
+
+                        </View>
                         </View>
                     </View>
+                </TouchableOpacity>
                 </View>
         );
     }
+}
+export default function (props) {
+    const navigation = useNavigation();
+
+    return <ReviewCard {...props} navigation={navigation} />;
 }

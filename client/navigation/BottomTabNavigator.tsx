@@ -12,6 +12,7 @@ import ShowPeopleScreen from '../screens/ShowPeopleScreen'
 import SearchScreen from '../screens/SearchScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ShowReviewScreen from '../screens/ShowReviewScreen'
+import ShowFullReviewScreen from '../screens/ShowFullReviewScreen'
 
 import { BottomTabParamList, HomeParamList, SearchParamList, ProfileParamList } from '../types';
 
@@ -85,6 +86,10 @@ function HomeNavigator() {
         name="ShowReviewScreen"
         component={ShowReviewScreen}
       />
+      <HomeStack.Screen
+        name="ShowFullReviewScreen"
+        component={ShowFullReviewScreen}
+      />
     </HomeStack.Navigator>
   );
 }
@@ -115,6 +120,10 @@ function SearchNavigator() {
         name="ShowReviewScreen"
         component={ShowReviewScreen}
       />
+      <SearchStack.Screen
+        name="ShowFullReviewScreen"
+        component={ShowFullReviewScreen}
+      />
     </SearchStack.Navigator>
   );
 }
@@ -144,6 +153,10 @@ function ProfileNavigator() {
       <ProfileStack.Screen
         name="ShowReviewScreen"
         component={ShowReviewScreen}
+      />
+      <ProfileStack.Screen
+        name="ShowFullReviewScreen"
+        component={ShowFullReviewScreen}
       />
     </ProfileStack.Navigator>
   );
