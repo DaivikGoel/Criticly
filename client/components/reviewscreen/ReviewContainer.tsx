@@ -45,7 +45,7 @@ export default class ReviewContainer extends React.Component<{}, {reviews:Array<
         const reviews = this.state.reviews.map((item) => {
             return (
                 <View>
-                    <ReviewCard userid = {item.userid}reviewid = {item.reviewid} name={item.username} review={item.reviewtext} date={item.modified_instant} rating={item.rating} numberofLikes={item.numberofLikes} numberofComments = {item.numberofComments} alreadyLiked={item.hasUserLiked == 1 ? true : false}/>
+                    <ReviewCard episodeinfo={this.props.episodeinfo} userid={item.userid} reviewid={item.reviewid} name={item.username} review={item.reviewtext} date={item.modified_instant} rating={item.rating} numberofLikes={item.numberofLikes} numberofComments={item.numberofComments} seasonposterurl={this.props.seasonposterurl} alreadyLiked={item.hasUserLiked == 1 ? true : false}/>
                     <View style={styles.Bar} />
                 </View>
             )

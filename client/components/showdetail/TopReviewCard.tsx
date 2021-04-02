@@ -37,19 +37,19 @@ const styles = StyleSheet.create({
 
 const TopReviewCard = (props) => {
     const navigation = useNavigation();
-    console.log(props.item)
     return (
     <View style ={{flex: 1}}>
             <Button title='Latest Review' type='outline' containerStyle={styles.containerStyle} titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle} onPress={() => navigation.push('ShowReviewScreen',
                 {
                     episodeinfo: props.episodeinfo,
-                    showid: props.showid
+                    showid: props.showid,
+                    seasonposterurl: props.seasonposterurl
                 })
             } />
             { props.latestreview.length == 0 ? 
             <Text style = {styles.Text}>No Reviews</Text>
             :
-                <ReviewCard userid={props.item.userid} reviewid={props.item.reviewid} name={props.item.username} review={props.item.reviewtext} date={props.item.modified_instant} rating={props.item.rating} numberofLikes={props.item.numberofLikes} numberofComments={props.item.numberofComments} alreadyLiked={props.item.hasUserLiked == 1 ? true : false} />
+                <ReviewCard episodeinfo = {props.episodeinfo} userid={props.item.userid} reviewid={props.item.reviewid} name={props.item.username} review={props.item.reviewtext} date={props.item.modified_instant} rating={props.item.rating} numberofLikes={props.item.numberofLikes} numberofComments={props.item.numberofComments} seasonposterurl={props.seasonposterurl}alreadyLiked={props.item.hasUserLiked == 1 ? true : false} />
 }
     </View>
     );

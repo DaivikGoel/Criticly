@@ -49,8 +49,11 @@ const EpisodeInfo = (props) => {
                         <Text style={styles.Text}>Air Date {props.episodeinfo.air_date} </Text>
                         <Text style={styles.Text}>Directed by: {props.episodeinfo.crew.find( el => el.job =='Director')['name']}</Text>
                     </View>
-                </View>
-                <ReviewButton payload = {props}/>
+                </View>{
+                props.type == 'review' ? 
+                <ReviewButton payload = {props}/> :
+                <View/> 
+}
             </View>
         </ImageBackground>
     </View>

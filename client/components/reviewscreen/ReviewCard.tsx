@@ -30,14 +30,15 @@ const styles = StyleSheet.create({
     },
 });
 
-class ReviewCard extends React.Component<{}, { liked: boolean, heartcolor: string, numberofLikes: number }> {
+class ReviewCard extends React.Component<{}, { liked: boolean, heartcolor: string, numberofLikes: number, showMoreText: boolean}> {
     
     constructor(props) {
         super(props);
         this.state = {
             liked: props.alreadyLiked,
             heartcolor: props.alreadyLiked ? 'gold' : 'grey',
-            numberofLikes: props.numberofLikes
+            numberofLikes: props.numberofLikes,
+            showMoreText: false
 
 
         };
@@ -75,13 +76,21 @@ class ReviewCard extends React.Component<{}, { liked: boolean, heartcolor: strin
         })
     }
 
+    toggleText = () => {
+        this.setState({ showMoreText: !this.state.showMoreText });
+    }
+
     render(){
         const { navigation } = this.props;
         return (
             <View style={{ flex: 1, paddingTop: '5%'}}>
-                <TouchableOpacity onPress={() => navigation.push('ShowFullReviewScreen',
+                <TouchableOpacity onPress={
+                    this.props.type == 'fullreviewscreen' ? 
+                    () => {} : 
+                () => navigation.push('ShowFullReviewScreen'
+                ,
                     {
-                        commentinfo: 'comments'
+                        reviewinfo: this.props,
                     })}>
                 <View style={{ flexDirection: 'column', paddingLeft: '2%', paddingRight: '2%'}}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -99,7 +108,10 @@ class ReviewCard extends React.Component<{}, { liked: boolean, heartcolor: strin
                             <Text style={styles.Text}>{this.props.date}</Text>
                     </View>
                         <View style = {{paddingTop: '5%'}}>
-                            <Text style={styles.Text}>{this.props.review}</Text>
+                            <Text numberOfLines={this.state.showMoreText ? undefined : 4} style={styles.Text}>{this.props.review}</Text>
+                            <Text onPress={this.toggleText} style={styles.Text}>
+                                {this.state.showMoreText ? 'read less...' : 'read more...'}
+                            </Text>
                         <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
                         <TouchableOpacity onPress = {() => this.onLike()}>
                             <Ionicons name="heart" backgroundColor="transparent" size={32} color = {this.state.heartcolor} />
