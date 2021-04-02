@@ -12,11 +12,11 @@ const ApiKey = require('../apikeys.json');
 export default function ShowReviewScreen({ route }) {
 
   
-    const { episodeinfo, showid} = route.params;
+    const { episodeinfo, showid, seasonposterurl} = route.params;
     return (
       <View style={styles.child}>
         <ScrollView >
-          <ReviewContainer episodeinfo = {episodeinfo} showid ={showid} />
+          <ReviewContainer episodeinfo={episodeinfo} showid={showid} seasonposterurl={seasonposterurl}/>
         </ScrollView>
       </View>
     );

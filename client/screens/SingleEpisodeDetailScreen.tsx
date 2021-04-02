@@ -20,9 +20,9 @@ export default function SingleEpisodeDetailScreen({ route }) {
     return (
         <View style={styles.child}>
             <ScrollView > 
-                    <EpisodeInfo episodeinfo={episodeinfo} seasonposterurl={original_url + seasoninfo.poster_path } showid = {showid} seasoninfo = {seasoninfo} />
-                    <EpisodeRatings averageSeasonRating={averageSeasonRating} episodeinfo = {episodeinfo} showid ={showid} />
-                    <TopReviews episodeinfo={episodeinfo} showid={showid}/>
+                    <EpisodeInfo episodeinfo={episodeinfo} seasonposterurl={original_url + seasoninfo.poster_path} showid={showid} seasoninfo={seasoninfo} type='review'/>
+                    <EpisodeRatings averageSeasonRating={averageSeasonRating} episodeinfo = {episodeinfo} showid ={showid}  />
+                    <TopReviews episodeinfo={episodeinfo} showid={showid} seasonposterurl={original_url + seasoninfo.poster_path}/>
                     <CastAndCrew url ={episodedetailsurl}/> 
             </ScrollView>
         </View>
