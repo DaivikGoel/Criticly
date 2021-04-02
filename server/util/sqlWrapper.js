@@ -3,7 +3,7 @@ const con = require('../config.js')
         con.query(sql, function (err, result) 
         {   
             if (err) {
-                res.status(404).json({"status": "failure", "message": 'error occured in deleting: code - ' + err.code + " ,isFatal - " + err.fatal });
+                res.status(404).json({"status": "failure", "message": '- ' + err.code + " ,isFatal - " + err.fatal });
               }
               res.send(result);
         })
