@@ -36,7 +36,7 @@ export default class ReviewComments extends React.Component<{}, {comments:Array<
                 <View>
                     <View style={{ flexDirection: 'column', paddingLeft: '2%', paddingRight: '2%' }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text style={styles.name}>{item.name}</Text>
+                            <Text style={styles.name}>{item.username}</Text>
                             <View>
                                 <Text style={styles.Text}>{item.created_instant}</Text>
                             </View>
