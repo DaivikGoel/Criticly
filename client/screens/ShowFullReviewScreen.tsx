@@ -9,6 +9,7 @@ import ReviewContainer from '../components/reviewscreen/ReviewContainer';
 import EpisodeInfo from '../components/episodedetail/EpisodeInfo';
 import ReviewCard from '../components/reviewscreen/ReviewCard';
 import ReviewComments from '../components/fullreviewscreen/ReviewComments';
+import ReplyButton from '../components/fullreviewscreen/ReplyButton';
 const ApiKey = require('../apikeys.json');
 
 export default function ShowFullReviewScreen({ route }) {
@@ -23,6 +24,7 @@ export default function ShowFullReviewScreen({ route }) {
           <Button title='Comments' type='outline' containerStyle={styles.containerStyle} titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle}/>
           <ReviewComments reviewid ={reviewinfo.reviewid} />
         </ScrollView>
+        <ReplyButton title='Reply' type='outline' containerStyle={styles.containerStyle} titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle} reviewid={reviewinfo.reviewid} />
       </View>
     );
   }

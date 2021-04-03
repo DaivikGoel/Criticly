@@ -59,7 +59,7 @@ export default class RateEpisodeModal extends React.Component<{}, { Rating: numb
                 isVisible={this.props.isVisible}
                 backdropOpacity = {0.9}
                 >
-                    <View style={{ flex: 1, flexDirection: 'column'}}>
+                <View style={{ flex: 1, flexDirection: 'column', paddingTop: '5%'}}>
                         <Button title="Hide modal" onPress={this.props.hideModal} />
                         <View style={styles.TitleView}>
                             <Poster url={this.props.payload.seasonposterurl} />

@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var postReviewsRouter = require('./routes/postreview');
+var postCommentRouter = require('./routes/postcomment');
 var postReviewLikeRouter = require('./routes/postreviewlike');
 var getReviewsRouter = require('./routes/getreviews');
 var getReviewCommentsRouter = require('./routes/getreviewcomments');
@@ -36,6 +37,7 @@ app.use('/getuserinfo', getUsersRouter)
 app.use('/aggregateReviews?:id', getAggregateReviewsRouter);
 app.use('/getuserstats', getUserStatsRouter);
 app.use('/postListItem',postListItemRouter);
+app.use('/postcomment',postCommentRouter);
 
 const con = require('./config.js')
 con.connect(function(err) {
