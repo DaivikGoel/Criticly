@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, ActivityIndicator, View, Dimensions, Text, ImageBackground} from 'react-native';
+import { StyleSheet, ScrollView, ActivityIndicator, View, Dimensions, Text, ImageBackground, RefreshControl} from 'react-native';
 import TVShowInfo from './TVShowInfo';
 import SeasonInfo from './SeasonInfo'
 import CastAndCrew from '../common/CastAndCrew';
@@ -73,7 +73,7 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
             })
     }
 
-    getAggregateReviews() {
+    async getAggregateReviews() {
         fetch(apiUrl + 'aggregateReviews?showid=' + this.props.showid + '&type=season')
         .then(async (response) => {
             const data = await response.json()
@@ -97,6 +97,11 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
         })
     }
 
+    _onRefresh = () => {
+        this.setState({ isLoading: true });
+        this.getAggregateReviews()
+        .then(() => {this.setState({ isLoading: false })});
+    }
 
 
     render() {
@@ -109,7 +114,13 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
         return (
             <ImageBackground style={styles.imgContainer} source={{ uri: original_url + this.state.showdata.backdrop_path }}>
                 <View style={{ backgroundColor: 'rgba(0,0,0,0.7)',flex: 1}}>
-                <ScrollView>
+                <ScrollView
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={this.state.isLoading}
+                                onRefresh={this._onRefresh}
+                            />
+                        }>
                     {this.state.isLoading == false ? (
                         <View>
                             <View>
