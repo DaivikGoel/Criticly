@@ -18,13 +18,13 @@ export default function ShowFullReviewScreen({ route }) {
     const {reviewinfo} = route.params;
     return (
       <View style={styles.child}>
-        <ScrollView >
+        <ScrollView>
           <EpisodeInfo episodeinfo ={reviewinfo.episodeinfo} seasonposterurl = {reviewinfo.seasonposterurl} />
           <ReviewCard episodeinfo={reviewinfo.episodeinfo} userid={reviewinfo.userid} reviewid={reviewinfo.reviewid} name={reviewinfo.name} review={reviewinfo.review} date={reviewinfo.date} rating={reviewinfo.rating} numberofLikes={reviewinfo.numberofLikes} numberofComments={reviewinfo.numberofComments} seasonposterurl={reviewinfo.seasonposterurl} alreadyLiked={reviewinfo.alreadyLiked} type = {'fullreviewscreen'}/>
           <Button title='Comments' type='outline' containerStyle={styles.containerStyle} titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle}/>
+          <ReplyButton title='Reply' type='outline' containerStyle={styles.containerStyle} titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle} reviewid={reviewinfo.reviewid} />
           <ReviewComments reviewid ={reviewinfo.reviewid} />
         </ScrollView>
-        <ReplyButton title='Reply' type='outline' containerStyle={styles.containerStyle} titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle} reviewid={reviewinfo.reviewid} />
       </View>
     );
   }
