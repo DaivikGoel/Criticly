@@ -8,6 +8,7 @@ const executeQuery = require('../util/sqlWrapper.js')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+  console.log(req.query);
     switch (req.query.type){
       case ('review'):
         var sql = "SELECT * FROM reviewcomments as r INNER JOIN users as u ON (r.userid = u.id) WHERE reviewid = " + req.query.reviewid
