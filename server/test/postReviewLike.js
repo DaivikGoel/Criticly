@@ -1,11 +1,11 @@
-const {expect, should} = require('chai');
+let chai = require('chai');
 const request = require('supertest');
-var assert = require('assert');
+
 
 const app = require('../app.js');
-const { strictEqual } = require('assert');
 
-const exsistingUserId = 88890134;
+
+const exsistingUserId = 9;
 const existingReviewId = 8889013;
 const Http404Reponse = 404;
 
@@ -16,7 +16,7 @@ describe('POST /reviewlike', () => {
         request(app).post('/getreviews')
         .send({type:'add',reviewid: exsistingUserId, existingReviewId: existingReviewId})
         .then((res) =>{
-            strictEqual(res['statusCode'], Http404Reponse);
+            chai.assert.strictEqual(res['statusCode'], Http404Reponse);
         }).then(done, done);
     })
 });
