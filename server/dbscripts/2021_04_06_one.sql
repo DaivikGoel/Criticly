@@ -1,0 +1,1 @@
+create table watched (userid INT NOT NULL, showid INT NOT NULL, seasonnumber INT NOT NULL, episodenumber INT NOT NULL, created_instant DATETIME DEFAULT CURRENT_TIMESTAMP PRIMARY KEY (userid, showid, seasonnumber, episodenumber) );

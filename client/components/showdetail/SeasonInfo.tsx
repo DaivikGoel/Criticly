@@ -1,8 +1,10 @@
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Dimensions, ActivityIndicator} from 'react-native';
 import React from 'react';
 import CollapsibleList from "react-native-collapsible-list";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import EpisodeCard from './EpisodeCard';
+import { apiUrl } from '../../constants/apiurl';
 
 const styles = StyleSheet.create({
     wrapperCollapsibleList: {
@@ -18,43 +20,81 @@ const styles = StyleSheet.create({
         padding: 10
     }
 });
-const SeasonInfo = (props) => {
-    const navigation = useNavigation();
-    const Episodes = props.payload.episodes.map((episode) => {
-        return (
-            <View style={styles.collapsibleItem}>
-            <TouchableOpacity 
-                onPress={() =>navigation.push('ShowSingleEpisodeDetailScreen', 
-                    {
-                        episodeinfo: episode,
-                        seasoninfo: props.payload,
-                        showid: props.showid,
-                        averageSeasonRating: props.averageSeasonRating
-                    })
-            }>
-                <Text>{episode.episode_number} {episode.name}</Text>
-            </TouchableOpacity>
-            </View>
+class SeasonInfo extends React.Component<{}, { watched: Record<string, boolean> , isLoading: boolean}> {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            watched: {},
+            isLoading: true
 
-        )
-    })
-    return (
-        <View >
-            <CollapsibleList
-                numberOfVisibleItems={0}
-                wrapperStyle={styles.wrapperCollapsibleList}
-                buttonPosition='top'
-                buttonContent={
-                    <View>
-                        <View style={styles.collapsibleItem}>
-                            <Text>{props.payload.name}</Text>
-                        </View>
-                    </View>
+
+        };
+    }
+    
+    componentDidMount() {
+        this.getWatched()
+    }
+
+    getWatched() {
+        const userid = '9'
+        fetch(apiUrl + 'getwatched?type=season&userid=' + userid + '&seasonnumber=' + this.props.payload.season_number + '&showid=' + this.props.showid)
+            .then(async (response) => {
+                const data = await response.json()
+                var watcheddict = {}
+                for (var i = 0; i < data.length; i++) {
+                    const episodenumber = data[i].episodenumber
+                    watcheddict[episodenumber] = true
+
                 }
-            >
-            {Episodes}
-            </CollapsibleList>
-        </View>
-    );
+                this.setState({
+                    watched: watcheddict,
+
+                });
+            }
+            )
+            .then( () => {
+                this.setState({
+
+                    isLoading: false
+                })
+
+            })
+    }
+
+    render(){
+        const { navigation } = this.props;
+        const Episodes = this.props.payload.episodes.map((episode) => {
+
+            var watched = false
+
+
+            return (
+                <EpisodeCard episode ={episode} seasoninfo ={this.props.payload} showid = {this.props.showid} averageSeasonRating = {this.props.averageSeasonRating} watched = {this.state.watched[episode.episode_number]}/>
+            )
+        })
+        return (
+            <View >
+                <CollapsibleList
+                    numberOfVisibleItems={0}
+                    wrapperStyle={styles.wrapperCollapsibleList}
+                    buttonPosition='top'
+                    buttonContent={
+                        <View>
+                            <View style={styles.collapsibleItem}>
+                                <Text>{this.props.payload.name}</Text>
+                            </View>
+                        </View>
+                    }
+                >
+                    {this.state.isLoading ? <ActivityIndicator /> : <View>{Episodes}</View> }
+                </CollapsibleList>
+            </View>
+        );
+    }
 }
-export default SeasonInfo;
+export default function (props) {
+    const navigation = useNavigation();
+
+    return <SeasonInfo {...props} navigation={navigation} />;
+}
