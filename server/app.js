@@ -5,18 +5,25 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users/users');
+
+
+//Reviews
 var postReviewsRouter = require('./routes/reviews/postreview');
 var postCommentRouter = require('./routes/reviews/postcomment');
 var postReviewLikeRouter = require('./routes/reviews/postreviewlike');
 var getReviewsRouter = require('./routes/reviews/getreviews');
 var getReviewCommentsRouter = require('./routes/reviews/getreviewcomments');
+
+//Users
 var getAggregateReviewsRouter = require('./routes/reviews/aggregateReviews');
 var getUserStatsRouter = require('./routes/users/getuserstats');
 var getUsersRouter = require('./routes/users/getuserinfo');
+var usersRouter = require('./routes/users/users');
 var getWatchedRouter = require('./routes/users/getwatched');
-var postListItemRouter = require('./routes/postListItem');
 var postWatchedRouter = require('./routes/users/postwatched');
+
+//Lists
+var postListItemRouter = require('./routes/postListItem');
 
 var app = express();
 
