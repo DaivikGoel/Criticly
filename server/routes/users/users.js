@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const executeQuery = require('../util/sqlWrapper.js')
-
+const executeQuery = require('../../util/sqlWrapper.js')
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 

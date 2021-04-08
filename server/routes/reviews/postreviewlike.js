@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const app = express();
-const executeQuery = require('../util/sqlWrapper.js')
+const executeQuery = require('../../util/sqlWrapper.js')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
