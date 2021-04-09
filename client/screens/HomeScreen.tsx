@@ -5,14 +5,26 @@ import List from '../components/common/List';
 import { Text, View } from '../components/Themed';
 import {trending_url, topRated_url, popular_url} from '../constants/urls'
 const ApiKey = require('../apikeys.json');
+import { AirbnbRating, Image, Button } from 'react-native-elements'
 
 let lists = [["Trending", trending_url + ApiKey.TMDBApiKey + '&page=1'], 
 ["Top Rated", topRated_url + ApiKey.TMDBApiKey + '&page=1'], 
 ["Popular", popular_url + ApiKey.TMDBApiKey + '&page=1'] ];
 
+import { AuthContext } from '../navigation/RootNavigator'
+import { userLogout } from '../utils/PersistantAuth'
+
 
 export default function HomeScreen() {
-  
+  const context = React.useContext(AuthContext);
+
+  function LogOut() {
+
+    userLogout()
+    context.setisSignedIn(false)
+
+  }
+
   const Lists = lists.map((item) => {
     return (
       <List name={item[0]} url={item[1]} type ='tv' key={item[0]}/>
@@ -22,6 +34,7 @@ export default function HomeScreen() {
     <View style={styles.container}>
     <ScrollView style = {styles.scrollstyle}>
       {Lists}
+        <Button title='Logout' type='outline' onPress={() => LogOut()} />
       </ScrollView>
     </View>
   );

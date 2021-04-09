@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View, Text, Dimensions, ImageBackground, RefreshControl } from 'react-native';
-import { AirbnbRating, Image } from 'react-native-elements'
+import { AirbnbRating, Image, Button } from 'react-native-elements'
 
 const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+
 import { test_image } from '../../constants/urls';
 import { apiUrl } from '../../constants/apiurl';
 import UserMetaData from './UserMetaData';
 import Icon from '../common/Icon'
+import {userLogout} from '../../utils/PersistantAuth'
 
-export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, isLoading: boolean, recentlyReviewed: Array<any>, userStats: Record<string, string> }> {
+import { AuthContext } from '../../navigation/RootNavigator'
+
+export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, isLoading: boolean, recentlyReviewed: Array<any>, userStats: Record<string, string>}> {
 
     constructor(props) {
         super(props);
@@ -20,6 +24,7 @@ export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, i
             userStats:{},
             recentlyReviewed: [], 
             isLoading: true,
+            
 
         };
     }
@@ -79,9 +84,8 @@ export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, i
                 )
             }
             )
-
-
     }
+
 
     render() {
         const Icons = this.state.recentlyReviewed.map((item) => {
@@ -132,6 +136,7 @@ export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, i
                             {Icons}
                             </ScrollView>
                         </View>
+
                 </ScrollView>
             </View>
         )

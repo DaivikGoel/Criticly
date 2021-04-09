@@ -1,14 +1,37 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import FormInput from '../components/loginscreen/FormInput';
 import FormButton from '../components/loginscreen/FormButton';
+import { apiUrl } from '../constants/apiurl';
+import {saveItem} from '../utils/PersistantAuth'
+import {AuthContext} from '../navigation/RootNavigator'
 
 export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const context = React.useContext(AuthContext);
+
+    
+    function login(){
+        fetch(apiUrl + 'login?email=' + email + '&password='+ password)
+            .then(async (response) => {
+                if (response.status == 404)
+                    Alert.alert('There has been an error')
+                else if (response.status == 200) {
+                    var data = await response.json()
+                    saveItem(data.email)
+                    context.setUser(data.email)
+                    context.setisSignedIn(true)
+
+                }
+            }
+            )
+
+    }
+
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Welcome to Firebase app</Text>
+            <Text style={styles.text}>Welcome to Criticly</Text>
             <FormInput
                 value={email}
                 placeholderText='Email'
@@ -23,7 +46,7 @@ export default function LoginScreen({ navigation }) {
                 onChangeText={userPassword => setPassword(userPassword)}
                 secureTextEntry={true}
             />
-            <FormButton buttonTitle='Login' onPress={() => alert('login button')} />
+            <FormButton buttonTitle='Login' onPress={() => login()} />
             <TouchableOpacity
                 style={styles.navButton}
                 onPress={() => navigation.navigate('Signup')}

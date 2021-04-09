@@ -25,6 +25,11 @@ var postWatchedRouter = require('./routes/users/postwatched');
 //Lists
 var postListItemRouter = require('./routes/postListItem');
 
+//Authentication
+
+var LoginRouter = require('./routes/authentication/login');
+var SignUpRouter = require('./routes/authentication/signup');
+
 var app = express();
 
 // view engine setup
@@ -50,6 +55,8 @@ app.use('/postListItem',postListItemRouter);
 app.use('/postcomment',postCommentRouter);
 app.use('/postwatched',postWatchedRouter);
 app.use('/getwatched',getWatchedRouter);
+app.use('/Login',LoginRouter);
+app.use('/signup',SignUpRouter);
 
 const con = require('./config.js')
 con.connect(function(err) {
