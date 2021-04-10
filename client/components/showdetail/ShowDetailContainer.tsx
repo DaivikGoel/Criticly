@@ -4,9 +4,11 @@ import TVShowInfo from './TVShowInfo';
 import SeasonInfo from './SeasonInfo'
 import CastAndCrew from '../common/CastAndCrew';
 import TVShowRatings from './TVShowRatings';
+import WatchListModal from './WatchListModal';
 import { apiUrl } from '../../constants/apiurl';
 import { original_url } from '../../constants/urls';
 import {Button} from 'react-native';
+import AddToListButton from './AddToListsButton';
 const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -82,20 +84,6 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
         )
     }
 
-    addToWatchList(){
-        fetch(apiUrl + 'postListItem', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                userid: '10',
-                listtype: "watchlist",
-                title: "action movies"
-            })
-        })
-    }
 
     _onRefresh = () => {
         this.setState({ isLoading: true });
@@ -125,7 +113,7 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
                         <View>
                             <View>
                                 <TVShowInfo payload ={this.state.showdata}/>
-                                <Button onPress={this.addToWatchList} title="Add to watchlist"></Button>
+                                <WatchListModal></WatchListModal>
                                 <TVShowRatings averageRating = {this.state.averageRating} ratingsCount = {this.state.ratingsCount}/>
                                 <Text style={styles.ShowTitle}>Seasons</Text>
                                 {SeasonLists}
