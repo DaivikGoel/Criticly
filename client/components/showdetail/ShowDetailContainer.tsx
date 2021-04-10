@@ -113,7 +113,7 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
                         <View>
                             <View>
                                 <TVShowInfo payload ={this.state.showdata}/>
-                                <WatchListModal></WatchListModal>
+                                <WatchListModal showid ={this.props.showid}></WatchListModal>
                                 <TVShowRatings averageRating = {this.state.averageRating} ratingsCount = {this.state.ratingsCount}/>
                                 <Text style={styles.ShowTitle}>Seasons</Text>
                                 {SeasonLists}
