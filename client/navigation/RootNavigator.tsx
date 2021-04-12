@@ -37,7 +37,7 @@ export default function RootNavigator() {
                     setisSignedIn(false)
                 }
                 else{
-                    setUser(userid)
+                    setUserid(userid)
                     setisSignedIn(true)
                 }
             }

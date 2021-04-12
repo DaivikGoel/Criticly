@@ -19,7 +19,6 @@ export default function SignUpScreen({navigation}) {
                     Alert.alert('There has been an error')
                 else if (response.status == 200){
                     var data = await response.json()
-                    saveItem(data.email)
                     context.setUser(data.email);
                     navigation.push('SetName',
                             {
