@@ -26,12 +26,15 @@ router.get('/', function(req, res, next) {
         .catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
-            res.status(404).send('Error')
-            console.log(errorCode)
             if (errorCode == 'auth/user-not-found'){
                 res.status(404).send('User Not Found')
                 console.log('No User Has Been Found. Please sign up')
             }
+            else{
+            res.status(404).send('Error')
+            console.log(errorCode)
+            }
+
         });
   });
 

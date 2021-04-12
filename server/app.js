@@ -29,6 +29,8 @@ var postListItemRouter = require('./routes/postListItem');
 
 var LoginRouter = require('./routes/authentication/login');
 var SignUpRouter = require('./routes/authentication/signup');
+var registerRouter = require('./routes/authentication/register');
+var getUseridRouter = require('./routes/authentication/getuserid');
 
 var app = express();
 
@@ -57,6 +59,9 @@ app.use('/postwatched',postWatchedRouter);
 app.use('/getwatched',getWatchedRouter);
 app.use('/Login',LoginRouter);
 app.use('/signup',SignUpRouter);
+app.use('/register',registerRouter);
+app.use('/getuserid',getUseridRouter);
+
 
 const con = require('./config.js')
 con.connect(function(err) {

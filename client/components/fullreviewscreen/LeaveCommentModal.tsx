@@ -5,7 +5,6 @@ import { AirbnbRating, Button } from 'react-native-elements';
 import Poster from '../common/Poster'
 import { apiUrl } from '../../constants/apiurl';
 
-const userid = 9
 
 export default class LeaveCommentModal extends React.Component<{}, { ReviewText: string }> {
     constructor(props) {
@@ -30,7 +29,7 @@ export default class LeaveCommentModal extends React.Component<{}, { ReviewText:
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    userid: userid,
+                    userid: this.props.userid,
                     reviewid: this.props.reviewid,
                     reviewcomment: this.state.ReviewText
                 })

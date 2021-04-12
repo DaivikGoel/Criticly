@@ -39,7 +39,7 @@ export default class RateEpisodeModal extends React.Component<{}, { Rating: numb
                     reviewtext: this.state.ReviewText,
                     seasonnumber: this.props.payload.seasoninfo.season_number,
                     showid: this.props.payload.showid,
-                    userid: '9'
+                    userid: this.props.payload.userid
                 })
             })
 

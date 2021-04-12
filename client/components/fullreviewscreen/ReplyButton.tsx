@@ -25,7 +25,7 @@ export default class ReplyButton extends React.Component<{}, { LeaveCommentVisib
         return (
             <View style={styles.Container}>
                 <Button title='Reply' type = 'outline' containerStyle = {styles.containerStyle} titleStyle = {styles.titleStyle} buttonStyle = {styles.buttonStyle} onPress = {this.showReview}/>
-                <LeaveCommentModal isVisible={this.state.LeaveCommentVisible} hideModal={this.showReview.bind(this)} reviewid={this.props.reviewid}/>
+                <LeaveCommentModal isVisible={this.state.LeaveCommentVisible} hideModal={this.showReview.bind(this)} reviewid={this.props.reviewid} userid = {this.props.userid}/>
             </View>
         );
     }

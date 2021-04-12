@@ -5,16 +5,17 @@ import {Image} from 'react-native-elements'
 import ShowDetailContainer from '../components/showdetail/ShowDetailContainer'
 import { original_url } from '../constants/urls';
 import { StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
+import { AuthContext } from '../navigation/RootNavigator'
 
 
 export default function ShowDetailScreen({ route }) {
-
+  const context = React.useContext(AuthContext);
   
     const {showid } = route.params;
     return (
     <View style={styles.imgContainer}>
         <View style={styles.child}>
-          <ShowDetailContainer showid ={showid}/>
+          <ShowDetailContainer showid ={showid} userid ={context.userid} />
         </View>
     </View>
     );

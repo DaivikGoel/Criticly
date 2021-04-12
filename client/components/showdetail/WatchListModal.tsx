@@ -4,7 +4,7 @@ import Modal from 'react-native-modal';
 import { apiUrl } from '../../constants/apiurl';
 import CreateListModal from './CreateListModal';
 
-function WatchListModal(showid: number) {
+function WatchListModal(showid: number, userid: number ) {
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -18,7 +18,7 @@ function WatchListModal(showid: number) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            userid: '10',
+            userid: Object.values(userid),
             listtype: "watchlist",
             title: "action movies",
             showid: Object.values(showid)

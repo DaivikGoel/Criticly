@@ -10,42 +10,6 @@ import { createStackNavigator } from 'react-navigation';
 import TopReviewCard from './TopReviewCard';
 import { apiUrl } from '../../constants/apiurl';
 
-const userid = 9
-
-
-const styles = StyleSheet.create({
-    Text: {
-        color: '#FFFFFF',
-        textAlign: 'center'
-    },
-    Container: {
-        flexDirection: 'column',
-        backgroundColor: 'rgba(0,0,0,0)',
-        flex: 1,
-        paddingTop:'5%', 
-        paddingBottom: '5%'
-    },
-    RatingMetaData: {
-        flexDirection: 'column',
-        backgroundColor: 'rgba(0,0,0,0)'
-    },
-    button:{
-        paddingLeft:'2%'
-    },
-    containerStyle:{
-        borderColor: '#FFFFFF'
-    },
-    titleStyle:{
-        color: '#FFFFFF'
-    },
-    buttonStyle:{
-        borderColor: '#FFFFFF'
-    }
-
-
-
-});
-
 
 export default class TopReviews extends Component<{}, { data: Array<any>, isLoading: boolean }> {
     
@@ -62,7 +26,7 @@ export default class TopReviews extends Component<{}, { data: Array<any>, isLoad
     }
 
     getreviews() {
-        fetch(apiUrl + 'getreviews?episodenumber=' + this.props.episodeinfo.episode_number + '&seasonnumber=' + this.props.episodeinfo.season_number + '&showid=' + this.props.showid + '&userid=' + userid + '&type=latest')
+        fetch(apiUrl + 'getreviews?episodenumber=' + this.props.episodeinfo.episode_number + '&seasonnumber=' + this.props.episodeinfo.season_number + '&showid=' + this.props.showid + '&userid=' + this.props.userid + '&type=latest')
             .then(async (response) => {
                 const data = await response.json()
                 this.setState({ data: this.state.data.concat(data) })
@@ -80,3 +44,38 @@ export default class TopReviews extends Component<{}, { data: Array<any>, isLoad
         );
     }
 }
+
+
+const styles = StyleSheet.create({
+    Text: {
+        color: '#FFFFFF',
+        textAlign: 'center'
+    },
+    Container: {
+        flexDirection: 'column',
+        backgroundColor: 'rgba(0,0,0,0)',
+        flex: 1,
+        paddingTop: '5%',
+        paddingBottom: '5%'
+    },
+    RatingMetaData: {
+        flexDirection: 'column',
+        backgroundColor: 'rgba(0,0,0,0)'
+    },
+    button: {
+        paddingLeft: '2%'
+    },
+    containerStyle: {
+        borderColor: '#FFFFFF'
+    },
+    titleStyle: {
+        color: '#FFFFFF'
+    },
+    buttonStyle: {
+        borderColor: '#FFFFFF'
+    }
+
+
+
+});
+

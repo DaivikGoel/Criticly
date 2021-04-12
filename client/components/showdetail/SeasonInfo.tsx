@@ -37,8 +37,7 @@ class SeasonInfo extends React.Component<{}, { watched: Record<string, boolean> 
     }
 
     getWatched() {
-        const userid = '9'
-        fetch(apiUrl + 'getwatched?type=season&userid=' + userid + '&seasonnumber=' + this.props.payload.season_number + '&showid=' + this.props.showid)
+        fetch(apiUrl + 'getwatched?type=season&userid=' + this.props.userid + '&seasonnumber=' + this.props.payload.season_number + '&showid=' + this.props.showid)
             .then(async (response) => {
                 const data = await response.json()
                 var watcheddict = {}
@@ -70,7 +69,7 @@ class SeasonInfo extends React.Component<{}, { watched: Record<string, boolean> 
 
 
             return (
-                <EpisodeCard episode ={episode} seasoninfo ={this.props.payload} showid = {this.props.showid} averageSeasonRating = {this.props.averageSeasonRating} watched = {this.state.watched[episode.episode_number]}/>
+                <EpisodeCard episode ={episode} seasoninfo ={this.props.payload} showid = {this.props.showid} averageSeasonRating = {this.props.averageSeasonRating} watched = {this.state.watched[episode.episode_number]} userid ={this.props.userid} />
             )
         })
         return (
