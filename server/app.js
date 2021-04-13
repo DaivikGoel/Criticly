@@ -24,6 +24,7 @@ var postWatchedRouter = require('./routes/users/postwatched');
 
 //Lists
 var postListItemRouter = require('./routes/postListItem');
+var postUserListItemRouter = require('./routes/PostUserList.js');
 
 //Authentication
 
@@ -54,6 +55,7 @@ app.use('/getuserinfo', getUsersRouter)
 app.use('/aggregateReviews?:id', getAggregateReviewsRouter);
 app.use('/getuserstats', getUserStatsRouter);
 app.use('/postListItem',postListItemRouter);
+app.use('/postUserList',postUserListItemRouter);
 app.use('/postcomment',postCommentRouter);
 app.use('/postwatched',postWatchedRouter);
 app.use('/getwatched',getWatchedRouter);

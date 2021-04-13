@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Button, TextInput, Text, View, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
+import { apiUrl } from '../../constants/apiurl';
 
 function CreateListModal() {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -11,8 +12,19 @@ function CreateListModal() {
   };
 
   const addToWatchList= (textInput: string) => {
-    console.log(textInput)
-    alert(textInput);
+    fetch(apiUrl + 'postUserList', {
+      method: 'POST',
+      headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          userid: 10,
+          listname: textInput,
+      })
+  })
+
+    
 }
 
   return (
