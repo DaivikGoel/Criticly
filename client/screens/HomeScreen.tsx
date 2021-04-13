@@ -18,12 +18,15 @@ import { userLogout } from '../utils/PersistantAuth'
 export default function HomeScreen() {
   const context = React.useContext(AuthContext);
 
+
   function LogOut() {
 
     userLogout()
     context.setisSignedIn(false)
 
   }
+
+  
 
   const Lists = lists.map((item) => {
     return (

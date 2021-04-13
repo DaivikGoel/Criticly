@@ -8,15 +8,18 @@ import { StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView} from 'reac
 import ReviewContainer from '../components/reviewscreen/ReviewContainer';
 
 const ApiKey = require('../apikeys.json');
+import { AuthContext } from '../navigation/RootNavigator'
+
+
 
 export default function ShowReviewScreen({ route }) {
 
-  
+    const context = React.useContext(AuthContext);
     const { episodeinfo, showid, seasonposterurl} = route.params;
     return (
       <View style={styles.child}>
         <ScrollView >
-          <ReviewContainer episodeinfo={episodeinfo} showid={showid} seasonposterurl={seasonposterurl}/>
+          <ReviewContainer episodeinfo={episodeinfo} showid={showid} seasonposterurl={seasonposterurl} userid = {context.userid}/>
         </ScrollView>
       </View>
     );

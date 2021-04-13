@@ -5,9 +5,9 @@ import FormButton from '../components/loginscreen/FormButton';
 import { apiUrl } from '../constants/apiurl';
 import { saveItem, userLogout } from '../utils/PersistantAuth'
 import { AuthContext } from '../navigation/RootNavigator'
+import { useNavigation } from '@react-navigation/native';
 
-
-export default function SignUpScreen() {
+export default function SignUpScreen({navigation}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const context = React.useContext(AuthContext);
@@ -19,11 +19,12 @@ export default function SignUpScreen() {
                     Alert.alert('There has been an error')
                 else if (response.status == 200){
                     var data = await response.json()
-                    saveItem(data.email)
-                    context.setUser(data.email)
-                    context.setisSignedIn(true)
-
-
+                    context.setUser(data.email);
+                    navigation.push('SetName',
+                            {
+                                email: email,
+                                password: password
+                            })
                 }
 
 

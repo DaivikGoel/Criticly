@@ -6,11 +6,12 @@ import EpisodeInfo from '../components/episodedetail/EpisodeInfo'
 import EpisodeRatings from '../components/episodedetail/EpisodeRatings'
 import TopReviews from '../components/showdetail/TopReviews';
 import CastAndCrew from '../components/common/CastAndCrew';
-
+import { AuthContext } from '../navigation/RootNavigator'
 const ApiKey = require('../apikeys.json');
 
 export default function SingleEpisodeDetailScreen({ route }) {
-
+    
+    const context = React.useContext(AuthContext);
   
     const { episodeinfo,seasoninfo, showid, averageSeasonRating} = route.params;
 
@@ -20,9 +21,9 @@ export default function SingleEpisodeDetailScreen({ route }) {
     return (
         <View style={styles.child}>
             <ScrollView > 
-                    <EpisodeInfo episodeinfo={episodeinfo} seasonposterurl={original_url + seasoninfo.poster_path} showid={showid} seasoninfo={seasoninfo} type='review'/>
+                <EpisodeInfo episodeinfo={episodeinfo} seasonposterurl={original_url + seasoninfo.poster_path} showid={showid} seasoninfo={seasoninfo} type='review' userid={context.userid}/>
                     <EpisodeRatings averageSeasonRating={averageSeasonRating} episodeinfo = {episodeinfo} showid ={showid}  />
-                    <TopReviews episodeinfo={episodeinfo} showid={showid} seasonposterurl={original_url + seasoninfo.poster_path}/>
+                    <TopReviews episodeinfo={episodeinfo} showid={showid} seasonposterurl={original_url + seasoninfo.poster_path} userid ={context.userid} />
                     <CastAndCrew url ={episodedetailsurl}/> 
             </ScrollView>
         </View>

@@ -19,13 +19,21 @@ export default function LoginScreen({ navigation }) {
                     Alert.alert('There has been an error')
                 else if (response.status == 200) {
                     var data = await response.json()
-                    saveItem(data.email)
                     context.setUser(data.email)
-                    context.setisSignedIn(true)
-
+                    fetch(apiUrl + 'getuserid?email=' + email)
+                        .then(async (response) => {
+                            var data = await response.json()
+                            data = data[0]
+                            const id = data.id
+                            saveItem(JSON.stringify(id))
+                            context.setUserid(data.id)
+                            context.setisSignedIn(true)
+                        }
+                        )
                 }
             }
             )
+
 
     }
 

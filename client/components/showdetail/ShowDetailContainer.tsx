@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 
     },
 });
-export default class ShowDetailContainer extends React.Component<{ showid: number }, { showdata: Array<any>, seasondata: Array<any>, isLoading: boolean, averageRating: number, ratingsCount:number }> {
+export default class ShowDetailContainer extends React.Component<{}, { showdata: Array<any>, seasondata: Array<any>, isLoading: boolean, averageRating: number, ratingsCount:number }> {
 
     constructor(props) {
         super(props);
@@ -96,7 +96,7 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
         let crediturl = "https://api.themoviedb.org/3/tv/" + this.props.showid + "/credits" + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
         const SeasonLists = this.state.seasondata.sort(function (a, b) { return a.season_number - b.season_number; }).map((season) => {
             return (
-                <SeasonInfo payload={season} showid={this.props.showid} averageSeasonRating = {this.state.averageRating}/>
+                <SeasonInfo payload={season} showid={this.props.showid} averageSeasonRating = {this.state.averageRating} userid ={this.props.userid} />
             )
         })
         return (
@@ -113,7 +113,7 @@ export default class ShowDetailContainer extends React.Component<{ showid: numbe
                         <View>
                             <View>
                                 <TVShowInfo payload ={this.state.showdata}/>
-                                <WatchListModal showid ={this.props.showid}></WatchListModal>
+                                    <WatchListModal showid={this.props.showid} userid={this.props.userid} ></WatchListModal>
                                 <TVShowRatings averageRating = {this.state.averageRating} ratingsCount = {this.state.ratingsCount}/>
                                 <Text style={styles.ShowTitle}>Seasons</Text>
                                 {SeasonLists}

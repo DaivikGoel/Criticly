@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export async function saveItem(selectedValue) {
     try {
         await AsyncStorage.setItem('userid', selectedValue);
+    
     } catch (error) {
         console.error('AsyncStorage error: ' + error.message);
     }

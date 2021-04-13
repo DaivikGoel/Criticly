@@ -50,7 +50,6 @@ class EpisodeCard extends React.Component<{}, { watched: boolean }> {
     }
 
     postEpisodeWatched(type, category = 'episode' ) {
-        const userid = 9
 
         fetch(apiUrl + 'postwatched', {
             method: 'POST',
@@ -62,7 +61,7 @@ class EpisodeCard extends React.Component<{}, { watched: boolean }> {
                 type: type,
                 category: category, 
                 showid: this.props.showid , 
-                userid: userid,
+                userid: this.props.userid,
                 seasonnumber: this.props.episode.season_number,
                 episodenumber: this.props.episode.episode_number
 

@@ -7,9 +7,10 @@ import { original_url, people_url} from '../constants/urls';
 import { StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView} from 'react-native';
 import PeopleInfo from '../components/peoplescreen/PeopleInfo'
 const ApiKey = require('../apikeys.json');
+import { AuthContext } from '../navigation/RootNavigator'
 
 export default function ShowPeopleScreen({ route }) {
-
+  const context = React.useContext(AuthContext);
   
     const { person } = route.params;
     return (
