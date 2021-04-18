@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, ScrollView, ActivityIndicator, View, Dimensions, Text, ImageBackground, RefreshControl} from 'react-native';
 import TVShowInfo from './TVShowInfo';
 import SeasonInfo from './SeasonInfo'
@@ -7,8 +7,6 @@ import TVShowRatings from './TVShowRatings';
 import WatchListModal from './WatchListModal';
 import { apiUrl } from '../../constants/apiurl';
 import { original_url } from '../../constants/urls';
-import {Button} from 'react-native';
-import AddToListButton from './AddToListsButton';
 const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;

@@ -3,9 +3,11 @@ import {Button, TextInput, Text, View, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
 import { apiUrl } from '../../constants/apiurl';
 
-function CreateListModal() {
+function CreateListModal(userid: number) {
   const [isModalVisible, setModalVisible] = useState(false);
   const [listNameInput, setTextInput] = React.useState('');
+  const useridKey = Object.values(userid)[0]
+
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -19,17 +21,15 @@ function CreateListModal() {
           'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-          userid: 10,
+          userid: useridKey,
           listname: textInput,
       })
   })
-
-    
 }
 
   return (
     <View style={{flex: 1}}>
-      <Button title="Add To list" onPress={toggleModal} />
+      <Button title="Create new list" onPress={toggleModal} />
 
       <Modal isVisible={isModalVisible}>
         <Text style= {styles.listNameLabel}>List Name</Text>

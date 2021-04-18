@@ -1,11 +1,25 @@
 import React, {useState} from 'react';
-import {Button , View} from 'react-native';
+import {Button , View, Text} from 'react-native';
 import Modal from 'react-native-modal';
 import { apiUrl } from '../../constants/apiurl';
 import CreateListModal from './CreateListModal';
 
 function WatchListModal(showid: number, userid: number ) {
   const [isModalVisible, setModalVisible] = useState(false);
+  const [userLists, setUserLists] = useState<any[]>([])
+  const useridKey = JSON.stringify(Object.values(showid)[1]);
+
+  React.useEffect(() => {
+    fetch(apiUrl + 'getUserList?userid='+  useridKey)
+      .then(results => results.json())
+      .then(data => {
+        if(data != undefined)
+          setUserLists(data);
+        else
+          setUserLists([]);
+      });
+  }, []);
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -33,7 +47,11 @@ function WatchListModal(showid: number, userid: number ) {
       <Modal isVisible={isModalVisible}>
         <View style={{flex: 1}}>
           <Button title="Add to watchlist" onPress ={addToWatchList} />
-          <CreateListModal></CreateListModal>
+          <Text style={{color:"white"}}>My Current Lists</Text>
+          {userLists.map(listItem => (
+        <Button key={listItem.iduser_lists} title={listItem.listname} onPress={() => addToWatchList(addToWatchList)}> </Button>
+      ))}
+          <CreateListModal userid = {JSON.parse(useridKey)}></CreateListModal>
           <Button title="Close modal" onPress={toggleModal} />
         </View>
       </Modal>
