@@ -30,13 +30,14 @@ const styles = StyleSheet.create({
 });
 
 
-export default class EpisodeRatings extends React.Component<{}, { isLoading: boolean, averageRating: number, ratingsCount: number  }> {
+export default class EpisodeRatings extends React.Component<{}, { isLoading: boolean, averageRating: number, ratingsCount: number, userRating: number}> {
 
     constructor(props) {
         super(props);
         this.state = {
             averageRating: -1,
             ratingsCount: -1,
+            userRating: -1,
             isLoading: true
         };
     }
@@ -45,10 +46,10 @@ export default class EpisodeRatings extends React.Component<{}, { isLoading: boo
 
     }
     getAggregateReviews() {
-        fetch(apiUrl + 'aggregateReviews?showid=' + this.props.showid + '&type=episode' + '&seasonnumber=' + this.props.episodeinfo.season_number + '&episodenumber=' + this.props.episodeinfo.episode_number)
+        fetch(apiUrl + 'aggregateReviews?showid=' + this.props.showid + '&type=episode' + '&seasonnumber=' + this.props.episodeinfo.season_number + '&episodenumber=' + this.props.episodeinfo.episode_number + '&userid=' + this.props.userid)
             .then(async (response) => {
                 const data = await response.json()
-                this.setState({ averageRating: data[0]["AVG(rating)"], ratingsCount: data[0]["COUNT(rating)"], isLoading: false });
+                this.setState({ averageRating: data[0]["GlobalEpisodeRating"], ratingsCount: data[0]["GlobalEpisodeCountRating"], userRating: data[0]["userRating"],  isLoading: false });
             }
             )
     }
@@ -64,7 +65,7 @@ export default class EpisodeRatings extends React.Component<{}, { isLoading: boo
                     <Text style={styles.Text}>Average Episode Rating </Text>
                 </View>
                 <View style={styles.RatingMetaData}>
-                    <Text style={styles.Text}>4/5</Text>
+                    <Text style={styles.Text}>{this.state.userRating}</Text>
                     <Text style={styles.Text}> Your Rating </Text>
                 </View>
             </View>

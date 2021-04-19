@@ -22,7 +22,7 @@ export default function SingleEpisodeDetailScreen({ route }) {
         <View style={styles.child}>
             <ScrollView > 
                 <EpisodeInfo episodeinfo={episodeinfo} seasonposterurl={original_url + seasoninfo.poster_path} showid={showid} seasoninfo={seasoninfo} type='review' userid={context.userid}/>
-                    <EpisodeRatings averageSeasonRating={averageSeasonRating} episodeinfo = {episodeinfo} showid ={showid}  />
+                <EpisodeRatings averageSeasonRating={averageSeasonRating} episodeinfo={episodeinfo} showid={showid} userid={context.userid} />
                     <TopReviews episodeinfo={episodeinfo} showid={showid} seasonposterurl={original_url + seasoninfo.poster_path} userid ={context.userid} />
                     <CastAndCrew url ={episodedetailsurl}/> 
             </ScrollView>

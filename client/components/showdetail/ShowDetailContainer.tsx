@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 
     },
 });
-export default class ShowDetailContainer extends React.Component<{}, { showdata: Array<any>, seasondata: Array<any>, isLoading: boolean, averageRating: number, ratingsCount:number }> {
+export default class ShowDetailContainer extends React.Component<{}, { showdata: Array<any>, seasondata: Array<any>, isLoading: boolean, averageRating: number, ratingsCount:number, userRating: number }> {
 
     constructor(props) {
         super(props);
@@ -43,7 +43,8 @@ export default class ShowDetailContainer extends React.Component<{}, { showdata:
             seasondata: [],
             isLoading: true,
             averageRating: -1,
-            ratingsCount: -1
+            ratingsCount: -1,
+            userRating: -1
         };
     }
     componentDidMount() {
@@ -74,10 +75,10 @@ export default class ShowDetailContainer extends React.Component<{}, { showdata:
     }
 
     async getAggregateReviews() {
-        fetch(apiUrl + 'aggregateReviews?showid=' + this.props.showid + '&type=season')
+        fetch(apiUrl + 'aggregateReviews?showid=' + this.props.showid + '&type=season' + '&userid=' + this.props.userid)
         .then(async (response) => {
             const data = await response.json()
-            this.setState({ averageRating: data[0]["AVG(rating)"], ratingsCount: data[0]["COUNT(rating)"] });
+            this.setState({ averageRating: data[0]["GlobalRating"], ratingsCount: data[0]["GlobalCountRating"], userRating: data[0]["userAverage"]  });
             }
         )
     }
@@ -112,7 +113,7 @@ export default class ShowDetailContainer extends React.Component<{}, { showdata:
                             <View>
                                 <TVShowInfo payload ={this.state.showdata}/>
                                     <WatchListModal showid={this.props.showid} userid={this.props.userid} ></WatchListModal>
-                                <TVShowRatings averageRating = {this.state.averageRating} ratingsCount = {this.state.ratingsCount}/>
+                                <TVShowRatings averageRating = {this.state.averageRating} ratingsCount = {this.state.ratingsCount} userRating = {this.state.userRating} />
                                 <Text style={styles.ShowTitle}>Seasons</Text>
                                 {SeasonLists}
                             </View>
