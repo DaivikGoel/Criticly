@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
       executeQuery(sql, req ,res)
       break;
     case ('episode'):
-      var sql = "SELECT AVG(rating) as GlobalEpisodeRating, COUNT(rating) as GlobalEpisodeCountRating, AVG(case when userid=" + req.query.userid+ " then rating else null end) as userRating from reviews where episodenumber = " + req.query.episodenumber + " AND seasonnumber = " + req.query.seasonnumber + " AND showid = " + req.query.showid; 
+      var sql = "SELECT AVG(rating) as GlobalSeasonRating, AVG(case when episodenumber = " +req.query.episodenumber+ " then rating else null end) as GlobalEpisodeRating, COUNT(rating) as GlobalEpisodeCountRating, AVG(case when userid=" + req.query.userid+ " AND episodenumber = " + req.query.episodenumber + " then rating else null end) as userRating from reviews where seasonnumber = " + req.query.seasonnumber + " AND showid = " + req.query.showid; 
       executeQuery(sql, req ,res)
       break;
 
