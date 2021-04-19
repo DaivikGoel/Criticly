@@ -12,13 +12,14 @@ import { apiUrl } from '../../constants/apiurl';
 import UserMetaData from './UserMetaData';
 import Icon from '../common/Icon'
 
-export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, isLoading: boolean, recentlyReviewed: Array<any>, userStats: Record<string, string>}> {
+export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, isLoading: boolean, recentlyReviewed: Array<any>, userStats: Record<string, string>, userWatchList: Array<any>}> {
 
     constructor(props) {
         super(props);
         this.state = {
             userInfo: [],
             userStats:{},
+            userWatchList:[],
             recentlyReviewed: [], 
             isLoading: true,
             
@@ -36,53 +37,82 @@ export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, i
     }
 
     getUserInfo() {
-        fetch(apiUrl + 'getuserinfo?userid=' + this.props.personid )
-        .then(async (response) => {
-            var data = await response.json()
-            data = data[0]
-            this.setState({ userInfo: data});
-        }
-        )
+        this.getUsersList();
+        this.getUserStats();
+        this.getReviewsForUser();
+        this.getWatchlistForUser();
+                
+        this.setState({ isLoading: false });
+        this.forceUpdate();
+    }
 
-       fetch(apiUrl + 'getuserstats?userid=' + this.props.personid + '&type=reviews')
-        .then(async (response) => {
-            var data = await response.json()
-            data = data[0]
-            this.setState({ userStats: {
-                numberofreviews: data['COUNT(*)']
-            } });
-        }
-        )
-        
+
+    private getReviewsForUser() {
         fetch(apiUrl + 'getreviews?userid=' + this.props.personid + '&type=user')
             .then(async (response) => {
-                var data = await response.json()
+                var data = await response.json();
                 this.setState({
-                        recentlyReviewed: data
-                    }, 
+                    recentlyReviewed: data
+                },
                     () => (
 
-                        this.state.recentlyReviewed.forEach(item => 
-                            (
+                        this.state.recentlyReviewed.forEach(item => (
                             fetch("https://api.themoviedb.org/3/tv/" + item.showid + "/season/" + item.seasonnumber + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US")
                                 .then(async (response) => {
-                                    var data = await response.json()
-                                    item.showdata = data
+                                    var data = await response.json();
+                                    item.showdata = data;
                                     this.setState({ isLoading: false });
                                     this.forceUpdate();
                                 }
                                 )
-                            )
+                        )
 
 
                         )
-                    
+
                     )
-                )
+                );
             }
-            )
+            );
     }
 
+    private getUserStats() {
+        fetch(apiUrl + 'getuserstats?userid=' + this.props.personid + '&type=reviews')
+            .then(async (response) => {
+                var data = await response.json();
+                data = data[0];
+                this.setState({
+                    userStats: {
+                        numberofreviews: data['COUNT(*)']
+                    }
+                });
+            }
+            );
+    }
+
+    private getUsersList() {
+        fetch(apiUrl + 'getuserinfo?userid=' + this.props.personid)
+            .then(async (response) => {
+                var data = await response.json();
+                data = data[0];
+                this.setState({ userInfo: data });
+            }
+            );
+    }
+
+    private getWatchlistForUser(){
+        fetch(apiUrl + 'getListItem?userid=' + this.props.personid)
+        .then(async (response) => {
+            var data = await response.json();
+            this.setState({userWatchList : data});
+            console.log(this.state)
+        }
+        );
+    }
+
+     private renderWatchListsForUser(){
+         return this.state.userWatchList.map((item, index) => <Text style={{color:"white"}} key={index}>{item.showid}</Text>);
+     }
 
     render() {
         const Icons = this.state.recentlyReviewed.map((item) => {
@@ -121,6 +151,11 @@ export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, i
                 >
                     <UserMetaData payload = {this.state} />
                         <Text style={styles.bio}> {this.state.userInfo.bio}</Text>
+                        <Text style={styles.header}>My Watchlist</Text>
+                        <View>
+                        {this.renderWatchListsForUser()}
+                        
+                        </View>
                         <View style={styles.reviewcontainer}>
                             <Text style={styles.header}>Recently Reviewed</Text>
                             <ScrollView

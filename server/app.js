@@ -26,6 +26,7 @@ var postWatchedRouter = require('./routes/users/postwatched');
 var postListItemRouter = require('./routes/postListItem');
 var postUserListItemRouter = require('./routes/PostUserList.js');
 var getUserListItem = require('./routes/getUserList');
+var getListItem = require('./routes/getListItem');
 
 //Authentication
 
@@ -62,6 +63,7 @@ app.use('/getuserstats', getUserStatsRouter);
 app.use('/postListItem',postListItemRouter);
 app.use('/postUserList',postUserListItemRouter);
 app.use('/getUserList',getUserListItem);
+app.use('/getListItem',getListItem);
 app.use('/postcomment',postCommentRouter);
 app.use('/postwatched',postWatchedRouter);
 app.use('/getwatched',getWatchedRouter);
