@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View, Text, useWindowDimensions} from 'react-native';
 import Icon from '../common/Icon';
 import { search_url_tv, search_url_people } from '../../constants/urls';
+import { apiUrl } from '../../constants/apiurl';
 import Tabs from 'react-native-tabs';
 const ApiKey = require('../../apikeys.json');
 
@@ -50,31 +51,57 @@ export default class TheSearchBarContainer extends React.Component<{}, { data: A
         switch(this.state.selectedpage){
             case 'TV Shows':
                 search_url = search_url_tv
+                this.searchExternal(search_url)
                 break;
             case 'People':
                 search_url = search_url_people
+                this.searchExternal(search_url)
                 break;
             case 'List':
-                search_url = search_url_tv
+                //this.searchInternal('lists')
                 break;
             case 'Users':
-                search_url = search_url_people
+                this.searchInternal('users')
                 break;
             default:
                 search_url = search_url_tv
                 break;
 
         }
+
+
+
+    }
+
+
+    searchExternal = (search_url) => {
+
+
         let url = search_url + ApiKey.TMDBApiKey + '&page=1&query=' + this.state.searchText
         fetch(url)
             .then((response) => response.json())
-            .then((response) => { this.setState({ data : response.results }); })
+            .then((response) => { this.setState({ data: response.results }); })
             .catch((error) => console.error(error))
             .then(() => {
                 this.setState({ isLoading: false });
             })
 
     }
+
+    searchInternal = (route) => {
+        let url = apiUrl + 'search' + '?type=' + route + '&search=' + this.state.searchText
+        fetch(url)
+        .then(async (response) => {
+            const data = await response.json()
+            this.setState({ data: data })
+            }
+            )
+        
+        
+    } 
+
+
+
     onClear = () => {
         // ? Visible the spinner
         this.setState({
@@ -134,10 +161,11 @@ export default class TheSearchBarContainer extends React.Component<{}, { data: A
                 return (
                     <View style={{ flexDirection: 'column' }}>
                         <View style={styles.SearchResult}>
-                            <Icon name={item.name} posterpath={item.poster_path} key={item.id} payload={item} />
+                            <Icon name={item.name} posterpath={item.profile_pic} key={item.id} payload={item} type={'user'} userid ={item.id} />
                             <View style={styles.TextView}>
                                 <Text>{item.name}</Text>
-                                <Text>{item.overview}</Text>
+                                <Text>{item.username}</Text>
+                                <Text>{item.bio}</Text>
                             </View>
                         </View>
                         <View style={styles.Bar} />

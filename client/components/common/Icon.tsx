@@ -42,6 +42,20 @@ const Icon = (props) => {
                     </TouchableOpacity>
                 </View>
             );
+
+        case 'user': 
+            return (
+                 <View style={styles.container}>
+                    <TouchableOpacity onPress={() => navigation.push('UserScreen',
+                        {
+                            userid: props.userid
+                        })
+                    }>
+                        <Poster url={props.posterpath} />
+                    </TouchableOpacity>
+                </View>
+            );
+
         default:
             return (
                 <View style = {styles.container}>

@@ -11,9 +11,6 @@ import { test_image } from '../../constants/urls';
 import { apiUrl } from '../../constants/apiurl';
 import UserMetaData from './UserMetaData';
 import Icon from '../common/Icon'
-import {userLogout} from '../../utils/PersistantAuth'
-
-import { AuthContext } from '../../navigation/RootNavigator'
 
 export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, isLoading: boolean, recentlyReviewed: Array<any>, userStats: Record<string, string>}> {
 

@@ -34,6 +34,10 @@ var SignUpRouter = require('./routes/authentication/signup');
 var registerRouter = require('./routes/authentication/register');
 var getUseridRouter = require('./routes/authentication/getuserid');
 
+//Search
+
+var searchRouter = require('./routes/search/search');
+
 var app = express();
 
 // view engine setup
@@ -65,6 +69,7 @@ app.use('/Login',LoginRouter);
 app.use('/signup',SignUpRouter);
 app.use('/register',registerRouter);
 app.use('/getuserid',getUseridRouter);
+app.use('/search',searchRouter);
 
 
 const con = require('./config.js')
