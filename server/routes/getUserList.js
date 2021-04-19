@@ -7,7 +7,6 @@ app.use(bodyParser.json());
 const executeQuery = require('../util/sqlWrapper.js')
 
 router.get('/', function(req, res, next) {
-        console.log(req.body);
         var sql = "SELECT * FROM user_lists WHERE userId =" + req.query.userid;
         executeQuery(sql, req ,res)
   });
