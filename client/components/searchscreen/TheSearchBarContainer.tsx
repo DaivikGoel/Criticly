@@ -99,10 +99,11 @@ export default class TheSearchBarContainer extends React.Component<{}, { data: A
     render() {
         const SearchResults = this.state.data.map((item) => {
             if(this.state.selectedpage == 'TV Shows'){
+                console.log(item)
             return (
                 <View style ={{flexDirection: 'column'}}>
                     <View style ={styles.SearchResult}>
-                        <Icon name={item.name} posterpath={item.poster_path} key={item.id} payload={item} />
+                        <Icon name={item.name} posterpath={item.poster_path} key={item.id} payload={item} showid={item.id} />
                         <View style = {styles.TextView}>
                             <Text>{item.name}</Text> 
                             <Text>{item.overview}</Text> 
