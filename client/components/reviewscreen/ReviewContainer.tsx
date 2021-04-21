@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View, Text, useWindowDimensions } from 'react-native';
+import React from 'react';
+import { StyleSheet, ScrollView, View } from 'react-native';
 import ReviewCard from './ReviewCard'
 import { apiUrl } from '../../constants/apiurl';
-import { Button } from 'react-native-elements';
 
 
 export default class ReviewContainer extends React.Component<{}, {reviews:Array<any>}> {

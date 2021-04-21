@@ -1,6 +1,6 @@
 import SearchBar from "react-native-dynamic-search-bar";
-import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View, Text, useWindowDimensions} from 'react-native';
+import React from 'react';
+import { StyleSheet, ScrollView, View, Text} from 'react-native';
 import Icon from '../common/Icon';
 import { search_url_tv, search_url_people } from '../../constants/urls';
 import { apiUrl } from '../../constants/apiurl';

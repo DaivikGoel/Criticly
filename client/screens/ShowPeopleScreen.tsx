@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { Text, View } from '../components/Themed';
-import { ImageBackground} from 'react-native';
-import {Image} from 'react-native-elements'
+import { View } from '../components/Themed';
 import List from '../components/common/List'
-import { original_url, people_url} from '../constants/urls';
-import { StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView} from 'react-native';
+import { original_url} from '../constants/urls';
+import { StyleSheet, ScrollView} from 'react-native';
 import PeopleInfo from '../components/peoplescreen/PeopleInfo'
 const ApiKey = require('../apikeys.json');
 import { AuthContext } from '../navigation/RootNavigator'

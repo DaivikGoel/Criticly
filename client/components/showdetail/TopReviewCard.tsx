@@ -1,6 +1,5 @@
-import SearchBar from "react-native-dynamic-search-bar";
-import React, { Component } from 'react';
-import { StyleSheet, View, Text, Dimensions, ImageBackground} from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Text} from 'react-native';
 import { Button } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native';
 import ReviewCard from '../reviewscreen/ReviewCard'

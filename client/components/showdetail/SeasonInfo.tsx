@@ -1,7 +1,6 @@
-import { StyleSheet, View, Text, Dimensions, ActivityIndicator} from 'react-native';
+import { StyleSheet, View, Text, ActivityIndicator} from 'react-native';
 import React from 'react';
 import CollapsibleList from "react-native-collapsible-list";
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import EpisodeCard from './EpisodeCard';
 import { apiUrl } from '../../constants/apiurl';

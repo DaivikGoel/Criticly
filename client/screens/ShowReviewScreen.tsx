@@ -1,10 +1,6 @@
 import * as React from 'react';
-import { Text, View } from '../components/Themed';
-import { ImageBackground} from 'react-native';
-import {Image} from 'react-native-elements'
-import List from '../components/common/List'
-import { original_url, people_url} from '../constants/urls';
-import { StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView} from 'react-native';
+import { View } from '../components/Themed';
+import { StyleSheet, ScrollView} from 'react-native';
 import ReviewContainer from '../components/reviewscreen/ReviewContainer';
 
 const ApiKey = require('../apikeys.json');

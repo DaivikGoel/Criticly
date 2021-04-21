@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import FormInput from '../components/loginscreen/FormInput';
 import FormButton from '../components/loginscreen/FormButton';

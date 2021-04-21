@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Text, View } from '../components/Themed';
+import { View } from '../components/Themed';
 import { original_url } from '../constants/urls';
-import { StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView, ImageBackground} from 'react-native';
+import { StyleSheet, ScrollView} from 'react-native';
 import EpisodeInfo from '../components/episodedetail/EpisodeInfo'
 import EpisodeRatings from '../components/episodedetail/EpisodeRatings'
 import TopReviews from '../components/showdetail/TopReviews';

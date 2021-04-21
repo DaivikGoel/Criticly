@@ -1,8 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TextInput, Alert } from 'react-native';
 import Modal from 'react-native-modal';
-import { AirbnbRating, Button } from 'react-native-elements';
-import Poster from '../common/Poster'
+import { Button } from 'react-native-elements';
 import { apiUrl } from '../../constants/apiurl';
 
 

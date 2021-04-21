@@ -1,6 +1,5 @@
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import React from 'react';
-import CollapsibleList from "react-native-collapsible-list";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';

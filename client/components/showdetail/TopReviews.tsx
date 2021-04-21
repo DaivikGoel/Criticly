@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, ActivityIndicator, } from 'react-native';
+import { StyleSheet, } from 'react-native';
 import { Dimensions } from 'react-native';
-import { View, Text } from '../Themed';
-import { Image, Button} from 'react-native-elements'
+import { View } from '../Themed';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-import { original_url } from '../../constants/urls';
-import { createStackNavigator } from 'react-navigation';
 import TopReviewCard from './TopReviewCard';
 import { apiUrl } from '../../constants/apiurl';
 

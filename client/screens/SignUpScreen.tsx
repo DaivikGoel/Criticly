@@ -3,9 +3,7 @@ import { View, Text, StyleSheet, Alert} from 'react-native';
 import FormInput from '../components/loginscreen/FormInput';
 import FormButton from '../components/loginscreen/FormButton';
 import { apiUrl } from '../constants/apiurl';
-import { saveItem, userLogout } from '../utils/PersistantAuth'
 import { AuthContext } from '../navigation/RootNavigator'
-import { useNavigation } from '@react-navigation/native';
 
 export default function SignUpScreen({navigation}) {
     const [email, setEmail] = useState('');

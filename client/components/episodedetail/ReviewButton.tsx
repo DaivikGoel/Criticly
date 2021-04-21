@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { StyleSheet, TouchableOpacity, ActivityIndicator, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Dimensions } from 'react-native';
-import { Image, Button} from 'react-native-elements'
+import { Button} from 'react-native-elements'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-import { useNavigation } from '@react-navigation/native';
-import { original_url } from '../../constants/urls';
 import RateEpisodeModal from './RateEpisodeModal';
 
 const styles = StyleSheet.create({

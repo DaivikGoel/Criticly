@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, TouchableOpacity, ActivityIndicator, View, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Dimensions } from 'react-native';
-import { Image } from 'react-native-elements'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import { apiUrl } from '../../constants/apiurl';

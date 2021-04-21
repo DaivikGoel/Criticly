@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, Text, View } from 'react-native';
+import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import Icon from './Icon';
 
 

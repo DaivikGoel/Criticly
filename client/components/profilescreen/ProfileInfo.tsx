@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View, Text, Dimensions, ImageBackground, RefreshControl } from 'react-native';
-import { AirbnbRating, Image, Button } from 'react-native-elements'
+import { StyleSheet, ScrollView, View, Text, Dimensions, RefreshControl } from 'react-native';
+import { AirbnbRating } from 'react-native-elements'
 
 const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-import { test_image } from '../../constants/urls';
 import { apiUrl } from '../../constants/apiurl';
 import UserMetaData from './UserMetaData';
 import Icon from '../common/Icon'

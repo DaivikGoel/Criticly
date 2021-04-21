@@ -1,10 +1,7 @@
-import SearchBar from "react-native-dynamic-search-bar";
-import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, View, Text, Dimensions, ImageBackground} from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Text, Dimensions, ImageBackground} from 'react-native';
 import Poster from '../common/Poster';
-import { search_url_tv, search_url_people } from '../../constants/urls';
 import { original_url } from '../../constants/urls';
-import { Image } from 'react-native-elements'
 import ReviewButton from "./ReviewButton";
 const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;

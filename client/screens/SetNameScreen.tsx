@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import FormInput from '../components/loginscreen/FormInput';
 import FormButton from '../components/loginscreen/FormButton';
 import { apiUrl } from '../constants/apiurl';
-import { saveItem, userLogout } from '../utils/PersistantAuth'
+import { saveItem } from '../utils/PersistantAuth'
 import { AuthContext } from '../navigation/RootNavigator'
 
 

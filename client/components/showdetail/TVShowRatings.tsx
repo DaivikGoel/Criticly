@@ -1,12 +1,9 @@
 import * as React from 'react';
-import { StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Dimensions } from 'react-native';
 import { View, Text } from '../Themed';
-import { Image } from 'react-native-elements'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-import { useNavigation } from '@react-navigation/native';
-import { original_url } from '../../constants/urls';
 
 const styles = StyleSheet.create({
     Text: {

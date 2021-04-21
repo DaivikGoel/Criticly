@@ -1,7 +1,6 @@
-import SearchBar from "react-native-dynamic-search-bar";
-import React, { Component } from 'react';
-import { StyleSheet, View, Text, Dimensions, ImageBackground, TouchableOpacity } from 'react-native';
-import { Button, AirbnbRating } from 'react-native-elements'
+import React from 'react';
+import { StyleSheet, View, Text, Dimensions, TouchableOpacity } from 'react-native';
+import { AirbnbRating } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 import { apiUrl } from '../../constants/apiurl';
 import { useNavigation } from '@react-navigation/native';
