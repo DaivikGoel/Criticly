@@ -5,10 +5,8 @@ import { original_url} from '../constants/urls';
 import { StyleSheet, ScrollView} from 'react-native';
 import PeopleInfo from '../components/peoplescreen/PeopleInfo'
 const ApiKey = require('../apikeys.json');
-import { AuthContext } from '../navigation/RootNavigator'
 
 export default function ShowPeopleScreen({ route }) {
-  const context = React.useContext(AuthContext);
   
     const { person } = route.params;
     return (

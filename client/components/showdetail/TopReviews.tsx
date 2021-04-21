@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, } from 'react-native';
-import { Dimensions } from 'react-native';
 import { View } from '../Themed';
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 import TopReviewCard from './TopReviewCard';
 import { apiUrl } from '../../constants/apiurl';
 

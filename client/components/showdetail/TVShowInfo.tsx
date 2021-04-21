@@ -3,7 +3,6 @@ import { StyleSheet, ActivityIndicator, View, Text, Dimensions } from 'react-nat
 import Poster from '../common/Poster';
 import { original_url } from '../../constants/urls';
 import { Image } from 'react-native-elements'
-const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 

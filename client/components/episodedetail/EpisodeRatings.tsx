@@ -1,8 +1,5 @@
 import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { Dimensions } from 'react-native';
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 import { apiUrl } from '../../constants/apiurl';
 
 const styles = StyleSheet.create({

@@ -58,7 +58,7 @@ export default class ShowDetailContainer extends React.Component<{}, { showdata:
                     showdata: data
                 }); 
                 })
-            .then((data) => {
+            .then(() => {
                 this.state.showdata.seasons.map(season => (
                     fetch(seasonurl + season.season_number + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US")
                     .then((response) => response.json())

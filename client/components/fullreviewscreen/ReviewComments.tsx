@@ -2,8 +2,6 @@ import React from 'react';
 import { StyleSheet, ScrollView, View, Text, Dimensions} from 'react-native'; 
 import { apiUrl } from '../../constants/apiurl';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 export default class ReviewComments extends React.Component<{}, {comments:Array<any>}> {
 

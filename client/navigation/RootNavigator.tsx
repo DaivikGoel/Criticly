@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import React,{createContext, useState, useEffect, useMemo} from 'react';
+import React,{createContext, useState, useEffect} from 'react';
 import AuthStack from './SignUpNavigator'
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
@@ -23,15 +23,13 @@ type ContextProps = {
 export const AuthContext = createContext<ContextProps>({user: '', setUser: () => {}, isSignedIn: false, setisSignedIn: () => {}, userid:'', setUserid: () => {} })
 
 export default function RootNavigator() {
-    const [initializing, setInitializing] = useState(true)
     const [user, setUser] = useState('')
     const [isSignedIn, setisSignedIn] = useState(false)
     const [userid, setUserid] = useState('')
     // Handle user state changes
-    const value = useMemo(() => ({ user, setUser}), [user])
     useEffect(() => {
         async function fetchUser() {
-            const value = await readItem()
+            await readItem()
             .then((userid) => {
                 if (userid == null){
                     setisSignedIn(false)

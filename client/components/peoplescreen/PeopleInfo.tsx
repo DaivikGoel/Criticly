@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Dimensions} from 'react-native';
+import { StyleSheet, View, Text} from 'react-native';
 import Poster from '../common/Poster';
 import { people_url } from '../../constants/urls';
 const ApiKey = require('../../apikeys.json');
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
     ShowTitle: {

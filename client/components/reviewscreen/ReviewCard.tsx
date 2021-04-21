@@ -5,7 +5,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { apiUrl } from '../../constants/apiurl';
 import { useNavigation } from '@react-navigation/native';
 
-const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({

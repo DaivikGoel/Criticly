@@ -8,7 +8,6 @@ import Tabs from 'react-native-tabs';
 const ApiKey = require('../../apikeys.json');
 
 
-let types = [["TV Shows", search_url_tv], ["Actors", search_url_people]];
 
 
 export default class TheSearchBarContainer extends React.Component<{}, { data: Array<any>, searchText: string, isLoading: boolean, selectedpage: string}> {

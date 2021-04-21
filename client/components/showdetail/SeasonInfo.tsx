@@ -61,10 +61,8 @@ class SeasonInfo extends React.Component<{}, { watched: Record<string, boolean> 
     }
 
     render(){
-        const { navigation } = this.props;
         const Episodes = this.props.payload.episodes.map((episode) => {
 
-            var watched = false
 
 
             return (

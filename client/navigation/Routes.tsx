@@ -9,7 +9,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 
 export default function Routes() {
     const { user, setUser } = useContext(AuthContext);
-    const [loading, setLoading] = useState(true);
+    const [setLoading] = useState(true);
     const [initializing, setInitializing] = useState(true);
     // Handle user state changes
     function onAuthStateChanged(user) {

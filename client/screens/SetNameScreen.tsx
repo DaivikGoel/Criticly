@@ -14,7 +14,7 @@ export default function SetNameScreen({route}) {
     const [bio, setbio] = useState('');
     const context = React.useContext(AuthContext);
 
-    const { email, password } = route.params;
+    const { email } = route.params;
     function register() {
         fetch(apiUrl + 'register', {
             method: 'POST',

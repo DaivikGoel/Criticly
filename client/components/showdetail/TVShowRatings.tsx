@@ -1,10 +1,6 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { Dimensions } from 'react-native';
 import { View, Text } from '../Themed';
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-
 const styles = StyleSheet.create({
     Text: {
         color: '#FFFFFF',

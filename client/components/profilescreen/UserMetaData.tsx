@@ -1,10 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Image } from 'react-native-elements'
 
-const ApiKey = require('../../apikeys.json');
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 
 

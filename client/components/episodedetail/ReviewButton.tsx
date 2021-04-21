@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Dimensions } from 'react-native';
 import { Button} from 'react-native-elements'
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 import RateEpisodeModal from './RateEpisodeModal';
 
 const styles = StyleSheet.create({

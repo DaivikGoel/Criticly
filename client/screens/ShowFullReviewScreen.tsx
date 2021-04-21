@@ -1,16 +1,11 @@
 import * as React from 'react';
-import { Text, View } from '../components/Themed';
-import { ImageBackground} from 'react-native';
+import { View } from '../components/Themed';
 import {Button} from 'react-native-elements'
-import List from '../components/common/List'
-import { original_url, people_url} from '../constants/urls';
-import { StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView} from 'react-native';
-import ReviewContainer from '../components/reviewscreen/ReviewContainer';
+import { StyleSheet, ScrollView} from 'react-native';
 import EpisodeInfo from '../components/episodedetail/EpisodeInfo';
 import ReviewCard from '../components/reviewscreen/ReviewCard';
 import ReviewComments from '../components/fullreviewscreen/ReviewComments';
 import ReplyButton from '../components/fullreviewscreen/ReplyButton';
-const ApiKey = require('../apikeys.json');
 
 
 import { AuthContext } from '../navigation/RootNavigator'

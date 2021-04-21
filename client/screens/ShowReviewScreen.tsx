@@ -3,7 +3,6 @@ import { View } from '../components/Themed';
 import { StyleSheet, ScrollView} from 'react-native';
 import ReviewContainer from '../components/reviewscreen/ReviewContainer';
 
-const ApiKey = require('../apikeys.json');
 import { AuthContext } from '../navigation/RootNavigator'
 
 
