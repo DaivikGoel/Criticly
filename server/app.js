@@ -18,7 +18,6 @@ var getReviewCommentsRouter = require('./routes/reviews/getreviewcomments');
 var getAggregateReviewsRouter = require('./routes/reviews/aggregateReviews');
 var getUserStatsRouter = require('./routes/users/getuserstats');
 var getUsersRouter = require('./routes/users/getuserinfo');
-var usersRouter = require('./routes/users/users');
 var getWatchedRouter = require('./routes/users/getwatched');
 var postWatchedRouter = require('./routes/users/postwatched');
 
@@ -52,7 +51,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/postreview', postReviewsRouter);
 app.use('/postreviewlike', postReviewLikeRouter);
 app.use('/getreviews', getReviewsRouter);
