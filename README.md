@@ -1,8 +1,6 @@
 # Criticly
 TV show review app
-
-Getting Started
-
+## Getting Started
 ---------------
 
 ### What to download before you get started
@@ -67,8 +65,7 @@ And in the client folder you will want to run the command:
 
 expo start
 
-You should see a screen like this pop up like this in your browser
+You should see a screen like this pop up with different simulators to choose
 
-![](blob:https://euangoddard.github.io/8e0fa87d-652c-458b-bc20-f95c2e09f572)
 
 Choose your respective simulator and you should be able to start the app!
