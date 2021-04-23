@@ -1,3 +1,4 @@
+//We define each route in here and how we will call them
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -6,6 +7,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 
+//references back to routes
 
 //Reviews
 var postReviewsRouter = require('./routes/reviews/postreview');
@@ -48,6 +50,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//assigning the url to call each routes. Ie. localhost:3000/postreview is going to call postreview function 
 app.use('/', indexRouter);
 app.use('/postreview', postReviewsRouter);
 app.use('/postreviewlike', postReviewLikeRouter);

@@ -1,3 +1,4 @@
+//get lists for a user
 var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');

@@ -1,3 +1,4 @@
+//creates new user in firebase
 var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
@@ -15,7 +16,7 @@ const auth = firebase.auth();
 /* GET users listing. */
 router.get('/', function(req, res, next) {
         firebaseApp
-        auth.createUserWithEmailAndPassword(req.query.email, req.query.password)
+        auth.createUserWithEmailAndPassword(req.query.email, req.query.password) //sends email and password to firebase to be created. Need to add hashing between this and front end
         .then((userCredential) => {
             // Signed in
             var user = userCredential.user;
