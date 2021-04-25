@@ -1,35 +1,29 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, ScrollView, View, Text, Dimensions} from 'react-native'; 
 import { apiUrl } from '../../constants/apiurl';
 
 
-export default class ReviewComments extends React.Component<{}, {comments:Array<any>}> {
+const ReviewComments = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            comments: []
-            
-        };
-    }
-    componentDidMount(){
-        this.getComments()
-    }
+    const [comments, setcomments] = useState([]);
+
+    useEffect(() => {
+        getComments()
+    }, []);
 
 
-    getComments() {
-        fetch(apiUrl + 'getreviewcomments?reviewid=' + this.props.reviewid)
+    function getComments() {
+        fetch(apiUrl + 'getreviewcomments?reviewid=' + props.reviewid)
         .then(async (response) => {
         const data = await response.json()
-        this.setState({ comments: data })
+        setcomments(data)
         }
         
         )
     }
 
 
-    render() {
-        const comments = this.state.comments.map((item) => {
+    const commentitems = comments.map((item) => {
             return (
                 <View>
                     <View style={{ flexDirection: 'column', paddingLeft: '2%', paddingRight: '2%' }}>
@@ -47,16 +41,17 @@ export default class ReviewComments extends React.Component<{}, {comments:Array<
                 </View>
             )
         })
-        return (
-            <View style={{ flexDirection: 'column' }} >
-                <ScrollView style={{ paddingTop: '5%' }}>
-                    {comments}
-                </ScrollView>
+        
+    return (
+        <View style={{ flexDirection: 'column' }} >
+            <ScrollView style={{ paddingTop: '5%' }}>
+                {commentitems}
+            </ScrollView>
 
-            </View>
-        );
+        </View>
+    );
     }
-}
+
 const styles = StyleSheet.create({
     SearchResult: {
         flexDirection: 'row',
@@ -90,3 +85,5 @@ const styles = StyleSheet.create({
         borderColor: '#FFFFFF'
     },
 });
+
+export default ReviewComments;

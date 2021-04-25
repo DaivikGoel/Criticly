@@ -1,31 +1,26 @@
-import * as React from 'react';
+import React,{useState} from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button} from 'react-native-elements'
 import LeaveCommentModal from './LeaveCommentModal';
 
 
 
-export default class ReplyButton extends React.Component<{}, { LeaveCommentVisible:boolean }> {
+const ReplyButton = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            LeaveCommentVisible: false
-        };
-    }
-    showReview = () => {
+    const [LeaveCommentVisible, setLeaveCommentVisible] = useState(false);
+
+    const showReview = () => {
         // ? Visible the spinner
-            this.setState({
-                LeaveCommentVisible: !this.state.LeaveCommentVisible
-        })};
-    render() {
+        setLeaveCommentVisible(!LeaveCommentVisible)
+    
+    };
+
         return (
             <View style={styles.Container}>
-                <Button title='Reply' type = 'outline' containerStyle = {styles.containerStyle} titleStyle = {styles.titleStyle} buttonStyle = {styles.buttonStyle} onPress = {this.showReview}/>
-                <LeaveCommentModal isVisible={this.state.LeaveCommentVisible} hideModal={this.showReview.bind(this)} reviewid={this.props.reviewid} userid = {this.props.userid}/>
+                <Button title='Reply' type = 'outline' containerStyle = {styles.containerStyle} titleStyle = {styles.titleStyle} buttonStyle = {styles.buttonStyle} onPress = {showReview}/>
+                <LeaveCommentModal isVisible={LeaveCommentVisible} hideModal={showReview.bind(this)} reviewid={props.reviewid} userid = {props.userid}/>
             </View>
         );
-    }
 }
 
 
@@ -63,3 +58,5 @@ const styles = StyleSheet.create({
 
 
 });
+
+export default ReplyButton;

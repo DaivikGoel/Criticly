@@ -1,7 +1,30 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button} from 'react-native-elements'
 import RateEpisodeModal from './RateEpisodeModal';
+
+const ReviewButton = (props) => {
+
+    const [ReviewVisible, setReviewVisible] = useState(false);
+
+
+    const showReview = () => {
+        // ? Visible the spinner
+        setReviewVisible(!ReviewVisible)
+    
+    };
+
+
+    return (
+        <View style={styles.Container}>
+            <Button title='Rate Episode' type = 'outline' containerStyle = {styles.containerStyle} titleStyle = {styles.titleStyle} buttonStyle = {styles.buttonStyle} onPress = {showReview}/>
+            <RateEpisodeModal isVisible={ReviewVisible} hideModal={showReview.bind(this)} payload ={props.payload} />
+            <Button title='Add to a list' type='outline' containerStyle={styles.containerStyle, {paddingLeft: '2%', paddingRight:'2%'}} titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle}/>
+            <Button title='Share' type='outline' containerStyle={styles.containerStyle} titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle}/>
+        </View>
+    );
+}
+
 
 const styles = StyleSheet.create({
     Text: {
@@ -13,24 +36,24 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0)',
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center', 
-        paddingTop:'5%', 
+        alignItems: 'center',
+        paddingTop: '5%',
         paddingBottom: '5%'
     },
     RatingMetaData: {
         flexDirection: 'column',
         backgroundColor: 'rgba(0,0,0,0)'
     },
-    button:{
-        paddingLeft:'2%'
+    button: {
+        paddingLeft: '2%'
     },
-    containerStyle:{
+    containerStyle: {
         borderColor: '#FFFFFF'
     },
-    titleStyle:{
+    titleStyle: {
         color: '#FFFFFF'
     },
-    buttonStyle:{
+    buttonStyle: {
         borderColor: '#FFFFFF'
     }
 
@@ -38,30 +61,4 @@ const styles = StyleSheet.create({
 
 });
 
-
-
-
-export default class ReviewButton extends React.Component<{ payload: Array<any>}, { ReviewVisible:boolean }> {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            ReviewVisible: false
-        };
-    }
-    showReview = () => {
-        // ? Visible the spinner
-            this.setState({
-                ReviewVisible: !this.state.ReviewVisible
-        })};
-    render() {
-        return (
-            <View style={styles.Container}>
-                <Button title='Rate Episode' type = 'outline' containerStyle = {styles.containerStyle} titleStyle = {styles.titleStyle} buttonStyle = {styles.buttonStyle} onPress = {this.showReview}/>
-                <RateEpisodeModal isVisible={this.state.ReviewVisible} hideModal={this.showReview.bind(this)} payload ={this.props.payload} />
-                <Button title='Add to a list' type='outline' containerStyle={styles.containerStyle, {paddingLeft: '2%', paddingRight:'2%'}} titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle}/>
-                <Button title='Share' type='outline' containerStyle={styles.containerStyle} titleStyle={styles.titleStyle} buttonStyle={styles.buttonStyle}/>
-            </View>
-        );
-    }
-}
+export default ReviewButton;

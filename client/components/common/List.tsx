@@ -1,69 +1,51 @@
-import React, {Component} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import Icon from './Icon';
 
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'transparent',
-  },
-  title:
-  {
-    fontSize: 30, 
-    color: 'white'
-  }
+const List = (props) => {
 
-});
+  const[isLoading, setisLoading] = useState(true);
+  const[data, setdata] = useState([]);
 
-export default class List extends Component<{name: string, url: string, type: string}, { data: Array<any>, isLoading: boolean}> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      isLoading: true,
-    };
-  }
-
-  componentDidMount() {
-    fetch(this.props.url)
+  useEffect(() => {
+    fetch(props.url)
       .then((response) => response.json())
       .then((response) => {
-        switch(this.props.type){
-        case 'tv':
-          this.setState({ data: response.results }); 
+        switch (props.type) {
+          case 'tv':
+            setdata(response.results)
             break;
-        case 'cast':
-            this.setState({ data: response.cast });
+          case 'cast':
+            setdata(response.cast)
             break;
-        case 'crew':
-            this.setState({ data: response.crew });
+          case 'crew':
+            setdata(response.crew)
             break;
-        default:
-          this.setState({ data: response.results });
-          break;
+          default:
+            setdata(response.results)
+            break;
 
         }
       }
-        )
+      )
       .catch((error) => console.error(error))
       .then(() => {
-        this.setState({ isLoading: false });
+        setisLoading(false)
       })
-  }
+  }, []);
 
-  render() {
 
-    const Icons = this.state.data.sort(function (a, b) { return b.popularity - a.popularity; }).map((item) => {
-      return (
-        <Icon name = {item.name} posterpath = {item.poster_path} key ={item.id} payload = {item} showid ={item.id} />
-      )
-    })
+  const Icons = data.sort(function (a, b) { return b.popularity - a.popularity; }).map((item) => {
+    return (
+      <Icon name = {item.name} posterpath = {item.poster_path} key ={item.id} payload = {item} showid ={item.id} />
+    )
+  })
 
   return (
     <View style = {styles.container}>
-      <Text style ={styles.title}> {this.props.name} </Text>
+      <Text style ={styles.title}> {props.name} </Text>
         <ScrollView
           horizontal={true}
           showsHorizontalScrollIndicator={false}
@@ -73,12 +55,24 @@ export default class List extends Component<{name: string, url: string, type: st
         >
           {Icons}    
           </ScrollView>
-
-
     </View>
   );
 }
-}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'transparent',
+  },
+  title:
+  {
+    fontSize: 30,
+    color: 'white'
+  }
+
+});
+
+export default List;
 
 
 

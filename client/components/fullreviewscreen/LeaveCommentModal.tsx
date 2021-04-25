@@ -1,26 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Text, View, StyleSheet, TextInput, Alert } from 'react-native';
 import Modal from 'react-native-modal';
 import { Button } from 'react-native-elements';
 import { apiUrl } from '../../constants/apiurl';
 
 
-export default class LeaveCommentModal extends React.Component<{}, { ReviewText: string }> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            ReviewText: '',
-        };
-    }
-    onChangeText = (text) => {
-        this.setState({
-            ReviewText: text
+const LeaveCommentModal = (props) => {
+    const [ReviewText, setReviewText] = useState('');
 
-        });
+    const onChangeText = (text) => {
+        setReviewText(text)
     }
     
-    submitReview = () => {
-        if (this.state.Rating != 0) {
+    const submitReview = () => {
+
             fetch(apiUrl + 'postcomment', {
                 method: 'POST',
                 headers: {
@@ -28,30 +21,24 @@ export default class LeaveCommentModal extends React.Component<{}, { ReviewText:
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    userid: this.props.userid,
-                    reviewid: this.props.reviewid,
-                    reviewcomment: this.state.ReviewText
+                    userid: props.userid,
+                    reviewid: props.reviewid,
+                    reviewcomment: ReviewText
                 })
             })
 
-            this.props.hideModal()
-        }
-        else {
-
-            Alert.alert('No Rating has been given')
+           props.hideModal()
         }
 
-    }
 
 
-    render() {
         return (
             <Modal
-                isVisible={this.props.isVisible}
+                isVisible={props.isVisible}
                 backdropOpacity={0.9}
             >
                 <View style={{ flex: 1, flexDirection: 'column', paddingTop:'5%' }}>
-                    <Button title="Hide modal" onPress={this.props.hideModal} />
+                    <Button title="Hide modal" onPress={props.hideModal} />
                     <View style={{ paddingTop: '5%' }}>
                         <Text style={styles.ShowTitle}>Leave a Comment</Text>
                         <TextInput
@@ -60,14 +47,13 @@ export default class LeaveCommentModal extends React.Component<{}, { ReviewText:
                             placeholderTextColor='white'
                             multiline={true}
                             textAlignVertical='top'
-                            onChangeText={this.onChangeText}
+                            onChangeText={onChangeText}
                         />
-                        <Button title="Submit" onPress={this.submitReview} />
+                        <Button title="Submit" onPress={submitReview} />
                     </View>
                 </View>
             </Modal>
         );
-    }
 }
 
 const styles = StyleSheet.create({
@@ -100,3 +86,5 @@ const styles = StyleSheet.create({
         borderColor: 'white'
     },
 });
+
+export default LeaveCommentModal;
