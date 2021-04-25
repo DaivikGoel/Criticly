@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
@@ -22,76 +22,64 @@ const styles = StyleSheet.create({
     }
 });
 
-class EpisodeCard extends React.Component<{}, { watched: boolean }> {
+const EpsiodeCard = (props) => {
+const navigation = useNavigation();
+const [watched, setEpisodeWatched] = useState(props.watched);
+function onToggleWatch() {
+    setEpisodeWatched(!watched)
+}
+ function postEpisodeWatched(type, category = 'episode' ) {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            watched: this.props.watched
+    fetch(apiUrl + 'postwatched', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            type: type,
+            category: category, 
+            showid: props.showid , 
+            userid: props.userid,
+            seasonnumber: props.episode.season_number,
+            episodenumber: props.episode.episode_number
 
+        })
+    })
+}
 
-        };
-    }
+useEffect(() => {
 
-
-    onToggleWatch() {
-        this.setState({ watched: !this.state.watched }, () => {
-
-        if (this.state.watched == true) {
-            this.postEpisodeWatched('add', 'episode')
+        if (watched == true) {
+            postEpisodeWatched('add', 'episode')
         }
         else {
-            this.postEpisodeWatched('remove', 'episode')
+            postEpisodeWatched('remove', 'episode')
         }
-    }
+},[watched]);
 
-        )
-    }
 
-    postEpisodeWatched(type, category = 'episode' ) {
 
-        fetch(apiUrl + 'postwatched', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                type: type,
-                category: category, 
-                showid: this.props.showid , 
-                userid: this.props.userid,
-                seasonnumber: this.props.episode.season_number,
-                episodenumber: this.props.episode.episode_number
+return (
+    <View style={styles.collapsibleItem}>
+        <TouchableOpacity
+            onPress={() => navigation.push('ShowSingleEpisodeDetailScreen',
+                {
+                    episodeinfo: props.episode,
+                    seasoninfo: props.seasoninfo,
+                    showid: props.showid,
+                    averageSeasonRating: props.averageSeasonRating
+                })
+            }>
+            <Text>{props.episode.episode_number} {props.episode.name}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => onToggleWatch()}>
+            <Ionicons name={watched ? "eye" : "eye-outline"} backgroundColor="transparent" size={20} color={watched ? "green" : "black"} />
+        </TouchableOpacity>
+    </View>
+);
 
-            })
-        })
-    }
 
-    render() {
-        const { navigation } = this.props;
-        return (
-            <View style={styles.collapsibleItem}>
-                <TouchableOpacity
-                    onPress={() => navigation.push('ShowSingleEpisodeDetailScreen',
-                        {
-                            episodeinfo: this.props.episode,
-                            seasoninfo: this.props.seasoninfo,
-                            showid: this.props.showid,
-                            averageSeasonRating: this.props.averageSeasonRating
-                        })
-                    }>
-                    <Text>{this.props.episode.episode_number} {this.props.episode.name}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.onToggleWatch()}>
-                    <Ionicons name={this.state.watched ? "eye" : "eye-outline"} backgroundColor="transparent" size={20} color={this.state.watched ? "green" : "black"} />
-                </TouchableOpacity>
-            </View>
-        );
-    }
+
 }
-export default function (props) {
-    const navigation = useNavigation();
-
-    return <EpisodeCard {...props} navigation={navigation} />;
-}
+export default EpsiodeCard;
