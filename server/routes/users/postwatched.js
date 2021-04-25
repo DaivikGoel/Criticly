@@ -1,3 +1,4 @@
+//add that you watched episode to database
 var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
@@ -10,7 +11,9 @@ app.use(bodyParser.json());
 router.post('/', function(req, res, next) {
 
     switch (req.body.type){
+      //are we removing or adding a watched 
       case ('remove'):
+        //being able to delete by the whole show, season or episode
         if(req.body.category == 'show'){
         var sql = "DELETE FROM watched WHERE showid = " + req.body.showid + ' AND userid = ' + req.body.userid ; 
         executeQuery(sql, req ,res)
@@ -26,6 +29,7 @@ router.post('/', function(req, res, next) {
         break; 
 
       case ('add'):
+        //being able to delete by the whole show, season or episode. Right now we currently just have episode
         var sql = "INSERT INTO watched(showid, userid, seasonnumber, episodenumber) VALUES (" + req.body.showid + ',' + req.body.userid + ',' + req.body.seasonnumber + ','+ req.body.episodenumber + ')' ; 
         executeQuery(sql, req ,res)
         break; 

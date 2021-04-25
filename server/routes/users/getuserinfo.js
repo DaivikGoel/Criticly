@@ -1,3 +1,4 @@
+//get user information (name,bio,etc) from database
 var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
@@ -8,8 +9,8 @@ const executeQuery = require('../../util/sqlWrapper.js')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-        var sql = "SELECT * FROM users WHERE id =" + req.query.userid;
-        executeQuery(sql, req ,res)
+  var sql = "SELECT * FROM users WHERE id =" + req.query.userid;
+  executeQuery(sql, req ,res)
   });
 
 

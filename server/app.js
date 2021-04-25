@@ -1,3 +1,4 @@
+//We define each route in here and how we will call them
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -6,6 +7,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 
+//references back to routes
 
 //Reviews
 var postReviewsRouter = require('./routes/reviews/postreview');
@@ -18,14 +20,11 @@ var getReviewCommentsRouter = require('./routes/reviews/getreviewcomments');
 var getAggregateReviewsRouter = require('./routes/reviews/aggregateReviews');
 var getUserStatsRouter = require('./routes/users/getuserstats');
 var getUsersRouter = require('./routes/users/getuserinfo');
-var usersRouter = require('./routes/users/users');
 var getWatchedRouter = require('./routes/users/getwatched');
 var postWatchedRouter = require('./routes/users/postwatched');
 
 //Lists
 var postListItemRouter = require('./routes/postListItem');
-var postUserListItemRouter = require('./routes/PostUserList.js');
-var getUserListItem = require('./routes/getUserList');
 var getListItem = require('./routes/getListItem');
 
 //Authentication
@@ -51,8 +50,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//assigning the url to call each routes. Ie. localhost:3000/postreview is going to call postreview function 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/postreview', postReviewsRouter);
 app.use('/postreviewlike', postReviewLikeRouter);
 app.use('/getreviews', getReviewsRouter);
@@ -61,8 +60,6 @@ app.use('/getuserinfo', getUsersRouter)
 app.use('/aggregateReviews?:id', getAggregateReviewsRouter);
 app.use('/getuserstats', getUserStatsRouter);
 app.use('/postListItem',postListItemRouter);
-app.use('/postUserList',postUserListItemRouter);
-app.use('/getUserList',getUserListItem);
 app.use('/getListItem',getListItem);
 app.use('/postcomment',postCommentRouter);
 app.use('/postwatched',postWatchedRouter);

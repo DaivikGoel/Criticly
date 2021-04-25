@@ -10,14 +10,17 @@ function WatchListModal(showid: number, userid: number ) {
   const useridKey = JSON.stringify(Object.values(showid)[1]);
 
   React.useEffect(() => {
-    fetch(apiUrl + 'getUserList?userid='+  useridKey)
+    fetch(apiUrl + 'getListItem?userid='+  useridKey)
       .then(results => results.json())
       .then(data => {
-        if(data != undefined)
+        if(data != undefined){
           setUserLists(data);
+        }
         else
           setUserLists([]);
-      });
+      }
+
+      );
   }, []);
 
   const toggleModal = () => {

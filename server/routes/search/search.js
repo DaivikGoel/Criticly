@@ -1,3 +1,4 @@
+//Search for users or lists from OUR internal Database. TV show info comes from an external Api. 
 var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
@@ -11,9 +12,11 @@ router.get('/', function(req, res, next) {
 
     switch (req.query.type){
       case ('users'):
+        //searching our database by username
         sql = "SELECT * FROM users where username LIKE '" + req.query.search + "%'"
         break;
       case ('lists'):
+        //searching our database for lists by name. Still need to implement
         sql = "SELECT * FROM users where username LIKE '" + req.query.search + "%'"
         break;
       default:

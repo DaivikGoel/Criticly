@@ -8,17 +8,17 @@ app.use(bodyParser.json());
 var firebase = require('firebase');
 const firebaseApp = require('../../environment/firebaseconfig')
 
-
-
 const auth = firebase.auth();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+        //initializing firebase app 
         firebaseApp
-        auth.signInWithEmailAndPassword(req.query.email, req.query.password)
+        //getting email and password from front end to relay to firebase
+        auth.signInWithEmailAndPassword(req.query.email, req.query.password) // need to hash password between front end and backend, not secutred right now
         .then((userCredential) => {
             // Signed in
-            var user = userCredential.user;
+            var user = userCredential.user; //getting user info from firebase (email)
             console.log('Authenticated')
             res.send(user)
             // ...

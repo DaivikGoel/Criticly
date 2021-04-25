@@ -14,7 +14,7 @@ function CreateListModal(userid: number) {
   };
 
   const addToWatchList= (textInput: string) => {
-    fetch(apiUrl + 'postUserList', {
+    fetch(apiUrl + 'postListItem', {
       method: 'POST',
       headers: {
           Accept: 'application/json',
@@ -22,7 +22,8 @@ function CreateListModal(userid: number) {
       },
       body: JSON.stringify({
           userid: useridKey,
-          listname: textInput,
+          title: textInput,
+          listtype: 'watchlist',
       })
   })
 }
