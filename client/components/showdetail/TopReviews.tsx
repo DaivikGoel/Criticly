@@ -1,42 +1,40 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, } from 'react-native';
 import { View } from '../Themed';
 import TopReviewCard from './TopReviewCard';
 import { apiUrl } from '../../constants/apiurl';
 
 
-export default class TopReviews extends Component<{}, { data: Array<any>, isLoading: boolean }> {
-    
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [],
-            isLoading: true,
-        };
-    }
+const TopReviews = (props) => {
 
-    componentDidMount() {
-        this.getreviews()
-    }
 
-    getreviews() {
-        fetch(apiUrl + 'getreviews?episodenumber=' + this.props.episodeinfo.episode_number + '&seasonnumber=' + this.props.episodeinfo.season_number + '&showid=' + this.props.showid + '&userid=' + this.props.userid + '&type=latest')
+    const [data, setdata] = useState([]);
+    const [isLoading, setisLoading] = useState(true);
+
+    useEffect(() => {
+
+        getreviews()
+
+    }, []);
+
+
+    function getreviews() {
+        fetch(apiUrl + 'getreviews?episodenumber=' + props.episodeinfo.episode_number + '&seasonnumber=' + props.episodeinfo.season_number + '&showid=' + props.showid + '&userid=' + props.userid + '&type=latest')
             .then(async (response) => {
                 const data = await response.json()
-                this.setState({ data: this.state.data.concat(data) })
+                setdata(data.concat(data))
 
             }
 
             )
     }
 
-    render(){
-        return (
-            <View style={styles.Container}>
-                <TopReviewCard episodeinfo={this.props.episodeinfo} latestreview={this.state.data} showid={this.props.showid} item={this.state.data[0]} seasonposterurl={this.props.seasonposterurl}/>
-            </View>
-        );
-    }
+
+    return (
+        <View style={styles.Container}>
+            <TopReviewCard episodeinfo={props.episodeinfo} latestreview={data} showid={props.showid} item={data[0]} seasonposterurl={props.seasonposterurl}/>
+        </View>
+    );
 }
 
 
@@ -73,3 +71,4 @@ const styles = StyleSheet.create({
 
 });
 
+export default TopReviews;

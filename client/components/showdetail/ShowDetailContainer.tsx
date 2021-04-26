@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, ScrollView, ActivityIndicator, View, Dimensions, Text, ImageBackground, RefreshControl} from 'react-native';
 import TVShowInfo from './TVShowInfo';
 import SeasonInfo from './SeasonInfo'
@@ -10,6 +10,113 @@ import { original_url } from '../../constants/urls';
 const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+import { useIsFocused } from "@react-navigation/native";
+
+const ShowDetailContainer = (props) => {
+    
+    const [showdata, setshowdata] = useState([]);
+    const [seasondata, setseasondata] = useState([]);
+    const [isLoading, setisLoading] = useState(true);
+    const [averageRating, setaverageRating] = useState(-1);
+    const [ratingsCount, setratingsCount] = useState(-1);
+    const [userRating, setuserRating] = useState(-1);
+
+    useEffect(() => {
+        let showurl = "https://api.themoviedb.org/3/tv/" + props.showid + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
+        let seasonurl = "https://api.themoviedb.org/3/tv/" + props.showid + "/season/"
+        getAggregateReviews();
+        fetch(showurl)
+            .then((response) => response.json())
+            .then((data) => {
+                setshowdata(data)
+            })
+            .then(() => {
+                setisLoading(false)
+            })
+    }, []);
+
+
+    useEffect(() => {
+        if (showdata.length != 0 && seasondata.length === 0 ){
+            let showurl = "https://api.themoviedb.org/3/tv/" + props.showid + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
+            let seasonurl = "https://api.themoviedb.org/3/tv/" + props.showid + "/season/"
+            console.log("SHOW DATA",showdata)
+            showdata.seasons.map(season => (
+                fetch(seasonurl + season.season_number + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US")
+                    .then((response) => response.json())
+                    .then((response) => {
+                        setseasondata(seasondata.concat(response))
+                    })
+            ))
+
+        }
+
+    }, [showdata]);
+
+
+
+    async function getAggregateReviews() {
+        fetch(apiUrl + 'aggregateReviews?showid=' + props.showid + '&type=season' + '&userid=' + props.userid)
+        .then(async (response) => {
+            const data = await response.json()
+            setaverageRating(data[0]["GlobalRating"])
+            setratingsCount(data[0]["GlobalCountRating"])
+            setuserRating(data[0]["userAverage"])
+            }
+        )
+    }
+
+
+    const _onRefresh = () => {
+        setisLoading(true)
+        getAggregateReviews()
+        .then(() => {
+            setisLoading(false)
+        });
+    }
+
+
+    let crediturl = "https://api.themoviedb.org/3/tv/" + props.showid + "/credits" + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
+
+    const SeasonLists = seasondata.sort(function (a, b) { return a.season_number - b.season_number; }).map((season) => {
+        return (
+            <SeasonInfo payload={season} showid={props.showid} averageSeasonRating = {averageRating} userid ={props.userid} />
+        )
+    })
+    
+    return (
+        <ImageBackground style={styles.imgContainer} source={{ uri: original_url + showdata.backdrop_path }}>
+            <View style={{ backgroundColor: 'rgba(0,0,0,0.7)',flex: 1}}>
+            <ScrollView
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={isLoading}
+                            onRefresh={_onRefresh}
+                        />
+                    }>
+                {isLoading == false ? (
+                    <View>
+                        <View>
+                            <TVShowInfo payload ={showdata}/>
+                                <WatchListModal showid={props.showid} userid={props.userid} ></WatchListModal>
+                            <TVShowRatings averageRating = {averageRating} ratingsCount = {ratingsCount} userRating = {userRating} />
+                            <Text style={styles.ShowTitle}>Seasons</Text>
+                            {SeasonLists}
+                        </View>
+                        <View style ={{paddingTop:'5%'}}>
+                        <Text style={styles.ShowTitle}>Cast and Crew</Text>
+                        <CastAndCrew url ={crediturl}/>
+                        </View>
+                    </View>
+                ) :(
+                    <ActivityIndicator size="large" /> 
+                
+                )}
+            </ScrollView>
+        </View>
+        </ImageBackground>
+    );
+}
 
 
 const styles = StyleSheet.create({
@@ -29,106 +136,10 @@ const styles = StyleSheet.create({
         height: windowHeight / 10,
     },
     imgContainer: {
-        width: '100%', 
+        width: '100%',
         height: '100%',
 
     },
 });
-export default class ShowDetailContainer extends React.Component<{}, { showdata: Array<any>, seasondata: Array<any>, isLoading: boolean, averageRating: number, ratingsCount:number, userRating: number }> {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            showdata:[],
-            seasondata: [],
-            isLoading: true,
-            averageRating: -1,
-            ratingsCount: -1,
-            userRating: -1
-        };
-    }
-    componentDidMount() {
-        let showurl = "https://api.themoviedb.org/3/tv/" + this.props.showid + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
-        let seasonurl = "https://api.themoviedb.org/3/tv/" + this.props.showid +"/season/"
-        this.getAggregateReviews();
-            fetch(showurl)
-            .then((response) => response.json())
-            .then((data) => { 
-                this.setState({ 
-                    showdata: data
-                }); 
-                })
-            .then(() => {
-                this.state.showdata.seasons.map(season => (
-                    fetch(seasonurl + season.season_number + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US")
-                    .then((response) => response.json())
-                    .then((response) => {
-                        this.setState({
-                            seasondata: this.state.seasondata.concat(response)
-                        });
-                    })
-                ))
-            })
-            .then(() => {
-                this.setState({ isLoading: false });
-            })
-    }
-
-    async getAggregateReviews() {
-        fetch(apiUrl + 'aggregateReviews?showid=' + this.props.showid + '&type=season' + '&userid=' + this.props.userid)
-        .then(async (response) => {
-            const data = await response.json()
-            this.setState({ averageRating: data[0]["GlobalRating"], ratingsCount: data[0]["GlobalCountRating"], userRating: data[0]["userAverage"]  });
-            }
-        )
-    }
-
-
-    _onRefresh = () => {
-        this.setState({ isLoading: true });
-        this.getAggregateReviews()
-        .then(() => {this.setState({ isLoading: false })});
-    }
-
-
-    render() {
-        let crediturl = "https://api.themoviedb.org/3/tv/" + this.props.showid + "/credits" + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
-        const SeasonLists = this.state.seasondata.sort(function (a, b) { return a.season_number - b.season_number; }).map((season) => {
-            return (
-                <SeasonInfo payload={season} showid={this.props.showid} averageSeasonRating = {this.state.averageRating} userid ={this.props.userid} />
-            )
-        })
-        return (
-            <ImageBackground style={styles.imgContainer} source={{ uri: original_url + this.state.showdata.backdrop_path }}>
-                <View style={{ backgroundColor: 'rgba(0,0,0,0.7)',flex: 1}}>
-                <ScrollView
-                        refreshControl={
-                            <RefreshControl
-                                refreshing={this.state.isLoading}
-                                onRefresh={this._onRefresh}
-                            />
-                        }>
-                    {this.state.isLoading == false ? (
-                        <View>
-                            <View>
-                                <TVShowInfo payload ={this.state.showdata}/>
-                                    <WatchListModal showid={this.props.showid} userid={this.props.userid} ></WatchListModal>
-                                <TVShowRatings averageRating = {this.state.averageRating} ratingsCount = {this.state.ratingsCount} userRating = {this.state.userRating} />
-                                <Text style={styles.ShowTitle}>Seasons</Text>
-                                {SeasonLists}
-                            </View>
-                            <View style ={{paddingTop:'5%'}}>
-                            <Text style={styles.ShowTitle}>Cast and Crew</Text>
-                            <CastAndCrew url ={crediturl}/>
-                            </View>
-                        </View>
-                    ) :(
-                        <ActivityIndicator size="large" /> 
-                    
-                    )}
-                </ScrollView>
-            </View>
-            </ImageBackground>
-        );
-    }
-}
+export default ShowDetailContainer;

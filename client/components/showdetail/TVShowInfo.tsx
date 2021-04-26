@@ -6,26 +6,6 @@ import { Image } from 'react-native-elements'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const styles = StyleSheet.create({
-    ShowTitle: {
-        color: '#FFFFFF',
-        fontSize: 30,
-    },
-    Text: {
-        color: '#FFFFFF',
-    },
-    TitleView: {
-        flexDirection: 'row',
-        paddingTop: '10%',
-        paddingLeft: '3%'
-    },
-    NetworkIcons: {
-        width: windowWidth / 5,
-        height: windowHeight / 10,
-        resizeMode: 'contain', 
-        tintColor: 'white'
-    }
-});
 
 const TVShowInfo = (props) => {
     return (
@@ -42,4 +22,25 @@ const TVShowInfo = (props) => {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    ShowTitle: {
+        color: '#FFFFFF',
+        fontSize: 30,
+    },
+    Text: {
+        color: '#FFFFFF',
+    },
+    TitleView: {
+        flexDirection: 'row',
+        paddingTop: '10%',
+        paddingLeft: '3%'
+    },
+    NetworkIcons: {
+        width: windowWidth / 5,
+        height: windowHeight / 10,
+        resizeMode: 'contain',
+        tintColor: 'white'
+    }
+});
 export default TVShowInfo;

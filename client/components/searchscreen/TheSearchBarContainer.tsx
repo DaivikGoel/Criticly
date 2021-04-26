@@ -1,5 +1,5 @@
 import SearchBar from "react-native-dynamic-search-bar";
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import { StyleSheet, ScrollView, View, Text} from 'react-native';
 import Icon from '../common/Icon';
 import { search_url_tv, search_url_people } from '../../constants/urls';
@@ -10,57 +10,54 @@ const ApiKey = require('../../apikeys.json');
 
 
 
-export default class TheSearchBarContainer extends React.Component<{}, { data: Array<any>, searchText: string, isLoading: boolean, selectedpage: string}> {
+const TheSearchBarContainer = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            searchText: '',
-            data : [],
-            isLoading: false,
-            selectedpage: 'TV Shows'
-        };
+    const [searchText, setsearchText] = useState('');
+    const [data, setdata] = useState([]);
+    const [isLoading, setisLoading] = useState(false);
+    const [selectedpage, setselectedpage] = useState('TV Shows');
+
+    useEffect(() => {
+    if (searchText != ''){
+        fetchdata();
     }
-    handleOnChangeText = (text) => {
+    else{
+        
+        setdata([])
+    }
+
+    }, [searchText, selectedpage]);
+
+    const handleOnChangeText = (text) => {
         // ? Visible the spinner
         if (text != ''){
-            this.setState({
-                searchText: text,
-                isLoading: true
-
-            }, () => {
-                    this.fetchdata();
-            });
-            
-
-
+            setsearchText(text)
+            setisLoading(true)
         }
-        else
-            this.setState({
-                searchText: '',
-                isLoading: false,
-                data: []
-            });
+        else{
 
+            setisLoading(true)
+            setdata([])
+        }
     };
 
     
-    fetchdata = () => {
+    const fetchdata = () => {
         let search_url = ''
-        switch(this.state.selectedpage){
+        switch(selectedpage){
             case 'TV Shows':
                 search_url = search_url_tv
-                this.searchExternal(search_url)
+                searchExternal(search_url)
                 break;
             case 'People':
                 search_url = search_url_people
-                this.searchExternal(search_url)
+                searchExternal(search_url)
                 break;
             case 'List':
                 //this.searchInternal('lists')
                 break;
             case 'Users':
-                this.searchInternal('users')
+                searchInternal('users')
                 break;
             default:
                 search_url = search_url_tv
@@ -73,26 +70,26 @@ export default class TheSearchBarContainer extends React.Component<{}, { data: A
     }
 
 
-    searchExternal = (search_url) => {
+    const searchExternal = (search_url) => {
 
 
-        let url = search_url + ApiKey.TMDBApiKey + '&page=1&query=' + this.state.searchText
+        let url = search_url + ApiKey.TMDBApiKey + '&page=1&query=' + searchText
         fetch(url)
             .then((response) => response.json())
-            .then((response) => { this.setState({ data: response.results }); })
+            .then((response) => {setdata(response.results);})
             .catch((error) => console.error(error))
             .then(() => {
-                this.setState({ isLoading: false });
+                setisLoading(false)
             })
 
     }
 
-    searchInternal = (route) => {
-        let url = apiUrl + 'search' + '?type=' + route + '&search=' + this.state.searchText
+    const searchInternal = (route) => {
+        let url = apiUrl + 'search' + '?type=' + route + '&search=' + searchText
         fetch(url)
         .then(async (response) => {
             const data = await response.json()
-            this.setState({ data: data })
+            setdata(data)
             }
             )
         
@@ -101,30 +98,23 @@ export default class TheSearchBarContainer extends React.Component<{}, { data: A
 
 
 
-    onClear = () => {
+    const onClear = () => {
         // ? Visible the spinner
-        this.setState({
-            searchText: '',
-            isLoading: false,
-            data: [],
-        });
+        setsearchText('')
+        setisLoading(false)
+        setdata([])
 
     };
     
-    onSelect = (selected) => {
-        
-        this.setState({ selectedpage: selected.props.name, data: [] }, 
-            () =>{
-            if(this.state.searchText != '')
-                this.fetchdata()
-            });
+    const onSelect = (selected) => {
+        setselectedpage(selected.props.name)
+        setdata([])
 
     }
 
 
-    render() {
-        const SearchResults = this.state.data.map((item) => {
-            if(this.state.selectedpage == 'TV Shows'){
+        const SearchResults = data.map((item) => {
+            if(selectedpage == 'TV Shows'){
             return (
                 <View style ={{flexDirection: 'column'}}>
                     <View style ={styles.SearchResult}>
@@ -139,7 +129,7 @@ export default class TheSearchBarContainer extends React.Component<{}, { data: A
                 
             )
             }
-            else if (this.state.selectedpage == 'People') {
+            else if (selectedpage == 'People') {
                 return (
                 <View style ={{flexDirection: 'column'}}>
                     <View style ={styles.SearchResult}>
@@ -182,14 +172,14 @@ export default class TheSearchBarContainer extends React.Component<{}, { data: A
                 <View>
                     <SearchBar
                         placeholder="Search"
-                        onChangeText={this.handleOnChangeText}
-                        onClearPress={this.onClear}
+                        onChangeText={handleOnChangeText}
+                        onClearPress={onClear}
                     />
                 </View>
                 <View style ={{paddingTop:'15%'}}>
                     <View style={styles.Tabcontainer}>
-                        <Tabs selected={this.state.selectedpage} style={{ backgroundColor: 'white' }}
-                            selectedStyle={{ color: 'red' }} onSelect={this.onSelect} selectedIconStyle={{ borderTopWidth: 2, borderTopColor: 'red' }}>
+                        <Tabs selected={selectedpage} style={{ backgroundColor: 'white' }}
+                            selectedStyle={{ color: 'red' }} onSelect={onSelect} selectedIconStyle={{ borderTopWidth: 2, borderTopColor: 'red' }}>
                             <Text name="TV Shows">TV Shows</Text>
                             <Text name="People" >People</Text>
                             <Text name="Lists">Lists</Text>
@@ -204,7 +194,6 @@ export default class TheSearchBarContainer extends React.Component<{}, { data: A
                 </View>
         );
     }
-}
 const styles = StyleSheet.create({
     SearchResult: {
         flexDirection: 'row',
@@ -225,3 +214,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
     },
 });
+
+export default TheSearchBarContainer;

@@ -1,28 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { View, Text } from '../Themed';
-const styles = StyleSheet.create({
-    Text: {
-        color: '#FFFFFF',
-        textAlign: 'center'
-    },
-    Container:{
-        flexDirection: 'row', 
-        backgroundColor: 'rgba(0,0,0,0)',
-        flex: 1, 
-        justifyContent: 'center', 
-        alignItems: 'center',
-        borderColor: 'white', 
-        paddingTop: '2%'
-    },
-    RatingMetaData: {
-        flexDirection: 'column', 
-        backgroundColor: 'rgba(0,0,0,0)' 
-    }
-    
 
-
-});
 
 
 const TVShowRatings = (props) => {
@@ -43,4 +22,27 @@ const TVShowRatings = (props) => {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    Text: {
+        color: '#FFFFFF',
+        textAlign: 'center'
+    },
+    Container: {
+        flexDirection: 'row',
+        backgroundColor: 'rgba(0,0,0,0)',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: 'white',
+        paddingTop: '2%'
+    },
+    RatingMetaData: {
+        flexDirection: 'column',
+        backgroundColor: 'rgba(0,0,0,0)'
+    }
+
+
+
+});
 export default TVShowRatings;

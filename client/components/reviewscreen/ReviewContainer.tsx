@@ -1,28 +1,24 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, ScrollView, View } from 'react-native';
 import ReviewCard from './ReviewCard'
 import { apiUrl } from '../../constants/apiurl';
 
 
-export default class ReviewContainer extends React.Component<{}, {reviews:Array<any>}> {
+const ReviewContainer = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            reviews: []
-            
-        };
-    }
-    componentDidMount(){
-        this.getreviews()
-    }
+    const [reviews, setreviews] = useState([]);
+
+    useEffect(() => {
+        getreviews()
+    }, []);
 
 
-    getreviews() {
-        fetch(apiUrl + 'getreviews?episodenumber=' + this.props.episodeinfo.episode_number + '&seasonnumber=' + this.props.episodeinfo.season_number + '&showid=' + this.props.showid + '&userid=' + this.props.userid)
+
+    function getreviews() {
+        fetch(apiUrl + 'getreviews?episodenumber=' + props.episodeinfo.episode_number + '&seasonnumber=' + props.episodeinfo.season_number + '&showid=' + props.showid + '&userid=' + props.userid)
         .then(async (response) => {
             const data = await response.json()
-            this.setState({ reviews: this.state.reviews.concat(data) })
+            setreviews(reviews.concat(data))
         
         }
         
@@ -30,25 +26,25 @@ export default class ReviewContainer extends React.Component<{}, {reviews:Array<
     }
 
 
-    render() {
-        const reviews = this.state.reviews.map((item) => {
-            return (
-                <View>
-                    <ReviewCard episodeinfo={this.props.episodeinfo} userid={item.userid} reviewid={item.reviewid} name={item.username} review={item.reviewtext} date={item.modified_instant} rating={item.rating} numberofLikes={item.numberofLikes} numberofComments={item.numberofComments} seasonposterurl={this.props.seasonposterurl} alreadyLiked={item.hasUserLiked == 1 ? true : false}/>
-                    <View style={styles.Bar} />
-                </View>
-            )
-        })
+    const reviewitems = reviews.map((item) => {
         return (
-            <View style={{ flexDirection: 'column' }} >
-                <ScrollView style={{ paddingTop: '5%' }}>
-                    {reviews}
-                </ScrollView>
-
+            <View>
+                <ReviewCard episodeinfo={props.episodeinfo} userid={item.userid} reviewid={item.reviewid} name={item.username} review={item.reviewtext} date={item.modified_instant} rating={item.rating} numberofLikes={item.numberofLikes} numberofComments={item.numberofComments} seasonposterurl={props.seasonposterurl} alreadyLiked={item.hasUserLiked == 1 ? true : false}/>
+                <View style={styles.Bar} />
             </View>
-        );
-    }
+        )
+    })
+
+    return (
+        <View style={{ flexDirection: 'column' }} >
+            <ScrollView style={{ paddingTop: '5%' }}>
+                {reviewitems}
+            </ScrollView>
+
+        </View>
+    );
 }
+
 const styles = StyleSheet.create({
     SearchResult: {
         flexDirection: 'row',
@@ -69,3 +65,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
     },
 });
+
+export default ReviewContainer;
