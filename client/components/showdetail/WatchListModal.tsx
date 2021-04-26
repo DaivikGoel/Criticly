@@ -13,6 +13,7 @@ function WatchListModal(showid: number, userid: number ) {
     fetch(apiUrl + 'getListItem?userid='+  useridKey)
       .then(results => results.json())
       .then(data => {
+        console.log(data);
         if(data != undefined){
           setUserLists(data);
         }
@@ -52,8 +53,8 @@ function WatchListModal(showid: number, userid: number ) {
           <Button title="Add to watchlist" onPress ={addToWatchList} />
           <Text style={{color:"white"}}>My Current Lists</Text>
           {userLists.map(listItem => (
-        <Button key={listItem.iduser_lists} title={listItem.listname} onPress={() => addToWatchList(addToWatchList)}> </Button>
-      ))}
+          <Button key={listItem.iduser_lists} title={listItem.title} onPress={() => addToWatchList()}> </Button>
+          ))}
           <CreateListModal userid = {JSON.parse(useridKey)}></CreateListModal>
           <Button title="Close modal" onPress={toggleModal} />
         </View>
