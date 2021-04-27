@@ -11,34 +11,34 @@ const ApiKey = require('../apikeys.json');
 
 export default function SingleEpisodeDetailScreen({ route }) {
     
-    const context = React.useContext(AuthContext);
+	const context = React.useContext(AuthContext);
   
-    const { episodeinfo,seasoninfo, showid, averageSeasonRating} = route.params;
+	const { episodeinfo,seasoninfo, showid, averageSeasonRating} = route.params;
 
-    let episodedetailsurl = 'https://api.themoviedb.org/3/tv/' + showid + '/season/' + seasoninfo.season_number + '/episode/' + episodeinfo.episode_number + '/credits' + '?api_key=' + ApiKey.TMDBApiKey;
+	let episodedetailsurl = 'https://api.themoviedb.org/3/tv/' + showid + '/season/' + seasoninfo.season_number + '/episode/' + episodeinfo.episode_number + '/credits' + '?api_key=' + ApiKey.TMDBApiKey;
     
 
-    return (
-        <View style={styles.child}>
-            <ScrollView > 
-                <EpisodeInfo episodeinfo={episodeinfo} seasonposterurl={original_url + seasoninfo.poster_path} showid={showid} seasoninfo={seasoninfo} type='review' userid={context.userid}/>
-                <EpisodeRatings averageSeasonRating={averageSeasonRating} episodeinfo={episodeinfo} showid={showid} userid={context.userid} />
-                    <TopReviews episodeinfo={episodeinfo} showid={showid} seasonposterurl={original_url + seasoninfo.poster_path} userid ={context.userid} />
-                    <CastAndCrew url ={episodedetailsurl}/> 
-            </ScrollView>
-        </View>
-    );
-  }
+	return (
+		<View style={styles.child}>
+			<ScrollView > 
+				<EpisodeInfo episodeinfo={episodeinfo} seasonposterurl={original_url + seasoninfo.poster_path} showid={showid} seasoninfo={seasoninfo} type='review' userid={context.userid}/>
+				<EpisodeRatings averageSeasonRating={averageSeasonRating} episodeinfo={episodeinfo} showid={showid} userid={context.userid} />
+				<TopReviews episodeinfo={episodeinfo} showid={showid} seasonposterurl={original_url + seasoninfo.poster_path} userid ={context.userid} />
+				<CastAndCrew url ={episodedetailsurl}/> 
+			</ScrollView>
+		</View>
+	);
+}
 
-  const styles = StyleSheet.create({
-      imgContainer: {
-          width: '100%', height: '100%',
+const styles = StyleSheet.create({
+	imgContainer: {
+		width: '100%', height: '100%',
 
-      },
-    child: {
-        flex: 1,
-        backgroundColor: 'rgb(0,0,0)',
-      },
+	},
+	child: {
+		flex: 1,
+		backgroundColor: 'rgb(0,0,0)',
+	},
 
 });
 

@@ -8,25 +8,25 @@ import { AuthContext } from './AuthProvider';
 import LinkingConfiguration from './LinkingConfiguration';
 
 export default function Routes() {
-    const { user, setUser } = useContext(AuthContext);
-    const [setLoading] = useState(true);
-    const [initializing, setInitializing] = useState(true);
-    // Handle user state changes
-    function onAuthStateChanged(user) {
-        setUser(user);
-        if (initializing) setInitializing(false);
-        setLoading(false);
-    }
-    useEffect(() => {
-        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-        return subscriber; // unsubscribe on unmount
-    }, []);
+	const { user, setUser } = useContext(AuthContext);
+	const [setLoading] = useState(true);
+	const [initializing, setInitializing] = useState(true);
+	// Handle user state changes
+	function onAuthStateChanged(user) {
+		setUser(user);
+		if (initializing) setInitializing(false);
+		setLoading(false);
+	}
+	useEffect(() => {
+		const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+		return subscriber; // unsubscribe on unmount
+	}, []);
     
-    return (
-        <NavigationContainer
-            linking={LinkingConfiguration}
-            theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-            {user ? <BottomTabNavigator /> : <AuthStack />}
-        </NavigationContainer>
-    );
+	return (
+		<NavigationContainer
+			linking={LinkingConfiguration}
+			theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+			{user ? <BottomTabNavigator /> : <AuthStack />}
+		</NavigationContainer>
+	);
 }

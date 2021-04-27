@@ -20,43 +20,43 @@ import { BottomTabParamList, HomeParamList, SearchParamList, ProfileParamList } 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
+	const colorScheme = useColorScheme();
 
-  return (
-    <BottomTab.Navigator
-      initialRouteName="Home"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
-      <BottomTab.Screen
-        name="Home"
-        component={HomeNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Search"
-        component={SearchNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Profile"
-        component={ProfileNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        }}
-      />
+	return (
+		<BottomTab.Navigator
+			initialRouteName="Home"
+			tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+			<BottomTab.Screen
+				name="Home"
+				component={HomeNavigator}
+				options={{
+					tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+				}}
+			/>
+			<BottomTab.Screen
+				name="Search"
+				component={SearchNavigator}
+				options={{
+					tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+				}}
+			/>
+			<BottomTab.Screen
+				name="Profile"
+				component={ProfileNavigator}
+				options={{
+					tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+				}}
+			/>
 
       
-    </BottomTab.Navigator>
-  );
+		</BottomTab.Navigator>
+	);
 }
 
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
 function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']; color: string }) {
-  return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
+	return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
 }
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
@@ -64,115 +64,115 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']
 const HomeStack = createStackNavigator<HomeParamList>();
 
 function HomeNavigator() {
-  return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-        options={{ headerTitle: 'Crticly' }}
-      />
-      <HomeStack.Screen 
-        name="ShowDetailScreen" 
-        component={ShowDetailScreen} 
-      />
-      <HomeStack.Screen
-      name="ShowSingleEpisodeDetailScreen"
-      component={ShowSingleEpisodeDetailScreen}
-    />
-      <HomeStack.Screen
-        name="ShowPeopleScreen"
-        component={ShowPeopleScreen}
-      />
-      <HomeStack.Screen
-        name="ShowReviewScreen"
-        component={ShowReviewScreen}
-      />
-      <HomeStack.Screen
-        name="ShowFullReviewScreen"
-        component={ShowFullReviewScreen}
-      />
-      <HomeStack.Screen
-        name="UserScreen"
-        component={UserScreen}
-      />
-    </HomeStack.Navigator>
-  );
+	return (
+		<HomeStack.Navigator>
+			<HomeStack.Screen
+				name="HomeScreen"
+				component={HomeScreen}
+				options={{ headerTitle: 'Crticly' }}
+			/>
+			<HomeStack.Screen 
+				name="ShowDetailScreen" 
+				component={ShowDetailScreen} 
+			/>
+			<HomeStack.Screen
+				name="ShowSingleEpisodeDetailScreen"
+				component={ShowSingleEpisodeDetailScreen}
+			/>
+			<HomeStack.Screen
+				name="ShowPeopleScreen"
+				component={ShowPeopleScreen}
+			/>
+			<HomeStack.Screen
+				name="ShowReviewScreen"
+				component={ShowReviewScreen}
+			/>
+			<HomeStack.Screen
+				name="ShowFullReviewScreen"
+				component={ShowFullReviewScreen}
+			/>
+			<HomeStack.Screen
+				name="UserScreen"
+				component={UserScreen}
+			/>
+		</HomeStack.Navigator>
+	);
 }
 
 const SearchStack = createStackNavigator<SearchParamList>();
 
 function SearchNavigator() {
-  return (
-    <SearchStack.Navigator>
-      <SearchStack.Screen
-        name="SearchScreen"
-        component={SearchScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
-      />
-      <SearchStack.Screen 
-        name="ShowDetailScreen" 
-        component={ShowDetailScreen} 
-      />
-      <SearchStack.Screen
-      name="ShowSingleEpisodeDetailScreen"
-      component={ShowSingleEpisodeDetailScreen}
-      />
-      <SearchStack.Screen
-        name="ShowPeopleScreen"
-        component={ShowPeopleScreen}
-      />
-      <SearchStack.Screen
-        name="ShowReviewScreen"
-        component={ShowReviewScreen}
-      />
-      <SearchStack.Screen
-        name="ShowFullReviewScreen"
-        component={ShowFullReviewScreen}
-      />
-      <SearchStack.Screen
-        name="UserScreen"
-        component={UserScreen}
-      />
-    </SearchStack.Navigator>
-  );
+	return (
+		<SearchStack.Navigator>
+			<SearchStack.Screen
+				name="SearchScreen"
+				component={SearchScreen}
+				options={{ headerTitle: 'Tab Two Title' }}
+			/>
+			<SearchStack.Screen 
+				name="ShowDetailScreen" 
+				component={ShowDetailScreen} 
+			/>
+			<SearchStack.Screen
+				name="ShowSingleEpisodeDetailScreen"
+				component={ShowSingleEpisodeDetailScreen}
+			/>
+			<SearchStack.Screen
+				name="ShowPeopleScreen"
+				component={ShowPeopleScreen}
+			/>
+			<SearchStack.Screen
+				name="ShowReviewScreen"
+				component={ShowReviewScreen}
+			/>
+			<SearchStack.Screen
+				name="ShowFullReviewScreen"
+				component={ShowFullReviewScreen}
+			/>
+			<SearchStack.Screen
+				name="UserScreen"
+				component={UserScreen}
+			/>
+		</SearchStack.Navigator>
+	);
 }
 
 const ProfileStack = createStackNavigator<ProfileParamList>();
 
 function ProfileNavigator() {
-  return (
-    <ProfileStack.Navigator>
-      <ProfileStack.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
-        options={{ headerTitle: 'Profile' }}
-      />
-      <ProfileStack.Screen
-        name="ShowDetailScreen"
-        component={ShowDetailScreen}
-      />
-      <ProfileStack.Screen
-        name="ShowSingleEpisodeDetailScreen"
-        component={ShowSingleEpisodeDetailScreen}
-      />
-      <ProfileStack.Screen
-        name="ShowPeopleScreen"
-        component={ShowPeopleScreen}
-      />
-      <ProfileStack.Screen
-        name="ShowReviewScreen"
-        component={ShowReviewScreen}
-      />
-      <ProfileStack.Screen
-        name="ShowFullReviewScreen"
-        component={ShowFullReviewScreen}
-      />
-      <ProfileStack.Screen
-        name="UserScreen"
-        component={UserScreen}
-      />
-    </ProfileStack.Navigator>
-  );
+	return (
+		<ProfileStack.Navigator>
+			<ProfileStack.Screen
+				name="ProfileScreen"
+				component={ProfileScreen}
+				options={{ headerTitle: 'Profile' }}
+			/>
+			<ProfileStack.Screen
+				name="ShowDetailScreen"
+				component={ShowDetailScreen}
+			/>
+			<ProfileStack.Screen
+				name="ShowSingleEpisodeDetailScreen"
+				component={ShowSingleEpisodeDetailScreen}
+			/>
+			<ProfileStack.Screen
+				name="ShowPeopleScreen"
+				component={ShowPeopleScreen}
+			/>
+			<ProfileStack.Screen
+				name="ShowReviewScreen"
+				component={ShowReviewScreen}
+			/>
+			<ProfileStack.Screen
+				name="ShowFullReviewScreen"
+				component={ShowFullReviewScreen}
+			/>
+			<ProfileStack.Screen
+				name="UserScreen"
+				component={UserScreen}
+			/>
+		</ProfileStack.Navigator>
+	);
 }
 
 

@@ -8,67 +8,67 @@ import { original_url } from '../../constants/urls';
 import Poster from './Poster'
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 15,
-        backgroundColor: 'transparent'
-    },
+	container: {
+		padding: 15,
+		backgroundColor: 'transparent'
+	},
 
-    Logo: {
-        width: windowWidth / 5,
-        height: windowHeight / 6,
-    },
-    IconText:{
-        color: 'white',
-        textAlign: 'center', 
+	Logo: {
+		width: windowWidth / 5,
+		height: windowHeight / 6,
+	},
+	IconText:{
+		color: 'white',
+		textAlign: 'center', 
 
 
-    },
+	},
 
 });
 
 const Icon = (props) => {
-    const navigation = useNavigation();
-    switch (props.type){
-        case 'people':
-            return (
-                <View style={styles.container}>
-                    <TouchableOpacity onPress={() => navigation.push('ShowPeopleScreen',
-                        {
-                            person: props.payload
-                        })
-                    }>
-                        <Poster url={original_url + props.posterpath} />
-                    </TouchableOpacity>
-                </View>
-            );
+	const navigation = useNavigation();
+	switch (props.type){
+	case 'people':
+		return (
+			<View style={styles.container}>
+				<TouchableOpacity onPress={() => navigation.push('ShowPeopleScreen',
+					{
+						person: props.payload
+					})
+				}>
+					<Poster url={original_url + props.posterpath} />
+				</TouchableOpacity>
+			</View>
+		);
 
-        case 'user': 
-            return (
-                 <View style={styles.container}>
-                    <TouchableOpacity onPress={() => navigation.push('UserScreen',
-                        {
-                            userid: props.userid
-                        })
-                    }>
-                        <Poster url={props.posterpath} />
-                    </TouchableOpacity>
-                </View>
-            );
+	case 'user': 
+		return (
+			<View style={styles.container}>
+				<TouchableOpacity onPress={() => navigation.push('UserScreen',
+					{
+						userid: props.userid
+					})
+				}>
+					<Poster url={props.posterpath} />
+				</TouchableOpacity>
+			</View>
+		);
 
-        default:
-            return (
-                <View style = {styles.container}>
-                    <TouchableOpacity onPress={() =>navigation.push('ShowDetailScreen', 
-                        {
-                            showid: props.showid
-                        })
-            }>
-                        <Poster url={original_url + props.posterpath}/>
-                    </TouchableOpacity>
-                </View>
-            );
-            break;
-}
+	default:
+		return (
+			<View style = {styles.container}>
+				<TouchableOpacity onPress={() =>navigation.push('ShowDetailScreen', 
+					{
+						showid: props.showid
+					})
+				}>
+					<Poster url={original_url + props.posterpath}/>
+				</TouchableOpacity>
+			</View>
+		);
+		break;
+	}
 }
 export default Icon;
 

@@ -8,26 +8,26 @@ const ApiKey = require('../apikeys.json');
 
 export default function ShowPeopleScreen({ route }) {
   
-    const { person } = route.params;
-    return (
-      <View style={styles.child}>
-        <ScrollView >
-          <PeopleInfo profilepic ={original_url + person.profile_path} person ={person} />
-          <List url={'https://api.themoviedb.org/3/person/' + person.id + '/tv_credits' + '?api_key=' + ApiKey.TMDBApiKey +  '&language=en-US'} type ='cast' name='TV Shows Known For' />
-        </ScrollView>
-      </View>
-    );
-  }
+	const { person } = route.params;
+	return (
+		<View style={styles.child}>
+			<ScrollView >
+				<PeopleInfo profilepic ={original_url + person.profile_path} person ={person} />
+				<List url={'https://api.themoviedb.org/3/person/' + person.id + '/tv_credits' + '?api_key=' + ApiKey.TMDBApiKey +  '&language=en-US'} type ='cast' name='TV Shows Known For' />
+			</ScrollView>
+		</View>
+	);
+}
 
-  const styles = StyleSheet.create({
-    imgContainer: {
-        width: '100%', height:'100%',
+const styles = StyleSheet.create({
+	imgContainer: {
+		width: '100%', height:'100%',
 
-    },
-    child: {
-        flex: 1,
-        backgroundColor: 'rgba(0,0,0,0.5)',
-      },
+	},
+	child: {
+		flex: 1,
+		backgroundColor: 'rgba(0,0,0,0.5)',
+	},
 
 });
 

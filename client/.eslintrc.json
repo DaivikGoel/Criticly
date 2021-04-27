@@ -21,6 +21,7 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "indent": ["error", "tab"],
         "quotes": [2, "single", { "avoidEscape": true }] ,
         "no-unused-vars": ["warn", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
 		"unused-imports/no-unused-imports": "error",

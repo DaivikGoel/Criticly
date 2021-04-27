@@ -8,39 +8,39 @@ const windowHeight = Dimensions.get('window').height;
 
 
 const TVShowInfo = (props) => {
-    return (
-        <View style={styles.TitleView}>
-            <Poster url={original_url + props.payload.poster_path} />
-            <View style={{ flexDirection: 'column', paddingLeft: '5%' }}>
-                <Text style={styles.ShowTitle}>{props.payload.name}</Text>
-                <Text style={styles.Text}>{props.payload.number_of_seasons} Seasons </Text>
-                <Text style={styles.Text}>{props.payload.number_of_episodes} Episodes </Text>
-                <Text style={styles.Text}>Last Air Date: {props.payload.last_air_date} </Text>
-                <Text style={styles.Text}>Status: {props.payload.status} </Text>
-                <Image style={styles.NetworkIcons} source={{ uri: original_url + props.payload.networks[0].logo_path }} PlaceholderContent={<ActivityIndicator />} />
-            </View>
-        </View>
-    );
+	return (
+		<View style={styles.TitleView}>
+			<Poster url={original_url + props.payload.poster_path} />
+			<View style={{ flexDirection: 'column', paddingLeft: '5%' }}>
+				<Text style={styles.ShowTitle}>{props.payload.name}</Text>
+				<Text style={styles.Text}>{props.payload.number_of_seasons} Seasons </Text>
+				<Text style={styles.Text}>{props.payload.number_of_episodes} Episodes </Text>
+				<Text style={styles.Text}>Last Air Date: {props.payload.last_air_date} </Text>
+				<Text style={styles.Text}>Status: {props.payload.status} </Text>
+				<Image style={styles.NetworkIcons} source={{ uri: original_url + props.payload.networks[0].logo_path }} PlaceholderContent={<ActivityIndicator />} />
+			</View>
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({
-    ShowTitle: {
-        color: '#FFFFFF',
-        fontSize: 30,
-    },
-    Text: {
-        color: '#FFFFFF',
-    },
-    TitleView: {
-        flexDirection: 'row',
-        paddingTop: '10%',
-        paddingLeft: '3%'
-    },
-    NetworkIcons: {
-        width: windowWidth / 5,
-        height: windowHeight / 10,
-        resizeMode: 'contain',
-        tintColor: 'white'
-    }
+	ShowTitle: {
+		color: '#FFFFFF',
+		fontSize: 30,
+	},
+	Text: {
+		color: '#FFFFFF',
+	},
+	TitleView: {
+		flexDirection: 'row',
+		paddingTop: '10%',
+		paddingLeft: '3%'
+	},
+	NetworkIcons: {
+		width: windowWidth / 5,
+		height: windowHeight / 10,
+		resizeMode: 'contain',
+		tintColor: 'white'
+	}
 });
 export default TVShowInfo;
