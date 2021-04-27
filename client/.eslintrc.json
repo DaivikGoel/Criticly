@@ -21,6 +21,7 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "no-extra-parens": 1,
         "indent": ["error", "tab"],
         "quotes": [2, "single", { "avoidEscape": true }] ,
         "no-unused-vars": ["warn", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],

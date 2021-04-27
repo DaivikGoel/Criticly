@@ -47,7 +47,7 @@ const ProfileInfo = (props) => {
 					var data = await response.json();
 					return data;
 				}).then();
-			let isLoading: boolean =  recentlyReviewed.forEach(item => (
+			let isLoading: boolean =  recentlyReviewed.forEach(item => 
 				fetch('https://api.themoviedb.org/3/tv/' + item.showid + '/season/' + item.seasonnumber + '?api_key=' + ApiKey.TMDBApiKey + '&language=en-US')
 					.then(async (response) => {
 						var data = await response.json();
@@ -56,12 +56,12 @@ const ProfileInfo = (props) => {
 						return false;
 					}
 					)
-			)
+			
 			)
 			const icons = recentlyReviewed.map((listItem) => {
 				var poster_path
 				var episodename
-				if(typeof(listItem.showdata) == 'undefined'){
+				if(typeof listItem.showdata == 'undefined'){
 					poster_path = null
 					episodename = null 
 				}

@@ -40,13 +40,13 @@ const ShowDetailContainer = (props) => {
 			let showurl = 'https://api.themoviedb.org/3/tv/' + props.showid + '?api_key=' + ApiKey.TMDBApiKey + '&language=en-US';
 			let seasonurl = 'https://api.themoviedb.org/3/tv/' + props.showid + '/season/'
 			console.log('SHOW DATA',showdata)
-			showdata.seasons.map(season => (
+			showdata.seasons.map(season => 
 				fetch(seasonurl + season.season_number + '?api_key=' + ApiKey.TMDBApiKey + '&language=en-US')
 					.then((response) => response.json())
 					.then((response) => {
 						setseasondata(seasondata.concat(response))
 					})
-			))
+			)
 
 		}
 
@@ -93,7 +93,7 @@ const ShowDetailContainer = (props) => {
 							onRefresh={_onRefresh}
 						/>
 					}>
-					{isLoading == false ? (
+					{isLoading == false ? 
 						<View>
 							<View>
 								<TVShowInfo payload ={showdata}/>
@@ -107,10 +107,10 @@ const ShowDetailContainer = (props) => {
 								<CastAndCrew url ={crediturl}/>
 							</View>
 						</View>
-					) :(
+					 :
 						<ActivityIndicator size="large" /> 
                 
-					)}
+					}
 				</ScrollView>
 			</View>
 		</ImageBackground>

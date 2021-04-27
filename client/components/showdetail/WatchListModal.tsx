@@ -52,9 +52,9 @@ function WatchListModal(showid: number, userid: number ) {
 				<View style={{flex: 1}}>
 					<Button title="Add to watchlist" onPress ={addToWatchList} />
 					<Text style={{color:'white'}}>My Current Lists</Text>
-					{userLists.map(listItem => (
+					{userLists.map(listItem => 
 						<Button key={listItem.iduser_lists} title={listItem.title} onPress={() => addToWatchList()}> </Button>
-					))}
+					)}
 					<CreateListModal userid = {JSON.parse(useridKey)}></CreateListModal>
 					<Button title="Close modal" onPress={toggleModal} />
 				</View>

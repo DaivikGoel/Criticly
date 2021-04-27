@@ -50,11 +50,11 @@ export default function RootNavigator() {
 	return (
        
 		<AuthContext.Provider value={{user: user, setUser: setUser, isSignedIn: isSignedIn, setisSignedIn:setisSignedIn, userid: userid, setUserid:setUserid }}>
-			{isSignedIn ? (
+			{isSignedIn ? 
 				<Stack.Navigator screenOptions={{ headerShown: false }}>
 					<Stack.Screen name="Root" component={BottomTabNavigator} />
 				</Stack.Navigator>
-			)
+			
 				:
 				<Stack.Navigator screenOptions={{ headerShown: false }}>
 					<Stack.Screen name="SignUp" component={AuthStack} />
