@@ -5,6 +5,14 @@ import { Image } from 'react-native-elements'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+
+
+const Poster = (props) => {
+	return (
+		<Image style={styles.Logo} source={{ uri: props.url }} PlaceholderContent={<ActivityIndicator />} />
+	);
+}
+
 const styles = StyleSheet.create({
 	container: {
 		padding: 15,
@@ -13,7 +21,7 @@ const styles = StyleSheet.create({
 	Logo: {
 		width: windowWidth / 5,
 		height: windowHeight / 6,
-		resizeMode:'cover'
+		resizeMode: 'cover'
 	},
 	IconText: {
 		color: 'white',
@@ -23,11 +31,5 @@ const styles = StyleSheet.create({
 	},
 
 });
-
-const Poster = (props) => {
-	return (
-		<Image style={styles.Logo} source={{ uri: props.url }} PlaceholderContent={<ActivityIndicator />} />
-	);
-}
 export default Poster;
 

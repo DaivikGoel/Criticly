@@ -5,23 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { apiUrl } from '../../constants/apiurl';
 
-const styles = StyleSheet.create({
-	wrapperCollapsibleList: {
-		flex: 1,
-		marginTop: 20,
-		overflow: 'hidden',
-		backgroundColor: '#FFF',
-		borderRadius: 5
-	},
-	collapsibleItem: {
-		borderBottomWidth: StyleSheet.hairlineWidth,
-		borderColor: '#CCC',
-		padding: 10,
-		flexDirection: 'row',
-		justifyContent: 'space-between'
-	}
-});
-
 const EpisodeCard = (props) => {
     
 	const navigation = useNavigation();
@@ -81,4 +64,21 @@ const EpisodeCard = (props) => {
 
 
 }
+
+const styles = StyleSheet.create({
+	wrapperCollapsibleList: {
+		flex: 1,
+		marginTop: 20,
+		overflow: 'hidden',
+		backgroundColor: '#FFF',
+		borderRadius: 5
+	},
+	collapsibleItem: {
+		borderBottomWidth: StyleSheet.hairlineWidth,
+		borderColor: '#CCC',
+		padding: 10,
+		flexDirection: 'row',
+		justifyContent: 'space-between'
+	}
+});
 export default EpisodeCard;

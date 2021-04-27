@@ -4,30 +4,7 @@ import Poster from '../common/Poster';
 import { original_url } from '../../constants/urls';
 import ReviewButton from './ReviewButton';
 
-const styles = StyleSheet.create({
-	ShowTitle: {
-		color: '#FFFFFF',
-		fontSize: 30,
-	},
-	Text: {
-		color: '#FFFFFF',
-	},
-	TitleView: {
-		flexDirection: 'row',
-		paddingTop: '10%',
-		paddingLeft:'3%',
-		flex: 1,
 
-	},
-	ImageOpacity:{
-		backgroundColor: 'rgba(0,0,0,0.5)',
-	},
-	imgContainer: {
-		width: '100%', 
-		height: '100%'
-
-	},
-});
 
 const EpisodeInfo = (props) => {
 	return (
@@ -53,4 +30,29 @@ const EpisodeInfo = (props) => {
 		</View>
 	);
 }
+
+const styles = StyleSheet.create({
+	ShowTitle: {
+		color: '#FFFFFF',
+		fontSize: 30,
+	},
+	Text: {
+		color: '#FFFFFF',
+	},
+	TitleView: {
+		flexDirection: 'row',
+		paddingTop: '10%',
+		paddingLeft: '3%',
+		flex: 1,
+
+	},
+	ImageOpacity: {
+		backgroundColor: 'rgba(0,0,0,0.5)',
+	},
+	imgContainer: {
+		width: '100%',
+		height: '100%'
+
+	},
+});
 export default EpisodeInfo;

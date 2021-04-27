@@ -7,24 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { original_url } from '../../constants/urls';
 import Poster from './Poster'
 
-const styles = StyleSheet.create({
-	container: {
-		padding: 15,
-		backgroundColor: 'transparent'
-	},
 
-	Logo: {
-		width: windowWidth / 5,
-		height: windowHeight / 6,
-	},
-	IconText:{
-		color: 'white',
-		textAlign: 'center', 
-
-
-	},
-
-});
 
 const Icon = (props) => {
 	const navigation = useNavigation();
@@ -70,5 +53,25 @@ const Icon = (props) => {
 		break;
 	}
 }
+
+const styles = StyleSheet.create({
+	container: {
+		padding: 15,
+		backgroundColor: 'transparent'
+	},
+
+	Logo: {
+		width: windowWidth / 5,
+		height: windowHeight / 6,
+	},
+	IconText: {
+		color: 'white',
+		textAlign: 'center',
+
+
+	},
+
+});
+
 export default Icon;
 
