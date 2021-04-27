@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Text, View, StyleSheet, TextInput, Alert } from 'react-native';
+import { Text, View, StyleSheet, TextInput } from 'react-native';
 import Modal from 'react-native-modal';
 import { Button } from 'react-native-elements';
 import { apiUrl } from '../../constants/apiurl';

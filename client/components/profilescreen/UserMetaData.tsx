@@ -5,6 +5,7 @@ import { Image } from 'react-native-elements'
 
 
 const UserMetaData = (props) => {
+    console.log(props.payload.userStats);
     return (
         <View style={styles.metadata}>
             <View style={{ flexDirection: 'row' }}>
@@ -30,6 +31,7 @@ const UserMetaData = (props) => {
                     </View>
                 </View>
             </View>
+            <Text style={styles.bio}> {props.payload.userInfo.bio}</Text>
         </View>
     );
 }
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
     bio: {
         paddingTop: '5%',
         fontSize: 20,
-        color: 'white'
+        color: 'orange'
     },
     userstats: {
         paddingTop: '5%',

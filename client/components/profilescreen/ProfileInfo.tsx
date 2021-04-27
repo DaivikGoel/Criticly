@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { StyleSheet, ScrollView, View, Text, Dimensions, RefreshControl } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, ScrollView, View, Text, Dimensions } from 'react-native';
 import { AirbnbRating } from 'react-native-elements'
 
 const ApiKey = require('../../apikeys.json');
@@ -11,150 +11,92 @@ import { apiUrl } from '../../constants/apiurl';
 import UserMetaData from './UserMetaData';
 import Icon from '../common/Icon'
 
-export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, isLoading: boolean, recentlyReviewed: Array<any>, userStats: Record<string, string>, userWatchList: Array<any>}> {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            userInfo: [],
-            userStats:{},
-            userWatchList:[],
-            recentlyReviewed: [], 
-            isLoading: true,
-            
+const ProfileInfo = (props) => {
+    const [payload, setPayLoad] = useState({
+        userInfo: [],
+        userStats : {},
+        userWatchList : [],
+        recentlyReviewed: [],
+        isloading: true,
+        icons : []
+    })
+    
 
-        };
-    }
-
-    componentDidMount() {
-        this.getUserInfo()
-    }
-
-    _onRefresh = () => {
-        this.setState({ isLoading: true });
-        this.getUserInfo()
-    }
-
-    getUserInfo() {
-        this.getUsersList();
-        this.getUserStats();
-        this.getReviewsForUser();
-        this.getWatchlistForUser();
-                
-        this.setState({ isLoading: false });
-        this.forceUpdate();
-    }
-
-
-    private getReviewsForUser() {
-        fetch(apiUrl + 'getreviews?userid=' + this.props.personid + '&type=user')
+    useEffect(() => {
+        async function fetchInfoAndStats() {
+            let userInfo = await fetch(apiUrl + 'getuserinfo?userid=' + props.personid)
             .then(async (response) => {
                 var data = await response.json();
-                this.setState({
-                    recentlyReviewed: data
-                },
-                    () => (
-
-                        this.state.recentlyReviewed.forEach(item => (
-                            fetch("https://api.themoviedb.org/3/tv/" + item.showid + "/season/" + item.seasonnumber + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US")
-                                .then(async (response) => {
-                                    var data = await response.json();
-                                    item.showdata = data;
-                                    this.setState({ isLoading: false });
-                                    this.forceUpdate();
-                                }
-                                )
-                        )
-
-
-                        )
-
+                data = data[0];
+                return data;
+            });
+        let userStats = await fetch(apiUrl + 'getuserstats?userid=' + props.personid + '&type=reviews')
+            .then(async (response) => {
+                var data = await response.json();
+                data = data[0];
+                return {numberofreviews: data['COUNT(*)']}
+            });
+        let watchListData  = await fetch(apiUrl + 'getListItem?userid=' + props.personid)
+            .then(async (response) => {
+                var data = await response.json();
+                return data;
+            });
+        let recentlyReviewed = await  fetch(apiUrl + 'getreviews?userid=' + props.personid + '&type=user')
+            .then(async (response) => {
+                var data = await response.json();
+                return data;
+            }).then();
+        let isLoading: boolean =  recentlyReviewed.forEach(item => (
+                    fetch("https://api.themoviedb.org/3/tv/" + item.showid + "/season/" + item.seasonnumber + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US")
+                        .then(async (response) => {
+                            var data = await response.json();
+                            item.showdata = data;
+                            //forceUpdate();
+                            return false;
+                        }
                     )
-                );
-            }
-            );
-    }
-
-    private getUserStats() {
-        fetch(apiUrl + 'getuserstats?userid=' + this.props.personid + '&type=reviews')
-            .then(async (response) => {
-                var data = await response.json();
-                data = data[0];
-                this.setState({
-                    userStats: {
-                        numberofreviews: data['COUNT(*)']
-                    }
-                });
-            }
-            );
-    }
-
-    private getUsersList() {
-        fetch(apiUrl + 'getuserinfo?userid=' + this.props.personid)
-            .then(async (response) => {
-                var data = await response.json();
-                data = data[0];
-                this.setState({ userInfo: data });
-            }
-            );
-    }
-
-    private getWatchlistForUser(){
-        fetch(apiUrl + 'getListItem?userid=' + this.props.personid)
-        .then(async (response) => {
-            var data = await response.json();
-            this.setState({userWatchList : data});
-            console.log(this.state)
-        }
-        );
-    }
-
-     private renderWatchListsForUser(){
-         return this.state.userWatchList.map((item, index) => <Text style={{color:"white"}} key={index}>{item.showid}</Text>);
-     }
-
-    render() {
-        const Icons = this.state.recentlyReviewed.map((item) => {
-            var poster_path
-            var episodename
-            if(typeof(item.showdata) == 'undefined'){
-                poster_path = null
-                episodename = null 
-            }
-            else {
-                poster_path = item.showdata.poster_path
-                episodename = item.showdata.episodes[item.episodenumber - 1].name
-            }
-            return (
-                <View>
-                <Icon key={item.id} showid={item.showid} posterpath={poster_path}/>
-                <Text style={styles.userreview} numberOfLines ={1}>{episodename}</Text>
-                <AirbnbRating
-                    defaultRating={item.rating}
-                    isDisabled={true}
-                    showRating={false}
-                    size={windowHeight / 70}
-                />
-                </View>
+                )
             )
-        })
+            const icons = recentlyReviewed.map((listItem) => {
+                var poster_path
+                var episodename
+                if(typeof(listItem.showdata) == 'undefined'){
+                    poster_path = null
+                    episodename = null 
+                }
+                else {
+                    poster_path = listItem.showdata.poster_path
+                    episodename = listItem.showdata.episodes[listItem.episodenumber - 1].name
+                }
+                return (
+                    <View>
+                    <Icon key={listItem.id} showid={listItem.showid} posterpath={poster_path}/>
+                    <Text style={styles.userreview} numberOfLines ={1}>{episodename}</Text>
+                    <AirbnbRating
+                        defaultRating={listItem.rating}
+                        isDisabled={true}
+                        showRating={false}
+                        size={windowHeight / 70}
+                    />
+                    </View>
+                    )
+                });
+                setPayLoad({...payload, 
+                        userInfo:userInfo, 
+                        userStats: userStats,
+                        userWatchList: watchListData,
+                        recentlyReviewed: recentlyReviewed,
+                        isloading: isLoading,
+                        icons:icons})
+                        console.log(icons);
+        }
+        fetchInfoAndStats()
+        }, []);
         return (
             <View style={styles.container}>
-                <ScrollView
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={this.state.isLoading}
-                            onRefresh={this._onRefresh}
-                        />
-                    }
-                >
-                    <UserMetaData payload = {this.state} />
-                        <Text style={styles.bio}> {this.state.userInfo.bio}</Text>
+                    <UserMetaData payload = {payload} />
                         <Text style={styles.header}>My Watchlist</Text>
-                        <View>
-                        {this.renderWatchListsForUser()}
-                        
-                        </View>
                         <View style={styles.reviewcontainer}>
                             <Text style={styles.header}>Recently Reviewed</Text>
                             <ScrollView
@@ -164,15 +106,14 @@ export default class ProfileInfo extends Component<{}, { userInfo: Array<any>, i
                                 decelerationRate="fast"
                                 style={{ backgroundColor: 'transparent' }}
                             >
-                            {Icons}
+                            {payload.icons}
                             </ScrollView>
                         </View>
-
-                </ScrollView>
             </View>
         )
-    }
 }
+    
+
 
 const styles = StyleSheet.create({
     displayPic: {
@@ -213,3 +154,5 @@ const styles = StyleSheet.create({
         width: windowWidth / 4
     },
 });
+
+export default ProfileInfo ;

@@ -1,7 +1,6 @@
 import { StyleSheet, View, Text, ActivityIndicator} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import CollapsibleList from "react-native-collapsible-list";
-import { useNavigation } from '@react-navigation/native';
 import EpisodeCard from './EpisodeCard';
 import { apiUrl } from '../../constants/apiurl';
 

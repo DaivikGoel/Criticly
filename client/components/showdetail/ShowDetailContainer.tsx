@@ -10,7 +10,6 @@ import { original_url } from '../../constants/urls';
 const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-import { useIsFocused } from "@react-navigation/native";
 
 const ShowDetailContainer = (props) => {
     

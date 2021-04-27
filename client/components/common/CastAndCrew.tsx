@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text } from 'react-native';
-import React, {Component, useState, useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import CollapsibleList from "react-native-collapsible-list";
 import CrewCastListItem from './CrewCastListItem';
 

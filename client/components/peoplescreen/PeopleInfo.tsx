@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 import Poster from '../common/Poster';
 import { people_url } from '../../constants/urls';
