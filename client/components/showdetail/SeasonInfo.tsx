@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text, ActivityIndicator} from 'react-native';
 import React, {useState, useEffect} from 'react';
-import CollapsibleList from "react-native-collapsible-list";
+import CollapsibleList from 'react-native-collapsible-list';
 import EpisodeCard from './EpisodeCard';
 import { apiUrl } from '../../constants/apiurl';
 
@@ -65,13 +65,13 @@ const styles = StyleSheet.create({
     wrapperCollapsibleList: {
         flex: 1,
         marginTop: 20,
-        overflow: "hidden",
-        backgroundColor: "#FFF",
+        overflow: 'hidden',
+        backgroundColor: '#FFF',
         borderRadius: 5
     },
     collapsibleItem: {
         borderBottomWidth: StyleSheet.hairlineWidth,
-        borderColor: "#CCC",
+        borderColor: '#CCC',
         padding: 10
     }
 });

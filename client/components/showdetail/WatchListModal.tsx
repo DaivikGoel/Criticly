@@ -37,8 +37,8 @@ function WatchListModal(showid: number, userid: number ) {
         },
         body: JSON.stringify({
             userid: Object.values(userid),
-            listtype: "watchlist",
-            title: "action movies",
+            listtype: 'watchlist',
+            title: 'action movies',
             showid: Object.values(showid)
         })
     });
@@ -51,7 +51,7 @@ function WatchListModal(showid: number, userid: number ) {
       <Modal isVisible={isModalVisible}>
         <View style={{flex: 1}}>
           <Button title="Add to watchlist" onPress ={addToWatchList} />
-          <Text style={{color:"white"}}>My Current Lists</Text>
+          <Text style={{color:'white'}}>My Current Lists</Text>
           {userLists.map(listItem => (
           <Button key={listItem.iduser_lists} title={listItem.title} onPress={() => addToWatchList()}> </Button>
           ))}

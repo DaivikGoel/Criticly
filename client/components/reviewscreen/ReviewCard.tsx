@@ -86,7 +86,7 @@ const ReviewCard = (props) => {
                         </TouchableOpacity>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Text style={[styles.Text, { justifyContent: 'flex-end', height: "100%" }]}>{numberofLikes} likes</Text>
+                        <Text style={[styles.Text, { justifyContent: 'flex-end', height: '100%' }]}>{numberofLikes} likes</Text>
 
                                 <Text style={styles.Text}>{props.numberofComments} Comments</Text>
 

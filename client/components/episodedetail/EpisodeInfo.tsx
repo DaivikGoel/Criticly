@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, ImageBackground} from 'react-native';
 import Poster from '../common/Poster';
 import { original_url } from '../../constants/urls';
-import ReviewButton from "./ReviewButton";
+import ReviewButton from './ReviewButton';
 
 const styles = StyleSheet.create({
     ShowTitle: {

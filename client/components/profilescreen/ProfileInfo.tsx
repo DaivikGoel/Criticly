@@ -48,7 +48,7 @@ const ProfileInfo = (props) => {
                 return data;
             }).then();
         let isLoading: boolean =  recentlyReviewed.forEach(item => (
-                    fetch("https://api.themoviedb.org/3/tv/" + item.showid + "/season/" + item.seasonnumber + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US")
+                    fetch('https://api.themoviedb.org/3/tv/' + item.showid + '/season/' + item.seasonnumber + '?api_key=' + ApiKey.TMDBApiKey + '&language=en-US')
                         .then(async (response) => {
                             var data = await response.json();
                             item.showdata = data;

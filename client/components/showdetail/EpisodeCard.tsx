@@ -9,13 +9,13 @@ const styles = StyleSheet.create({
     wrapperCollapsibleList: {
         flex: 1,
         marginTop: 20,
-        overflow: "hidden",
-        backgroundColor: "#FFF",
+        overflow: 'hidden',
+        backgroundColor: '#FFF',
         borderRadius: 5
     },
     collapsibleItem: {
         borderBottomWidth: StyleSheet.hairlineWidth,
-        borderColor: "#CCC",
+        borderColor: '#CCC',
         padding: 10,
         flexDirection: 'row',
         justifyContent: 'space-between'
@@ -73,7 +73,7 @@ const EpisodeCard = (props) => {
                 <Text>{props.episode.episode_number} {props.episode.name}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => onToggleWatch()}>
-                <Ionicons name={watched ? "eye" : "eye-outline"} backgroundColor="transparent" size={20} color={watched ? "green" : "black"} />
+                <Ionicons name={watched ? 'eye' : 'eye-outline'} backgroundColor="transparent" size={20} color={watched ? 'green' : 'black'} />
             </TouchableOpacity>
         </View>
     );

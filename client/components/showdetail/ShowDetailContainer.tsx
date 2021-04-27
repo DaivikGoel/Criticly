@@ -21,8 +21,8 @@ const ShowDetailContainer = (props) => {
     const [userRating, setuserRating] = useState(-1);
 
     useEffect(() => {
-        let showurl = "https://api.themoviedb.org/3/tv/" + props.showid + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
-        let seasonurl = "https://api.themoviedb.org/3/tv/" + props.showid + "/season/"
+        let showurl = 'https://api.themoviedb.org/3/tv/' + props.showid + '?api_key=' + ApiKey.TMDBApiKey + '&language=en-US';
+        let seasonurl = 'https://api.themoviedb.org/3/tv/' + props.showid + '/season/'
         getAggregateReviews();
         fetch(showurl)
             .then((response) => response.json())
@@ -37,11 +37,11 @@ const ShowDetailContainer = (props) => {
 
     useEffect(() => {
         if (showdata.length != 0 && seasondata.length === 0 ){
-            let showurl = "https://api.themoviedb.org/3/tv/" + props.showid + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
-            let seasonurl = "https://api.themoviedb.org/3/tv/" + props.showid + "/season/"
-            console.log("SHOW DATA",showdata)
+            let showurl = 'https://api.themoviedb.org/3/tv/' + props.showid + '?api_key=' + ApiKey.TMDBApiKey + '&language=en-US';
+            let seasonurl = 'https://api.themoviedb.org/3/tv/' + props.showid + '/season/'
+            console.log('SHOW DATA',showdata)
             showdata.seasons.map(season => (
-                fetch(seasonurl + season.season_number + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US")
+                fetch(seasonurl + season.season_number + '?api_key=' + ApiKey.TMDBApiKey + '&language=en-US')
                     .then((response) => response.json())
                     .then((response) => {
                         setseasondata(seasondata.concat(response))
@@ -58,9 +58,9 @@ const ShowDetailContainer = (props) => {
         fetch(apiUrl + 'aggregateReviews?showid=' + props.showid + '&type=season' + '&userid=' + props.userid)
         .then(async (response) => {
             const data = await response.json()
-            setaverageRating(data[0]["GlobalRating"])
-            setratingsCount(data[0]["GlobalCountRating"])
-            setuserRating(data[0]["userAverage"])
+            setaverageRating(data[0]['GlobalRating'])
+            setratingsCount(data[0]['GlobalCountRating'])
+            setuserRating(data[0]['userAverage'])
             }
         )
     }
@@ -75,7 +75,7 @@ const ShowDetailContainer = (props) => {
     }
 
 
-    let crediturl = "https://api.themoviedb.org/3/tv/" + props.showid + "/credits" + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
+    let crediturl = 'https://api.themoviedb.org/3/tv/' + props.showid + '/credits' + '?api_key=' + ApiKey.TMDBApiKey + '&language=en-US';
 
     const SeasonLists = seasondata.sort(function (a, b) { return a.season_number - b.season_number; }).map((season) => {
         return (

@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     },
     collapsibleItem: {
         borderBottomWidth: StyleSheet.hairlineWidth,
-        borderColor: "#CCC",
+        borderColor: '#CCC',
         padding: 10
     }
 

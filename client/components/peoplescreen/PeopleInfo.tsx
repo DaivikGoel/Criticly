@@ -13,7 +13,7 @@ const PeopleInfo = (props) => {
 
 
     useEffect(() => {
-        let detailsurl = people_url + props.person.id + "?api_key=" + ApiKey.TMDBApiKey + "&language=en-US";
+        let detailsurl = people_url + props.person.id + '?api_key=' + ApiKey.TMDBApiKey + '&language=en-US';
         fetch(detailsurl)
             .then((response) => response.json())
             .then((data) => {

@@ -1,4 +1,4 @@
-import SearchBar from "react-native-dynamic-search-bar";
+import SearchBar from 'react-native-dynamic-search-bar';
 import React,{useState, useEffect} from 'react';
 import { StyleSheet, ScrollView, View, Text} from 'react-native';
 import Icon from '../common/Icon';

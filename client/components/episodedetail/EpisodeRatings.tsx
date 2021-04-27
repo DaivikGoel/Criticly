@@ -21,10 +21,10 @@ const EpisodeRatings = (props) => {
         fetch(apiUrl + 'aggregateReviews?showid=' + props.showid + '&type=episode' + '&seasonnumber=' + props.episodeinfo.season_number + '&episodenumber=' + props.episodeinfo.episode_number + '&userid=' + props.userid)
             .then(async (response) => {
                 const data = await response.json()
-                setaverageRating(data[0]["GlobalEpisodeRating"])
-                setratingsCount(data[0]["GlobalEpisodeCountRating"])
-                setuserRating(data[0]["userRating"])
-                setglobalSeasonRating(data[0]["GlobalSeasonRating"])
+                setaverageRating(data[0]['GlobalEpisodeRating'])
+                setratingsCount(data[0]['GlobalEpisodeCountRating'])
+                setuserRating(data[0]['userRating'])
+                setglobalSeasonRating(data[0]['GlobalSeasonRating'])
                 setisLoading(false)
             }
             )

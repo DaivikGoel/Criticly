@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
      color: 'white'
   },
   listNameLabel: {
-    backgroundColor: "purple", 
-    color: "white",
+    backgroundColor: 'purple', 
+    color: 'white',
     padding:'5%'
   }
 })

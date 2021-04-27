@@ -7,9 +7,9 @@ import {trending_url, topRated_url, popular_url} from '../constants/urls'
 const ApiKey = require('../apikeys.json');
 import { Button } from 'react-native-elements'
 
-let lists = [["Trending", trending_url + ApiKey.TMDBApiKey + '&page=1'], 
-["Top Rated", topRated_url + ApiKey.TMDBApiKey + '&page=1'], 
-["Popular", popular_url + ApiKey.TMDBApiKey + '&page=1'] ];
+let lists = [['Trending', trending_url + ApiKey.TMDBApiKey + '&page=1'], 
+['Top Rated', topRated_url + ApiKey.TMDBApiKey + '&page=1'], 
+['Popular', popular_url + ApiKey.TMDBApiKey + '&page=1'] ];
 
 import { AuthContext } from '../navigation/RootNavigator'
 import { userLogout } from '../utils/PersistantAuth'
