@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from '../components/Themed';
-import { original_url } from '../constants/urls';
+import { original_url, baseV3_url } from '../constants/urls';
 import { StyleSheet, ScrollView} from 'react-native';
 import EpisodeInfo from '../components/episodedetail/EpisodeInfo'
 import EpisodeRatings from '../components/episodedetail/EpisodeRatings'
@@ -15,7 +15,7 @@ export default function SingleEpisodeDetailScreen({ route }) {
   
 	const { episodeinfo,seasoninfo, showid, averageSeasonRating} = route.params;
 
-	let episodedetailsurl = 'https://api.themoviedb.org/3/tv/' + showid + '/season/' + seasoninfo.season_number + '/episode/' + episodeinfo.episode_number + '/credits' + '?api_key=' + ApiKey.TMDBApiKey;
+	let episodedetailsurl = baseV3_url + showid + '/season/' + seasoninfo.season_number + '/episode/' + episodeinfo.episode_number + '/credits' + '?api_key=' + ApiKey.TMDBApiKey;
     
 
 	return (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ScrollView, View, Text, Dimensions } from 'react-native';
 import { AirbnbRating } from 'react-native-elements'
-
+import { baseV3_url, english_Us_Url } from '../../constants/urls';
 const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -48,7 +48,7 @@ const ProfileInfo = (props) => {
 					return data;
 				}).then();
 			let isLoading: boolean =  recentlyReviewed.forEach(item => 
-				fetch('https://api.themoviedb.org/3/tv/' + item.showid + '/season/' + item.seasonnumber + '?api_key=' + ApiKey.TMDBApiKey + '&language=en-US')
+				fetch(baseV3_url + item.showid + '/season/' + item.seasonnumber + '?api_key=' + ApiKey.TMDBApiKey + english_Us_Url)
 					.then(async (response) => {
 						var data = await response.json();
 						item.showdata = data;

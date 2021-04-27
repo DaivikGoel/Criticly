@@ -6,7 +6,7 @@ import CastAndCrew from '../common/CastAndCrew';
 import TVShowRatings from './TVShowRatings';
 import WatchListModal from './WatchListModal';
 import { apiUrl } from '../../constants/apiurl';
-import { original_url } from '../../constants/urls';
+import { original_url, baseV3_url, english_Us_Url } from '../../constants/urls';
 const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -21,8 +21,8 @@ const ShowDetailContainer = (props) => {
 	const [userRating, setuserRating] = useState(-1);
 
 	useEffect(() => {
-		let showurl = 'https://api.themoviedb.org/3/tv/' + props.showid + '?api_key=' + ApiKey.TMDBApiKey + '&language=en-US';
-		let seasonurl = 'https://api.themoviedb.org/3/tv/' + props.showid + '/season/'
+		let showurl = baseV3_url + props.showid + '?api_key=' + ApiKey.TMDBApiKey + english_Us_Url;
+		let seasonurl = baseV3_url + props.showid + '/season/'
 		getAggregateReviews();
 		fetch(showurl)
 			.then((response) => response.json())
@@ -37,11 +37,11 @@ const ShowDetailContainer = (props) => {
 
 	useEffect(() => {
 		if (showdata.length != 0 && seasondata.length === 0 ){
-			let showurl = 'https://api.themoviedb.org/3/tv/' + props.showid + '?api_key=' + ApiKey.TMDBApiKey + '&language=en-US';
-			let seasonurl = 'https://api.themoviedb.org/3/tv/' + props.showid + '/season/'
+			let showurl = baseV3_url + props.showid + '?api_key=' + ApiKey.TMDBApiKey + english_Us_Url;
+			let seasonurl = baseV3_url + props.showid + '/season/'
 			console.log('SHOW DATA',showdata)
 			showdata.seasons.map(season => 
-				fetch(seasonurl + season.season_number + '?api_key=' + ApiKey.TMDBApiKey + '&language=en-US')
+				fetch(seasonurl + season.season_number + '?api_key=' + ApiKey.TMDBApiKey + english_Us_Url)
 					.then((response) => response.json())
 					.then((response) => {
 						setseasondata(seasondata.concat(response))
@@ -75,7 +75,7 @@ const ShowDetailContainer = (props) => {
 	}
 
 
-	let crediturl = 'https://api.themoviedb.org/3/tv/' + props.showid + '/credits' + '?api_key=' + ApiKey.TMDBApiKey + '&language=en-US';
+	let crediturl = baseV3_url + props.showid + '/credits' + '?api_key=' + ApiKey.TMDBApiKey + english_Us_Url;
 
 	const SeasonLists = seasondata.sort(function (a, b) { return a.season_number - b.season_number; }).map((season) => {
 		return (

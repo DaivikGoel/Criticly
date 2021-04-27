@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 import Poster from '../common/Poster';
-import { people_url } from '../../constants/urls';
+import { people_url,english_Us_Url } from '../../constants/urls';
 const ApiKey = require('../../apikeys.json');
 
 
@@ -13,7 +13,7 @@ const PeopleInfo = (props) => {
 
 
 	useEffect(() => {
-		let detailsurl = people_url + props.person.id + '?api_key=' + ApiKey.TMDBApiKey + '&language=en-US';
+		let detailsurl = people_url + props.person.id + '?api_key=' + ApiKey.TMDBApiKey + english_Us_Url;
 		fetch(detailsurl)
 			.then((response) => response.json())
 			.then((data) => {
