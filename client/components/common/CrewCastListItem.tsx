@@ -5,6 +5,24 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import { useNavigation } from '@react-navigation/native';
 
+
+
+const CrewCastListItem = (props) => {
+	const navigation = useNavigation();
+	return (
+		<View style={styles.collapsibleItem}>
+			<TouchableOpacity onPress={() => navigation.push('ShowPeopleScreen',
+				{
+					person: props.payload
+				})
+			}>
+				<Text>{props.name}</Text>
+				<Text style={{ textAlign: 'right' }}>{props.role}</Text>
+			</TouchableOpacity>
+		</View>
+	);
+}
+
 const styles = StyleSheet.create({
 	container: {
 		padding: 15,
@@ -27,20 +45,4 @@ const styles = StyleSheet.create({
 	}
 
 });
-
-const CrewCastListItem = (props) => {
-	const navigation = useNavigation();
-	return (
-		<View style={styles.collapsibleItem}>
-			<TouchableOpacity onPress={() => navigation.push('ShowPeopleScreen',
-				{
-					person: props.payload
-				})
-			}>
-				<Text>{props.name}</Text>
-				<Text style={{ textAlign: 'right' }}>{props.role}</Text>
-			</TouchableOpacity>
-		</View>
-	);
-}
 export default CrewCastListItem;

@@ -4,7 +4,7 @@ import { original_url, baseV3_url } from '../constants/urls';
 import { StyleSheet, ScrollView} from 'react-native';
 import EpisodeInfo from '../components/episodedetail/EpisodeInfo'
 import EpisodeRatings from '../components/episodedetail/EpisodeRatings'
-import TopReviews from '../components/showdetail/TopReviews';
+import TopReviews from '../components/episodedetail/TopReviews';
 import CastAndCrew from '../components/common/CastAndCrew';
 import { AuthContext } from '../navigation/RootNavigator'
 const ApiKey = require('../apikeys.json');
