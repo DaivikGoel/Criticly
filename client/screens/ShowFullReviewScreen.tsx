@@ -8,7 +8,7 @@ import ReviewComments from '../components/fullreviewscreen/ReviewComments';
 import ReplyButton from '../components/fullreviewscreen/ReplyButton';
 
 
-import { AuthContext } from '../navigation/RootNavigator'
+import { AuthContext } from '../constants/AuthContext';
 
 
 

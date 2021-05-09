@@ -4,7 +4,7 @@ import FormInput from '../components/loginscreen/FormInput';
 import FormButton from '../components/loginscreen/FormButton';
 import { apiUrl } from '../constants/apiurl';
 import { saveItem } from '../utils/PersistantAuth'
-import { AuthContext } from '../navigation/RootNavigator'
+import { AuthContext } from '../constants/AuthContext';
 //test
 
 export default function SetNameScreen({route}) {

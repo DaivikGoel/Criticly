@@ -23,9 +23,9 @@ const ReviewComments = (props) => {
 	}
 
 
-	const commentitems = comments.map((item) => {
+	const commentitems = comments.map((item, id) => {
 		return (
-			<View>
+			<View key={id}>
 				<View style={{ flexDirection: 'column', paddingLeft: '2%', paddingRight: '2%' }}>
 					<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 						<Text style={styles.name}>{item.username}</Text>

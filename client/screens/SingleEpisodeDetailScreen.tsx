@@ -6,7 +6,7 @@ import EpisodeInfo from '../components/episodedetail/EpisodeInfo'
 import EpisodeRatings from '../components/episodedetail/EpisodeRatings'
 import TopReviews from '../components/episodedetail/TopReviews';
 import CastAndCrew from '../components/common/CastAndCrew';
-import { AuthContext } from '../navigation/RootNavigator'
+import { AuthContext } from '../constants/AuthContext';
 const ApiKey = require('../apikeys.json');
 
 export default function SingleEpisodeDetailScreen({ route }) {

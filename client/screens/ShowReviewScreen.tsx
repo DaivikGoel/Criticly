@@ -3,7 +3,7 @@ import { View } from '../components/Themed';
 import { StyleSheet, ScrollView} from 'react-native';
 import ReviewContainer from '../components/reviewscreen/ReviewContainer';
 
-import { AuthContext } from '../navigation/RootNavigator'
+import { AuthContext } from '../constants/AuthContext';
 
 
 

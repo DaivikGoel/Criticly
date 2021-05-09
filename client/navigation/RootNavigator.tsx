@@ -1,14 +1,15 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import React,{createContext, useState, useEffect} from 'react';
+import React,{useState, useEffect} from 'react';
 import AuthStack from './SignUpNavigator'
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import { readItem } from '../utils/PersistantAuth'
+import { AuthContext } from '../constants/AuthContext';
 
 
 const Stack = createStackNavigator<RootStackParamList>();
 
-type ContextProps = {
+export type ContextProps = {
     user: string,
     setUser: Function, 
     isSignedIn: boolean,
@@ -19,8 +20,6 @@ type ContextProps = {
 };
 
 
-
-export const AuthContext = createContext<ContextProps>({user: '', setUser: () => {}, isSignedIn: false, setisSignedIn: () => {}, userid:'', setUserid: () => {} })
 
 export default function RootNavigator() {
 	const [user, setUser] = useState('')

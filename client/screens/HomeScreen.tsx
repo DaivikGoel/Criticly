@@ -11,7 +11,7 @@ let lists = [['Trending', trending_url + ApiKey.TMDBApiKey + '&page=1'],
 	['Top Rated', topRated_url + ApiKey.TMDBApiKey + '&page=1'], 
 	['Popular', popular_url + ApiKey.TMDBApiKey + '&page=1'] ];
 
-import { AuthContext } from '../navigation/RootNavigator'
+import { AuthContext } from '../constants/AuthContext';
 import { userLogout } from '../utils/PersistantAuth'
 
 

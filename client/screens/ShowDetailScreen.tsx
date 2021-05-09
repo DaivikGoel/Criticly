@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View } from '../components/Themed';
 import ShowDetailContainer from '../components/showdetail/ShowDetailContainer'
 import { StyleSheet} from 'react-native';
-import { AuthContext } from '../navigation/RootNavigator'
+import { AuthContext } from '../constants/AuthContext';
 
 
 export default function ShowDetailScreen({ route }) {
