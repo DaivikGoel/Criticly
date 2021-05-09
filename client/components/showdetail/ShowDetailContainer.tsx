@@ -39,7 +39,6 @@ const ShowDetailContainer = (props) => {
 		if (showdata.length != 0 && seasondata.length === 0 ){
 			let showurl = baseV3_url + props.showid + '?api_key=' + ApiKey.TMDBApiKey + english_Us_Url;
 			let seasonurl = baseV3_url + props.showid + '/season/'
-			console.log('SHOW DATA',showdata)
 			showdata.seasons.map(season => 
 				fetch(seasonurl + season.season_number + '?api_key=' + ApiKey.TMDBApiKey + english_Us_Url)
 					.then((response) => response.json())
@@ -77,9 +76,9 @@ const ShowDetailContainer = (props) => {
 
 	let crediturl = baseV3_url + props.showid + '/credits' + '?api_key=' + ApiKey.TMDBApiKey + english_Us_Url;
 
-	const SeasonLists = seasondata.sort(function (a, b) { return a.season_number - b.season_number; }).map((season) => {
+	const SeasonLists = seasondata.sort(function (a, b) { return a.season_number - b.season_number; }).map((season, id) => {
 		return (
-			<SeasonInfo payload={season} showid={props.showid} averageSeasonRating = {averageRating} userid ={props.userid} />
+			<SeasonInfo key={id} payload={season} showid={props.showid} averageSeasonRating = {averageRating} userid ={props.userid} />
 		)
 	})
     

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 import Poster from '../common/Poster';
+import React, { useState, useEffect } from 'react';
 import { people_url,english_Us_Url } from '../../constants/urls';
 const ApiKey = require('../../apikeys.json');
 

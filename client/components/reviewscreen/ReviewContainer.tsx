@@ -26,9 +26,9 @@ const ReviewContainer = (props) => {
 	}
 
 
-	const reviewitems = reviews.map((item) => {
+	const reviewitems = reviews.map((item, id) => {
 		return (
-			<View>
+			<View key={id}>
 				<ReviewCard episodeinfo={props.episodeinfo} userid={item.userid} reviewid={item.reviewid} name={item.username} review={item.reviewtext} date={item.modified_instant} rating={item.rating} numberofLikes={item.numberofLikes} numberofComments={item.numberofComments} seasonposterurl={props.seasonposterurl} alreadyLiked={item.hasUserLiked == 1 ? true : false}/>
 				<View style={styles.Bar} />
 			</View>

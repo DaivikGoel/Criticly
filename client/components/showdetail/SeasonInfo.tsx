@@ -34,9 +34,9 @@ const SeasonInfo = (props) => {
 			})
 	}
 
-	const Episodes = props.payload.episodes.map((episode) => {
+	const Episodes = props.payload.episodes.map((episode, id) => {
 		return (
-			<EpisodeCard episode ={episode} seasoninfo ={props.payload} showid = {props.showid} averageSeasonRating = {props.averageSeasonRating} watched = {watched[episode.episode_number]} userid ={props.userid} />
+			<EpisodeCard key={id} episode ={episode} seasoninfo ={props.payload} showid = {props.showid} averageSeasonRating = {props.averageSeasonRating} watched = {watched[episode.episode_number]} userid ={props.userid} />
 		)
 	})
 

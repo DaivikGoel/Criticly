@@ -37,9 +37,9 @@ const List = (props) => {
 	}, []);
 
 
-	const Icons = data.sort(function (a, b) { return b.popularity - a.popularity; }).map((item) => {
+	const Icons = data.sort(function (a, b) { return b.popularity - a.popularity; }).map((item, id) => {
 		return (
-			<Icon name = {item.name} posterpath = {item.poster_path} key ={item.id} payload = {item} showid ={item.id} />
+			<Icon key={id} name= {item.name} posterpath = {item.poster_path} key ={item.id} payload = {item} showid ={item.id} />
 		)
 	})
 

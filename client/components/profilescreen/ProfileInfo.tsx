@@ -58,7 +58,7 @@ const ProfileInfo = (props) => {
 					)
 			
 			)
-			const icons = recentlyReviewed.map((listItem) => {
+			const icons = recentlyReviewed.map((listItem, id) => {
 				var poster_path
 				var episodename
 				if(typeof listItem.showdata == 'undefined'){
@@ -70,7 +70,7 @@ const ProfileInfo = (props) => {
 					episodename = listItem.showdata.episodes[listItem.episodenumber - 1].name
 				}
 				return (
-					<View>
+					<View key ={id}>
 						<Icon key={listItem.id} showid={listItem.showid} posterpath={poster_path}/>
 						<Text style={styles.userreview} numberOfLines ={1}>{episodename}</Text>
 						<AirbnbRating
@@ -89,7 +89,6 @@ const ProfileInfo = (props) => {
 				recentlyReviewed: recentlyReviewed,
 				isloading: isLoading,
 				icons:icons})
-			console.log(icons);
 		}
 		fetchInfoAndStats()
 	}, []);

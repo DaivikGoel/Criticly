@@ -24,14 +24,14 @@ const CastAndCrew = (props) => {
 	}, []);
 
 
-	const castitem = cast.map((member) => {
+	const castitem = cast.map((member,id ) => {
 		return (
-			<CrewCastListItem name={member.name} role={member.character} payload={member}/>
+			<CrewCastListItem key={id} name={member.name} role={member.character} payload={member}/>
 		)
 	})
-	const crewitem = crew.map((member) => {
+	const crewitem = crew.map((member,id) => {
 		return (
-			<CrewCastListItem name={member.name} role={member.job} payload = {member}/>
+			<CrewCastListItem key ={id} name={member.name} role={member.job} payload = {member}/>
 		)
 	})
 

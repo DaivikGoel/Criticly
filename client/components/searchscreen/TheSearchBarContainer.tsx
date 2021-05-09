@@ -113,10 +113,10 @@ const TheSearchBarContainer = (props) => {
 	}
 
 
-	const SearchResults = data.map((item) => {
+	const SearchResults = data.map((item, id) => {
 		if(selectedpage == 'TV Shows'){
 			return (
-				<View style ={{flexDirection: 'column'}}>
+				<View key={id} style ={{flexDirection: 'column'}}>
 					<View style ={styles.SearchResult}>
 						<Icon name={item.name} posterpath={item.poster_path} key={item.id} payload={item} showid={item.id} />
 						<View style = {styles.TextView}>
@@ -137,8 +137,8 @@ const TheSearchBarContainer = (props) => {
 						<View style = {styles.TextView}>
 							<Text>{item.name}</Text> 
 							<Text>{item.known_for_department}</Text>
-							{item.known_for.map((media, index)  => 
-								<Text key={index}>{media.title} </Text>
+							{item.known_for.map((media, id)  => 
+								<Text key={id}>{media.title} </Text>
 							)} 
 						</View>
 					</View>

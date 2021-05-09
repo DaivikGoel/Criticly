@@ -5,7 +5,6 @@ import { Image } from 'react-native-elements'
 
 
 const UserMetaData = (props) => {
-	console.log(props.payload.userStats);
 	return (
 		<View style={styles.metadata}>
 			<View style={{ flexDirection: 'row' }}>

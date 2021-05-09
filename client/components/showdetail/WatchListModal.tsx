@@ -13,7 +13,6 @@ function WatchListModal(showid: number, userid: number ) {
 		fetch(apiUrl + 'getListItem?userid='+  useridKey)
 			.then(results => results.json())
 			.then(data => {
-				console.log(data);
 				if(data != undefined){
 					setUserLists(data);
 				}
