@@ -3,10 +3,15 @@ import {Button, TextInput, Text, View, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
 import { apiUrl } from '../../constants/apiurl';
 
-function CreateListModal(userid: number) {
+interface Props {
+	userid: number
+}
+
+
+function CreateListModal(props : Props) {
 	const [isModalVisible, setModalVisible] = useState(false);
 	const [listNameInput, setTextInput] = React.useState('');
-	const useridKey = Object.values(userid)[0]
+	const useridKey = Object.values(props.userid)[0]
 
 
 	const toggleModal = () => {

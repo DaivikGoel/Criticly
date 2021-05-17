@@ -2,9 +2,14 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { View, Text } from '../Themed';
 
+interface Props {
+	ratingsCount: number,
+	averageRating: number,
+	userRating: number
+ }
 
 
-const TVShowRatings = (props) => {
+const TVShowRatings = (props:Props) => {
 	return (
 		<View style={styles.Container}>
 			<View style={styles.RatingMetaData}>

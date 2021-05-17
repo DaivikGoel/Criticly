@@ -11,9 +11,52 @@ const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const ShowDetailContainer = (props) => {
+
+interface Props {
+	showid: number,
+	userid: number
+ }
+
+ interface SeasonData {
+	season_number: number
+ }
+
+
+ interface Payload {
+	backdrop_path: string,
+	poster_path: string,
+	name : string,
+	number_of_seasons : number,
+	number_of_episodes : number,
+	last_air_date : string;
+	status : string
+	length: number,
+	seasons: Array<SeasonData>,
+	networks: Array<Networks>
+
+ }
+
+ interface Networks {
+	logo_path : string
+ }
+
+
+
+
+const ShowDetailContainer = (props : Props) => {
     
-	const [showdata, setshowdata] = useState([]);
+	const [showdata, setshowdata] = useState<Payload>(
+		{
+			backdrop_path:'', 
+			name: '', 
+			number_of_episodes: 0, 
+			number_of_seasons: 0, 
+			status : '', length:0, 
+			seasons:[],
+			last_air_date : '',
+			networks: [],
+			poster_path: ''
+		});
 	const [seasondata, setseasondata] = useState([]);
 	const [isLoading, setisLoading] = useState(true);
 	const [averageRating, setaverageRating] = useState(-1);
@@ -22,7 +65,6 @@ const ShowDetailContainer = (props) => {
 
 	useEffect(() => {
 		let showurl = baseV3_url + props.showid + '?api_key=' + ApiKey.TMDBApiKey + english_Us_Url;
-		let seasonurl = baseV3_url + props.showid + '/season/'
 		getAggregateReviews();
 		fetch(showurl)
 			.then((response) => response.json())
@@ -37,7 +79,6 @@ const ShowDetailContainer = (props) => {
 
 	useEffect(() => {
 		if (showdata.length != 0 && seasondata.length === 0 ){
-			let showurl = baseV3_url + props.showid + '?api_key=' + ApiKey.TMDBApiKey + english_Us_Url;
 			let seasonurl = baseV3_url + props.showid + '/season/'
 			showdata.seasons.map(season => 
 				fetch(seasonurl + season.season_number + '?api_key=' + ApiKey.TMDBApiKey + english_Us_Url)
@@ -76,12 +117,11 @@ const ShowDetailContainer = (props) => {
 
 	let crediturl = baseV3_url + props.showid + '/credits' + '?api_key=' + ApiKey.TMDBApiKey + english_Us_Url;
 
-	const SeasonLists = seasondata.sort(function (a, b) { return a.season_number - b.season_number; }).map((season, id) => {
+	const SeasonLists = seasondata.sort(function (a : SeasonData, b: SeasonData) { return a.season_number - b.season_number; }).map((season, id) => {
 		return (
 			<SeasonInfo key={id} payload={season} showid={props.showid} averageSeasonRating = {averageRating} userid ={props.userid} />
 		)
 	})
-    
 	return (
 		<ImageBackground style={styles.imgContainer} source={{ uri: original_url + showdata.backdrop_path }}>
 			<View style={{ backgroundColor: 'rgba(0,0,0,0.7)',flex: 1}}>
@@ -95,8 +135,8 @@ const ShowDetailContainer = (props) => {
 					{isLoading == false ? 
 						<View>
 							<View>
-								<TVShowInfo payload ={showdata}/>
-								<WatchListModal showid={props.showid} userid={props.userid} ></WatchListModal>
+								<TVShowInfo {...showdata}/>
+								<WatchListModal {...props} ></WatchListModal>
 								<TVShowRatings averageRating = {averageRating} ratingsCount = {ratingsCount} userRating = {userRating} />
 								<Text style={styles.ShowTitle}>Seasons</Text>
 								{SeasonLists}
@@ -106,7 +146,7 @@ const ShowDetailContainer = (props) => {
 								<CastAndCrew url ={crediturl}/>
 							</View>
 						</View>
-					 :
+						:
 						<ActivityIndicator size="large" /> 
                 
 					}

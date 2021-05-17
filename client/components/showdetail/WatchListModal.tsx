@@ -4,10 +4,15 @@ import Modal from 'react-native-modal';
 import { apiUrl } from '../../constants/apiurl';
 import CreateListModal from './CreateListModal';
 
-function WatchListModal(showid: number, userid: number ) {
+interface Props{
+	showid: number, 
+	userid: number 
+}
+
+function WatchListModal(props: Props) {
 	const [isModalVisible, setModalVisible] = useState(false);
 	const [userLists, setUserLists] = useState<any[]>([])
-	const useridKey = JSON.stringify(Object.values(showid)[1]);
+	const useridKey = JSON.stringify(props.showid);
 
 	React.useEffect(() => {
 		fetch(apiUrl + 'getListItem?userid='+  useridKey)
@@ -35,10 +40,10 @@ function WatchListModal(showid: number, userid: number ) {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				userid: Object.values(userid),
+				userid: props.userid,
 				listtype: 'watchlist',
 				title: 'action movies',
-				showid: Object.values(showid)
+				showid: props.showid
 			})
 		});
 	}
