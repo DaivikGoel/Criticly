@@ -5,28 +5,8 @@ import { original_url } from '../../constants/urls';
 import { Image } from 'react-native-elements'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+import { Payload } from '../../interfaces/interfaces';
 
-interface SeasonData {
-	season_number: number
- }
-
-interface Payload {
-	backdrop_path: string,
-	poster_path: string,
-	name : string,
-	number_of_seasons : number,
-	number_of_episodes : number,
-	last_air_date : string;
-	status : string
-	length: number,
-	seasons: Array<SeasonData>,
-	networks: Array<Networks>
-
- }
-
- interface Networks {
-	logo_path : string
- }
 
 const TVShowInfo = (props: Payload) => {
 	return (

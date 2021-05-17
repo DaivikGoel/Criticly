@@ -2,14 +2,12 @@ import React, {useState} from 'react';
 import {Button , View, Text} from 'react-native';
 import Modal from 'react-native-modal';
 import { apiUrl } from '../../constants/apiurl';
+import {ShowIdUserIdProps} from '../../interfaces/interfaces';
 import CreateListModal from './CreateListModal';
 
-interface Props{
-	showid: number, 
-	userid: number 
-}
 
-function WatchListModal(props: Props) {
+
+function WatchListModal(props: ShowIdUserIdProps) {
 	const [isModalVisible, setModalVisible] = useState(false);
 	const [userLists, setUserLists] = useState<any[]>([])
 	const useridKey = JSON.stringify(props.showid);

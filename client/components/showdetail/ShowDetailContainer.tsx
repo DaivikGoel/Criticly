@@ -7,43 +7,17 @@ import TVShowRatings from './TVShowRatings';
 import WatchListModal from './WatchListModal';
 import { apiUrl } from '../../constants/apiurl';
 import { original_url, baseV3_url, english_Us_Url } from '../../constants/urls';
+import {ShowIdUserIdProps, Payload} from '../../interfaces/interfaces';
 const ApiKey = require('../../apikeys.json');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-interface Props {
-	showid: number,
-	userid: number
- }
-
- interface SeasonData {
-	season_number: number
- }
-
-
- interface Payload {
-	backdrop_path: string,
-	poster_path: string,
-	name : string,
-	number_of_seasons : number,
-	number_of_episodes : number,
-	last_air_date : string;
-	status : string
-	length: number,
-	seasons: Array<SeasonData>,
-	networks: Array<Networks>
-
- }
-
- interface Networks {
-	logo_path : string
- }
 
 
 
 
-const ShowDetailContainer = (props : Props) => {
+const ShowDetailContainer = (props : ShowIdUserIdProps) => {
     
 	const [showdata, setshowdata] = useState<Payload>(
 		{
